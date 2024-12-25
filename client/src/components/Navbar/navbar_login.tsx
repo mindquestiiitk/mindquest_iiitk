@@ -1,4 +1,4 @@
-import { iiitkottayam_logo, mindquest_logo } from "../assets";
+import { iiitkottayam_logo, mindquest_logo } from "../../assets";
 
 const NavbarLogin = () => {
   return (

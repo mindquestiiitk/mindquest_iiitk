@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { login_hero } from "../assets";
-import NavbarLogin from "../components/navbar_login";
+import NavbarLogin from "../components/Navbar/navbar_login";
 import Login_block from "../components/Login_block";
 
 const Login = () => {
