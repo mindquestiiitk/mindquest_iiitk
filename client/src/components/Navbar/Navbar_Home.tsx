@@ -37,7 +37,7 @@ const Navbar_Home = () => {
       <div className="relative flex items-center justify-between">
         <a
           href="/"
-          aria-label="mindques"
+          aria-label="mindquest"
           title="mindquest"
           className="inline-flex items-center"
         >
