@@ -32,9 +32,9 @@ const Login = () => {
         </div>
 
         {/* Right Section */}
-        <div className="basis-3/5 bg-white flex justify-center items-center p-8">
-          <Login_block />
-        </div>
+        <div className="basis-3/5 bg-white flex justify-center items-center p- mt-[-20px]">
+  <Login_block />
+</div>
       </div>
     </div>
   );
