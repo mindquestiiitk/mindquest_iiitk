@@ -16,7 +16,18 @@ const Navbar_Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems: NavItemData[] = [
-    { href: "/", ariaLabel: "About", title: "About", text: "About" },
+    { 
+      href: "/", 
+      ariaLabel: "About", 
+      title: "About", 
+      text: "About" 
+    },
+    {
+      href: "/",
+      ariaLabel: "Our Team",
+      title: "Our Team",
+      text: "Our Team",
+    },
     {
       href: "/",
       ariaLabel: "Binaural Beats",
@@ -29,7 +40,12 @@ const Navbar_Home = () => {
       title: "Mood Survey",
       text: "Mood Survey",
     },
-    { href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },
+    { 
+      href: "/", 
+      ariaLabel: "Chat", 
+      title: "Chat", 
+      text: "Chat" 
+    },
   ];
 
   return (
