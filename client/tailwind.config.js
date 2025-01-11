@@ -23,8 +23,15 @@ export default {
   			'deep-purple-accent-700': '#512da8',
   			'light-green': '#006833',
   			'lighter-green': '#BDFFB4',
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
+  			background: {
+				DEFAULT: 'hsl(var(--background))',
+				primary: 'hsl(var(--background-primary))',
+				secondary: 'hsl(var(--background-secondary))',
+			},
+  			foreground: {
+				DEFAULT: 'hsl(var(--foreground))',
+				primary: 'hsl(var(--foreground-primary))',
+			},
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -47,6 +54,7 @@ export default {
   			},
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
+				background: 'hsl(var(--accent-background))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
   			destructive: {
@@ -68,7 +76,7 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
