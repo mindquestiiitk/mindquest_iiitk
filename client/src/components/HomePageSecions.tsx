@@ -143,9 +143,9 @@ export const MoodSection: React.FC = () => {
 
 export const ChatInterface: React.FC = () => {
   return (
-    <div className="flex justify-center items-center p-6 bg-gray-50">
+    <div className="flex justify-center items-center p-6">
     {/* Main Chat Section */}
-      <div className="bg-green-200 rounded-xl p-4 flex items-center justify-between  gap-4 h-[200px]">
+      <div className="bg-background-secondary rounded-xl p-4 flex items-center justify-between  gap-4 h-[200px]">
           {/* Avatar Section */}
           <div className="flex flex-col items-center mr-4">
               <div className="bg-green-700 w-20 h-20 rounded-xl mb-2"></div>
@@ -159,15 +159,15 @@ export const ChatInterface: React.FC = () => {
              </div>
             <div className="bg-white border border-green-300 rounded-full flex items-center pr-2 py-1">
                <input type="text" placeholder="Type Something" className="focus:outline-none ml-4 flex-grow"/>
-                <button className="bg-green-300 p-2 rounded-full text-green-700">
+                <button className="bg- p-2 rounded-full text-green-700">
                  <i className="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
       </div>
       {/* Contact Councelor Section */}
-       <div className="ml-4 bg-green-200 rounded-xl p-3 text-center flex items-center justify-center whitespace-nowrap transform rotate-90">
-            <p className="text-green-700 flex items-center ">
+       <div className="ml-4 bg-accent rounded-xl p-3 text-center flex items-center justify-center whitespace-nowrap transform rotate-90 cursor-pointer">
+            <p className="text-accent-foreground flex items-center ">
               <i className="fas fa-arrow-left mr-2 transform rotate-45"></i>
             Contact Councelor
             </p>

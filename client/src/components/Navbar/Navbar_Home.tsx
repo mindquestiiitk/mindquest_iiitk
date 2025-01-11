@@ -49,7 +49,7 @@ const Navbar_Home = () => {
   ];
 
   return (
-    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
+    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full md:px-24 lg:px-8 xl:px-28 bg-background-primary">
       <div className="relative flex items-center justify-between">
         <a
           href="/"
@@ -59,7 +59,7 @@ const Navbar_Home = () => {
         >
           <img src={mindquest_logo} alt="mindquest logo" />
         </a>
-        <ul className="flex items-center hidden space-x-8 lg:flex">
+        <ul className="hidden items-center space-x-8 lg:flex">
           {navItems.map((item, index) => (
             <NavItem
               key={index}
