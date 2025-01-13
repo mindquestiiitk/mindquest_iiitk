@@ -23,6 +23,9 @@ export default {
   			'deep-purple-accent-700': '#512da8',
   			'light-green': '#006833',
   			'lighter-green': '#BDFFB4',
+			"primary-green" : "#006833",
+			"secondary-green" : "#D6F8D1",
+			"text-green" : "#006833",
   			background: {
 				DEFAULT: 'hsl(var(--background))',
 				primary: 'hsl(var(--background-primary))',
