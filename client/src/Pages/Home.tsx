@@ -2,6 +2,7 @@ import Navbar_Home from '../components/Navbar/Navbar_Home'
 import HeroSection from '../components/HeroSection'
 import FAQ from '../components/FAQ'
 import { ChatInterface, MoodSection, TeamSection, KeyFeatures  } from '../components/HomePageSecions'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <TeamSection />
       <MoodSection />
       <FAQ />
+      <Footer />
     </div>
   )
 }
