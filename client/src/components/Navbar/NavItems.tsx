@@ -14,7 +14,7 @@ const NavItem: React.FC<NavItemProps> = ({ href, ariaLabel, title, children }) =
         href={href}
         aria-label={ariaLabel}
         title={title}
-        className="font-roboto font-light tracking-wide text-light-green"
+        className="font-roboto font-light tracking-wide text-light-green line-expand-x"
       >
         {children}
       </a>
