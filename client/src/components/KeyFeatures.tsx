@@ -1,33 +1,34 @@
 import React from "react";
 import { brain_chat } from "../assets";
+import { ArrowUpRight } from "lucide-react";
 
 const KeyFeatures: React.FC = () => {
   return (
     <>
     <div className="max-w-4xl mx-auto p-4 flex flex-col lg:flex-row items-start gap-4">
       {/* Chat Container */}
-      <div className="bg-secondary-green rounded-2xl p-4 flex items-center gap-4 flex-grow h-48 sm:h-64">
+      <div className="w-full bg-secondary-green rounded-2xl p-4 flex items-center gap-4 flex-grow h-36 sm:h-64">
         {/* Left side with brain icon */}
-        <div className="relative bg-primary-green m-6 rounded-2xl w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 flex items-center justify-center flex-shrink-0">
+        <div className="relative bg-primary-green m-0 md:m-6 rounded-2xl w-20 h-20 sm:w-40 sm:h-40 lg:w-56 lg:h-56 flex items-center justify-center flex-shrink-0">
         <img
           src={brain_chat}
           alt="Brain Chat Icon"
           className="w-full h-full object-contain rounded-2xl"
         />
-        <span className="absolute text-white text-sm mt-32 sm:text-sm lg:text-base mx-28 sm:mx-36 lg:mx-40">
+        <span className="absolute text-white text-sm mt-14 sm:mt-32 sm:text-sm lg:text-base mx-28 sm:mx-36 lg:mx-40">
           brain
         </span>
         </div>
 
         {/* Right side content */}
-        <div className="flex-grow">
-        <div className="text-green-800 font-medium mb-2 text-lg sm:text-xl lg:text-2xl font-acme">
-          Hi
+        <div className="flex-grow flex flex-wrap gap-2">
+        <div className="text-green-800 font-medium mb-2 text-lg sm:text-xl lg:text-2xl sm:w-full font-acme">
+          Hi,
         </div>
         <div className="text-green-800 font-medium mb-2 text-lg sm:text-xl lg:text-2xl font-acme">
           Steve Jobs
         </div>
-        <div className="relative mt-4 sm:mt-16 lg:mt-24">
+        <div className="relative mt-4 sm:mt-16 lg:mt-24 w-full">
           <input
             type="text"
             placeholder="Type Something"
@@ -53,25 +54,15 @@ const KeyFeatures: React.FC = () => {
       </div>
 
       {/* Small div for Contact Counselor */}
-      <div className="bg-secondary-green rounded-2xl p-4 w-full lg:w-24 h-36 sm:h-48 lg:h-64 flex items-center justify-center lg:flex-shrink-0">
-        <span className="text-green-800 flex flex-col items-center gap-2 lg:gap-0 lg:flex-row lg:rotate-[-90deg]">
-        <svg
-          className="w-6 h-6 sm:w-8 sm:h-8 mt-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 15l7-7 7 7"
-          />
-        </svg>
-        <span className="font-roboto text-sm sm:text-base text-center lg:ml-2">
-          Contact Counselor
-        </span>
-        </span>
+      <div className="bg-accent rounded-xl p-3 text-center flex items-center justify-center whitespace-nowrap transform cursor-pointer w-full max-w-4xl lg:w-16 h-12 lg:h-64 lg:flex-shrink-0">
+          <p className="w-full lg:w-auto px-54 text-accent-foreground flex items-center justify-between flex-row lg:gap-2 lg:-rotate-90 text-xl">
+            <div className="">
+              Contact Councelor
+            </div>
+            <div>
+              <ArrowUpRight />
+            </div>
+          </p>
       </div>
     </div>
 
