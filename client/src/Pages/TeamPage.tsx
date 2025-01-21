@@ -16,6 +16,26 @@ const TeamPage = () => {
   const teamMembers = {
     patrons: [
       {
+        name: "Dr. G. Kannabiran",
+        role: "Director, IIIT Kottayam",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+      {
+        name: "Dr. Radha Krishnan, IIIT Kottayam",
+        role: "Registar, IIIT Kottayam",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+      {
         name: "Renjitha Mam",
         role: "Club Coordinator",
         image: "/api/placeholder/200/200",
@@ -25,26 +45,19 @@ const TeamPage = () => {
           website: "#",
         },
       },
+    ],
+    mentor: [
       {
-        name: "Saarthak Gupta",
-        role: "Club Lead",
+        name: "Sarthak Gupta",
+        role: "Mentor",
         image: "/api/placeholder/200/200",
         socials: {
           linkedin: "#",
           twitter: "#",
           website: "#",
         },
-      },
-      {
-        name: "Renjitha Mam",
-        role: "Club Coordinator",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
+      
+    },
     ],
     coreMembers: [
       {
@@ -178,6 +191,18 @@ const TeamPage = () => {
             ))}
           </div>
         </div>
+        
+        {/* Mentor Section */}
+        <div className="mb-16">
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Mentor
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+            {teamMembers.mentor.map((mentor, index) => (
+              <TeamMemberCard key={index} member={mentor} />
+            ))}
+          </div>
+        </div>
 
         {/* Core Members Section */}
         <div className="mb-16">
@@ -195,6 +220,25 @@ const TeamPage = () => {
         <div>
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Members
+          </h2>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2022
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
+            {teamMembers.members.map((member, index) => (
+              <TeamMemberCard key={index} member={member} />
+            ))}
+          </div>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2023
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
+            {teamMembers.members.map((member, index) => (
+              <TeamMemberCard key={index} member={member} />
+            ))}
+          </div>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2024
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
             {teamMembers.members.map((member, index) => (
