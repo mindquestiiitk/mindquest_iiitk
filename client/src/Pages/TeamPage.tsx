@@ -1,4 +1,4 @@
-import Navbar_Home from "../components/Navbar/Navbar_Home";
+import NavbarHome from "../components/Navbar/Navbar_Home";
 import Footer from "../components/Footer";
 
 interface TeamMember {
@@ -161,7 +161,7 @@ const TeamPage = () => {
 
   return (
     <>
-      <Navbar_Home />
+      <NavbarHome />
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-primary-green text-4xl font-bold text-center mb-12 font-acme">
           Meet our Team

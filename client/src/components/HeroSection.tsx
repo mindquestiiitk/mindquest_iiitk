@@ -5,19 +5,26 @@ const HeroSection = () => {
   return (
     <section
       id="about-us"
-      className="flex justify-between items-center max-lg:flex-col gap-10 w-full max-container"
+      className="flex flex-col justify-between items-center md:flex-row gap-10 w-full max-container"
     >
-      <div className="flex flex-1 flex-col xl:mx-12">
-        <div className="flex flex-col">
-          <h2 className="font-acme text-6xl capitalize lg:max-w-lg text-light-green">
+      <div className="flex flex-1 justify-center items-center md:order-2">
+        <img
+          src={hero_avatar}
+          alt="hero avatar"
+          className="object-contain rounded-xl w-[200px] md:w-[250px] lg:w-[500px]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col xl:mx-12 md:order-1">
+        <div className="flex flex-col my-4">
+          <h2 className="font-acme text-4xl text-center capitalize text-light-green md:text-5xl lg:max-w-lg lg:text-left lg:text-6xl">
             <span>Unlock Your Mind </span>
             <span className="text-coral-red "> Begin Your Quest </span>
           </h2>
-          <p className="mt-6 lg:max-w-lg info-text font-roboto text-xl text-light-green">
+          <p className="mt-6 lg:max-w-lg info-text font-roboto text-xl text-light-green text-center lg:text-left">
             Discover a space dedicated to nurturing your mental health. Join us
             as we explore resources, support, and community
           </p>
-          <div className="mt-2">
+          <div className="mt-2 mx-auto lg:mx-0">
             <button
               className={`px-6 py-2 my-2 bg-primary-green text-secondary-green font-bold rounded-lg`}
             >
@@ -25,15 +32,6 @@ const HeroSection = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div className="flex flex-1 justify-center items-center">
-        <img
-          src={hero_avatar}
-          alt="hero avatar"
-          width={420}
-          height={500}
-          className="object-contain rounded-xl"
-        />
       </div>
     </section>
   );
