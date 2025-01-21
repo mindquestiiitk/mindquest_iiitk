@@ -17,7 +17,7 @@ const Login = () => {
       <div className="flex flex-grow">
         {/* Left Section */}
         <div className="basis-2/5 bg-[#9FE196] flex flex-col justify-center items-center p-8">
-          <header className="text-center text-[#006833] font-acme text-3xl lg:text-4xl xl:text-6xl pt-12">
+          <header className="text-center text-[#006833] font-acme text-3xl lg:text-4xl xl:text-5xl pt-12">
             <h1>Unlock Your Mind</h1>
             <h1>Begin Your Quest</h1>
           </header>

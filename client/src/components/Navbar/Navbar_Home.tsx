@@ -17,33 +17,24 @@ const Navbar_Home = () => {
 
   const navItems: NavItemData[] = [
     { href: "/", ariaLabel: "About", title: "About", text: "About" },
-    {
-      href: "/",
-      ariaLabel: "Binaural Beats",
-      title: "Binaural Beats",
-      text: "Binaural Beats",
-    },
-    {
-      href: "/",
-      ariaLabel: "Mood Survey",
-      title: "Mood Survey",
-      text: "Mood Survey",
-    },
+    { href: "/", ariaLabel: "Merch", title: "Merch", text: "Merch" },
+    { href: "/team", ariaLabel: "Team", title: "Team", text: "Our Team" },
+    { href: "/", ariaLabel: "Events", title: "Events", text: "Events" },
     { href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },
   ];
 
   return (
-    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
-      <div className="relative flex items-center justify-between">
+    <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
+      <div className="relative flex items-center justify-between w-full">
         <a
           href="/"
           aria-label="mindquest"
           title="mindquest"
-          className="inline-flex items-center"
+          className="inline-flex items-center -my-8"
         >
           <img src={mindquest_logo} alt="mindquest logo" />
         </a>
-        <ul className="flex items-center hidden space-x-8 lg:flex">
+        <ul className="hidden lg:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <NavItem
               key={index}
