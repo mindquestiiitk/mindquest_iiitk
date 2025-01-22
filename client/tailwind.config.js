@@ -31,6 +31,9 @@ theme: {
 			foreground: 'hsl(var(--foreground))',
 			card: {
 				DEFAULT: 'hsl(var(--card))',
+				overlay:{
+					background: 'hsl(var(--card-overlay-background))',
+				},
 				foreground: 'hsl(var(--card-foreground))'
 			},
 			popover: {
