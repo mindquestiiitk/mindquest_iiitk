@@ -176,13 +176,13 @@ const TeamPage = () => {
     <>
       <Navbar_Home />
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-primary-green text-4xl font-bold text-center mb-12 font-acme">
+        <h1 className="text-primary-green text-5xl font-bold text-center mb-12 font-acme">
           Meet our Team
         </h1>
 
         {/* Patrons Section */}
         <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Patrons
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
@@ -194,7 +194,7 @@ const TeamPage = () => {
         
         {/* Mentor Section */}
         <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Mentor
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
@@ -218,7 +218,7 @@ const TeamPage = () => {
 
         {/* Members Section */}
         <div>
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Members
           </h2>
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
