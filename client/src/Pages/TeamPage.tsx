@@ -56,41 +56,41 @@ const TeamPage = () => {
           twitter: "#",
           website: "#",
         },
-      
-    },
-    ],
-    coreMembers: [
-      {
-        name: "John Doe",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Jane Smith",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Alice Johnson",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
+
       },
     ],
+    // coreMembers: [
+    //   {
+    //     name: "John Doe",
+    //     role: "Core Member",
+    //     image: "/api/placeholder/200/200",
+    //     socials: {
+    //       linkedin: "#",
+    //       twitter: "#",
+    //       website: "#",
+    //     },
+    //   },
+    //   {
+    //     name: "Jane Smith",
+    //     role: "Core Member",
+    //     image: "/api/placeholder/200/200",
+    //     socials: {
+    //       linkedin: "#",
+    //       twitter: "#",
+    //       website: "#",
+    //     },
+    //   },
+    //   {
+    //     name: "Alice Johnson",
+    //     role: "Core Member",
+    //     image: "/api/placeholder/200/200",
+    //     socials: {
+    //       linkedin: "#",
+    //       twitter: "#",
+    //       website: "#",
+    //     },
+    //   },
+    // ],
     members: [
       {
         name: "Bob Brown",
@@ -123,6 +123,39 @@ const TeamPage = () => {
         },
       },
     ],
+
+    developers:[
+      {
+        name: "Sarthak Gupta",
+        role: "Developer",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+      {
+        name: "Charlie Davis",
+        role: "Member",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+      {
+        name: "Eve Wilson",
+        role: "Member",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+    ]
   };
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
@@ -191,20 +224,22 @@ const TeamPage = () => {
             ))}
           </div>
         </div>
-        
+
         {/* Mentor Section */}
-        <div className="mb-16">
+        <div className="mb-16" >
           <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Mentor
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.mentor.map((mentor, index) => (
-              <TeamMemberCard key={index} member={mentor} />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-start-2 justify-self-center">
+              {teamMembers.mentor.map((mentor, index) => (
+                <TeamMemberCard key={index} member={mentor} />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Core Members Section */}
+        {/* Core Members Section
         <div className="mb-16">
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Core Members
@@ -214,7 +249,7 @@ const TeamPage = () => {
               <TeamMemberCard key={index} member={member} />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Members Section */}
         <div>
@@ -240,9 +275,19 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Batch -2024
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
             {teamMembers.members.map((member, index) => (
               <TeamMemberCard key={index} member={member} />
+            ))}
+          </div>
+        </div>
+        <div>
+        <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+            Developers
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
+            {teamMembers.developers.map((developer, index) => (
+              <TeamMemberCard key={index} member={developer} />
             ))}
           </div>
         </div>
