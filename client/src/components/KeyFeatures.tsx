@@ -9,8 +9,8 @@ const KeyFeatures: React.FC = () => {
       {/* Chat Container */}
       <div className="w-full bg-secondary-green rounded-2xl p-4 flex items-center gap-4 flex-grow h-36 sm:h-64 relative group">
         {/* Combined overlay */}
-        <div className="absolute inset-0 bg-primary-green/80 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10 cursor-not-allowed">
-          <p className="text-secondary-green text-xl font-acme">Coming Soon</p>
+        <div className="absolute inset-0 bg-primary-green/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10 cursor-not-allowed">
+          <p className="text-secondary-green text-5xl font-acme">Coming Soon</p>
         </div>
         
         {/* Left side with brain icon */}
