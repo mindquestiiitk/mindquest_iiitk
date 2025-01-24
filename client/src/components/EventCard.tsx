@@ -13,7 +13,7 @@ export function EventCard({ id, title, image, brief }: EventCardProps) {
 
   return (
     <div
-      className="relative overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-[#D4F3D9] border-card-overlay-background rounded-lg"
+      className="relative overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-xl bg-eventcard-background border-card-overlay-background rounded-lg"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

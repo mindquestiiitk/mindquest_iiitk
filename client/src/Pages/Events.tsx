@@ -52,7 +52,7 @@ export function Events() {
   return (
     <>
       <Navbar_Home/>
-      <div className="min-h-screen bg-[#D4F3D9]/30">
+      <div className="min-h-screen bg-eventcard-background/30">
         <div className="container mx-auto py-12 px-4">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}

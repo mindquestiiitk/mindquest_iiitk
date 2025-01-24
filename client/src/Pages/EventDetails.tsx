@@ -41,7 +41,7 @@ export function EventDetail() {
                 transition={{ duration: 0.5 }}
                 className="container mx-auto py-8 px-4"
             >
-                <div className="flex flex-col md:flex-row gap-8 bg-[#D4F3D9] rounded-2xl overflow-hidden shadow-xl">
+                <div className="flex flex-col md:flex-row gap-8 bg-eventcard-background rounded-2xl overflow-hidden shadow-xl">
                     {/* Left Section */}
                     <motion.div
                         initial={{ x: -50, opacity: 0 }}
@@ -58,7 +58,7 @@ export function EventDetail() {
                             />
                         </div>
                         {/* Bottom half - Organizer Images */}
-                        <div className="h-1/2 bg-[#EAF8EC] p-4 flex gap-4 justify-center items-center">
+                        <div className="h-1/2 bg-background-secondary p-4 flex gap-4 justify-center items-center">
                             {organizers.map((organizer) => (
                                 <div
                                     key={organizer.id}
@@ -93,7 +93,7 @@ export function EventDetail() {
                         <p className="text-lg mb-6 text-card-overlay-background">
                             {event.description}
                         </p>
-                        <button className="px-4 py-2 bg-card-overlay-background text-[#D4F3D9] hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
+                        <button className="px-4 py-2 bg-card-overlay-background text-background-primary hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
                             Register Now
                         </button>
                     </motion.div>

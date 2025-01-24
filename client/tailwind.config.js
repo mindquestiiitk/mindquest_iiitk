@@ -30,7 +30,7 @@ theme: {
 			background: 'hsl(var(--background))',
 			foreground: 'hsl(var(--foreground))',
 			eventcard: {
-				background: 'hsl(var(eventcard-background))',
+				background: 'hsl(var(--eventcard-background))',
 			},
 			card: {
 				DEFAULT: 'hsl(var(--card))',
