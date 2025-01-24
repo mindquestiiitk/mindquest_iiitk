@@ -39,10 +39,10 @@ const FAQ = () => {
         <DetailsSection
           key={index}
           summary={<span className="text-lg">{faq.question}</span>}
-          content={faq.answer}  
+          content={faq.answer}
         />
         ))}
-      </div>  
+      </div>
       </div>
     </section>
   );

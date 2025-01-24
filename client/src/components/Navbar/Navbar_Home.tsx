@@ -24,7 +24,7 @@ const NavbarHome = () => {
     ];
 
     return (
-        <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
+        <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4 w-full">
             <div className="relative flex items-center justify-between w-full">
                 <a
                     href="/"
