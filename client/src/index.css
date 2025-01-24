@@ -22,6 +22,7 @@
       --foreground-primary: 149 100% 20%; /* #006833 */
       --card: 0 0% 100%; /* #FFFFFF */
       --card-overlay-background: 152 100% 20%; /* #006838 */
+      --eventcard-background: 130 13% 95%; /*#D4F3D9 */
       --card-foreground: 0 0% 4%; /* #0A0A0A */
       --popover: 0 0% 100%; /* #FFFFFF */
       --popover-foreground: 0 0% 4%; /* #0A0A0A */
