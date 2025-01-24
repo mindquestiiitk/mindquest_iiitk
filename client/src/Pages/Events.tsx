@@ -7,7 +7,7 @@ const events = [
   {
     id: "1",
     title: "Mental Wellness Workshop",
-    image: "https://via.placeholder.com/300x200",
+    image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg",
     brief: "Join us for a transformative experience",
   },
   {
@@ -51,37 +51,37 @@ const events = [
 export function Events() {
   return (
     <>
-    <Navbar_Home/>
-    <div className="min-h-screen bg-[#D4F3D9]/30">
-      <div className="container mx-auto py-12 px-4">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl font-bold mb-8 text-[#006838] text-center"
-        >
-          Upcoming Events
-        </motion.h1>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-        >
-          {events.map((event, index) => (
-            <motion.div
-              key={event.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
-            >
-              <EventCard {...event} />
-            </motion.div>
-          ))}
-        </motion.div>
+      <Navbar_Home/>
+      <div className="min-h-screen bg-[#D4F3D9]/30">
+        <div className="container mx-auto py-12 px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold mb-8 text-card-overlay-background text-center"
+          >
+            Upcoming Events
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+          >
+            {events.map((event, index) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
+              >
+                <EventCard {...event} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   )
 }

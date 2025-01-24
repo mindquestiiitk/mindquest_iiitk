@@ -5,63 +5,103 @@ import Navbar_Home from "@/components/Navbar/Navbar_Home"
 
 // Mock data - replace with actual data fetching logic
 const events = [
-  {
-    id: "1",
-    title: "Mental Wellness Workshop",
-    image: "https://via.placeholder.com/600x400",
-    brief: "Join us for a transformative experience",
-    description:
-      "Discover techniques and strategies to enhance your mental well-being in this interactive workshop. Learn from experts and connect with like-minded individuals in a supportive environment.",
-    date: "August 15-17, 2023",
-    location: "Mindful Center, California",
-  },
-  // Add more events as needed
+    {
+        id: "1",
+        title: "Mental Wellness Workshop",
+        image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg",
+        brief: "Join us for a transformative experience",
+        description:
+            "Discover techniques and strategies to enhance your mental well-being in this interactive workshop. Learn from experts and connect with like-minded individuals in a supportive Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas repudiandae reiciendis deserunt similique? Laudantium laborum perferendis, officiis debitis dolores, optio, aut id accusamus neque necessitatibus reprehenderit! Quaerat in doloribus quae itaque atque! Dolorum eligendi omnis ratione aperiam mollitia error dolor assumenda quam iste ea? Aspernatur atque quas voluptatem culpa ducimus. Rem facere minus nobis possimus consequuntur laborum ex deleniti non saepe exercitationem delectus, eveniet officiis voluptates fugiat soluta aspernatur perspiciatis. Autem laudantium optio ratione illum nemo consectetur omnis. Totam nobis quas doloremque optio sequi expedita culpa fuga itaque pariatur alias voluptas asperiores quisquam, odit consequuntur, corrupti et reprehenderit quam? Expedita doloremque enim ipsum modi tempore nam sequi consequuntur cum quos veritatis quasi iusto, iure tenetur deleniti eveniet, eum provident, amet perferendis? Autem, maiores debitis! Iure rem tempore quam animi recusandae praesentium aut voluptatem obcaecati sed nostrum? Molestias ab, optio voluptate facilis placeat tempore incidunt dolores! Suscipit mollitia id molestiae accusantium voluptates animi voluptate. Asperiores nihil repudiandae, ipsa consequuntur possimus accusamus minima tempore omnis quas, eveniet quia suscipit quam? Quia, dicta? Voluptatem non inventore velit deserunt labore ea! Sunt alias accusamus consequatur? Quae ratione voluptate quod. Dolore placeat et atque autem distinctio, quos excepturi id ab qui adipisci ipsum voluptates perferendis?",
+        date: "August 15-17, 2023",
+        location: "Mindful Center, California",
+    },
+    // Add more events as needed
 ]
 
 export function EventDetail() {
-  const { eventId } = useParams<{ eventId: string }>()
-  const event = events.find((e) => e.id === eventId)
+    const { eventId } = useParams<{ eventId: string }>();
+    const event = events.find((e) => e.id === eventId);
 
-  if (!event) {
-    return <div>Event not found</div>
-  }
+    if (!event) {
+        return <div>Event not found</div>;
+    }
 
-  return (
-    <>
-    <Navbar_Home/>
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="container mx-auto py-8 px-4"
-    >
-      <div className="flex flex-col md:flex-row gap-8 bg-[#D4F3D9] rounded-2xl overflow-hidden shadow-xl">
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="md:w-1/2"
-        >
-          <img src={event.image || "/placeholder.svg"} alt={event.title} className="w-full h-full object-cover" />
-        </motion.div>
-        <motion.div
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="md:w-1/2 p-8"
-        >
-          <h1 className="text-3xl font-bold mb-4 text-[#006838]">{event.title}</h1>
-          <p className="text-[#006838]/80 mb-4">{event.date}</p>
-          <p className="text-[#006838]/80 mb-6">{event.location}</p>
-          <p className="text-lg mb-6 text-[#006838]">{event.description}</p>
-          <button className="px-4 py-2 bg-[#006838] text-[#D4F3D9] hover:bg-[#006838]/90 transition-all duration-300 rounded-md">
-            Register Now
-          </button>
-        </motion.div>
-      </div>
-    </motion.div>
-    <Footer/>
-    </>
-  )
+    const organizers = [
+        { id: 1, name: "Organizer 1", image: "https://th.bing.com/th/id/OIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4?rs=1&pid=ImgDetMain" },
+        { id: 2, name: "Organizer 2", image: "https://via.placeholder.com/150" },
+        { id: 3, name: "Organizer 3", image: "https://via.placeholder.com/150" },
+    ];
+
+    return (
+        <>
+            <Navbar_Home />
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="container mx-auto py-8 px-4"
+            >
+                <div className="flex flex-col md:flex-row gap-8 bg-[#D4F3D9] rounded-2xl overflow-hidden shadow-xl">
+                    {/* Left Section */}
+                    <motion.div
+                        initial={{ x: -50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                        className="md:w-1/2 flex flex-col"
+                    >
+                        {/* Top half - Event Image */}
+                        <div className="h-1/2 flex-shrink-0">
+                            <img
+                                src={event.image || "/placeholder.svg"}
+                                alt={event.title}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        {/* Bottom half - Organizer Images */}
+                        <div className="h-1/2 bg-[#EAF8EC] p-4 flex gap-4 justify-center items-center">
+                            {organizers.map((organizer) => (
+                                <div
+                                    key={organizer.id}
+                                    className="w-20 h-20 rounded-full overflow-hidden shadow-md"
+                                >
+                                    <img
+                                        src={organizer.image}
+                                        alt={organizer.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Right Section */}
+                    <motion.div
+                        initial={{ x: 50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="md:w-1/2 p-8"
+                    >
+                        <h1 className="text-3xl font-bold mb-4 text-card-overlay-background">
+                            {event.title}
+                        </h1>
+                        <p className="text-card-overlay-background/80 mb-4">
+                            {event.date}
+                        </p>
+                        <p className="text-card-overlay-background/80 mb-6">
+                            {event.location}
+                        </p>
+                        <p className="text-lg mb-6 text-card-overlay-background">
+                            {event.description}
+                        </p>
+                        <button className="px-4 py-2 bg-card-overlay-background text-[#D4F3D9] hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
+                            Register Now
+                        </button>
+                    </motion.div>
+                </div>
+            </motion.div>
+            <Footer />
+        </>
+    );
 }
+
 
