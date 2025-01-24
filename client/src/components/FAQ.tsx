@@ -15,11 +15,11 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => 
       open={isOpen}
       onToggle={() => setIsOpen(!isOpen)}
     >
-      <summary className="px-4 py-6 flex justify-between items-center focus:outline-none focus-visible:text-primary-green">
+      <summary className="px-4 py-2 flex justify-between items-center focus:outline-none focus-visible:text-primary-green">
         {summary}
-        <span className="ml-2">{isOpen ? '▲' : '▼'}</span>
+        <span className="ml-4">{isOpen ? '▲' : '▼'}</span>
       </summary>
-      <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-primary-green">
+      <p className="px-4 py-4 ml-4 text-primary-green">
         {content}
       </p>
     </details>
@@ -33,7 +33,6 @@ const FAQ = () => {
       <h2 className="text-2xl font-acme text-primary-green font-semibold sm:text-4xl my-auto py-6">
         FAQs
       </h2>
-      <hr className="border-primary-green mb-4" />
       <div className="space-y-4">
         {faqs.map((faq, index) => (
         <DetailsSection
