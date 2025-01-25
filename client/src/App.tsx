@@ -3,6 +3,7 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import TeamPage from './Pages/TeamPage'
 import ThemePage from './Pages/Themepage';
+import EventsPage from './Pages/EventsPage';
 
 const App = () => {
   return (
@@ -11,8 +12,8 @@ const App = () => {
       <Route path ='/login'  element ={<Login/>} />
       <Route path = '/team' element ={<TeamPage/>} />
       <Route path='/theme' element={<ThemePage />} />
+      <Route path='/events' element={<EventsPage />} />
     </Routes>
-    
   )
 }
 

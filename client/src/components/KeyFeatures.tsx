@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 
-const VerticalWaveScroll = ({ children }) => {
+const KeyFeatures = ({ children }) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
     const [maxScroll, setMaxScroll] = useState(0);
@@ -33,7 +33,7 @@ const VerticalWaveScroll = ({ children }) => {
             if (rect && rect.top <= maxScroll) {
                 setScrollPosition(maxScroll - rect.top);
             } else {
-            console.log("did not update", rect.top, maxScroll);
+                console.log("did not update", rect.top, maxScroll);
                 setScrollPosition(0);
             }
             if (position < rect.top) return;
@@ -58,7 +58,7 @@ const VerticalWaveScroll = ({ children }) => {
         waves.forEach((wave) => {
             x += Math.sin(y * wave.freq) * width * wave.amp;
         });
-        setDotPosition({ x: x, y: y});
+        setDotPosition({ x: x, y: y });
     }, [scrollPosition, maxScroll, height, width]);
 
     useEffect(() => {
@@ -122,7 +122,7 @@ const VerticalWaveScroll = ({ children }) => {
                     {children[0]}
                 </div>
                 {/* Wave and dot container */}
-                <div className="w-1/3 h-screen pointer-events-none">
+                <div className="w-1/3 h-screen pointer-events-none hidden md:block">
                     <svg
                         className="w-full h-full"
                         viewBox={`${-width - 10} -20 ${width * 2 + 20} ${height}`}
@@ -157,10 +157,10 @@ const VerticalWaveScroll = ({ children }) => {
                 </div>
             </div>
             <div className="h-screen"
-                    ref={contentRef}
+                ref={contentRef}
             />
         </>
     );
 };
 
-export default VerticalWaveScroll;
+export default KeyFeatures;

@@ -11,7 +11,7 @@ const HeroSection = () => {
         <img
           src={hero_avatar}
           alt="hero avatar"
-          className="object-contain rounded-xl w-[200px] md:w-[250px] lg:w-[500px]"
+          className="object-contain rounded-xl w-[200px] md:w-[240px] lg:w-[500px]"
         />
       </div>
       <div className="flex flex-1 flex-col xl:mx-12 md:order-1">

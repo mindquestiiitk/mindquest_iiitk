@@ -1,8 +1,8 @@
 import NavbarHome from '../components/Navbar/Navbar_Home'
 import HeroSection from '../components/HeroSection'
-import KeyFeatures from '../components/KeyFeatures'
-import Team from '../components/Team'
 import FAQ from '../components/FAQ'
+import KeyFeatures from '@/components/KeyFeatures'
+import Team from '../components/Team'
 import Footer from '../components/Footer'
 
 const Home = () => {

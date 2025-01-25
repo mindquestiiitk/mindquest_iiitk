@@ -19,7 +19,7 @@ const NavbarHome = () => {
         { href: "/", ariaLabel: "About", title: "About", text: "About" },
         { href: "/", ariaLabel: "Merch", title: "Merch", text: "Merch" },
         { href: "/team", ariaLabel: "Team", title: "Team", text: "Our Team" },
-        { href: "/", ariaLabel: "Events", title: "Events", text: "Events" },
+        { href: "/events", ariaLabel: "Events", title: "Events", text: "Events" },
         { href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },
     ];
 
