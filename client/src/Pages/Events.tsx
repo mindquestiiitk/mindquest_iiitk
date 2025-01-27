@@ -2,8 +2,17 @@ import { motion } from "framer-motion"
 import { EventCard } from "../components/EventCard"
 import Footer from "@/components/Footer"
 import Navbar_Home from "@/components/Navbar/Navbar_Home"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-const events = [
+// Define the Event interface
+interface Event {
+  id: string
+  title: string
+  image: string
+  brief: string
+}
+
+const upcomingEvents: Event[] = [
   {
     id: "1",
     title: "Mental Wellness Workshop",
@@ -48,6 +57,58 @@ const events = [
   },
 ]
 
+const pastEvents: Event[] = [
+  {
+    id: "p1",
+    title: "Meditation Workshop 2023",
+    image: "https://via.placeholder.com/300x200",
+    brief: "A deep dive into meditation practices",
+  },
+  {
+    id: "p2",
+    title: "Yoga Retreat 2023",
+    image: "https://via.placeholder.com/300x200",
+    brief: "Three days of mindful movement",
+  },
+  {
+    id: "p3",
+    title: "Mental Health Symposium",
+    image: "https://via.placeholder.com/300x200",
+    brief: "Expert talks on mental wellness",
+  },
+  {
+    id: "p4",
+    title: "Wellness Conference 2023",
+    image: "https://via.placeholder.com/300x200",
+    brief: "Annual gathering of wellness experts",
+  },
+]
+
+interface EventGridProps {
+  events: Event[]
+  animate?: boolean
+}
+
+const EventGrid: React.FC<EventGridProps> = ({ events, animate = true }) => (
+  <motion.div
+    initial={animate ? { opacity: 0 } : false}
+    animate={animate ? { opacity: 1 } : false}
+    transition={{ delay: 0.2, duration: 0.5 }}
+    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+  >
+    {events.map((event: Event, index: number) => (
+      <motion.div
+        key={event.id}
+        initial={animate ? { opacity: 0, y: 20 } : false}
+        animate={animate ? { opacity: 1, y: 0 } : false}
+        transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
+      >
+        <EventCard {...event} />
+      </motion.div>
+    ))}
+  </motion.div>
+)
+
 export function Events() {
   return (
     <div className="relative flex flex-col min-h-screen">
@@ -62,28 +123,25 @@ export function Events() {
             transition={{ duration: 0.5 }}
             className="text-4xl font-bold mb-8 text-card-overlay-background text-center"
           >
-            Upcoming Events
+            Events
           </motion.h1>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-          >
-            {events.map((event, index) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
-              >
-                <EventCard {...event} />
-              </motion.div>
-            ))}
-          </motion.div>
+
+          <Tabs defaultValue="upcoming" className="w-full">
+            <TabsList className="grid w-full max-w-[400px] grid-cols-2 mx-auto mb-8">
+              <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
+              <TabsTrigger value="past">Past Events</TabsTrigger>
+            </TabsList>
+            <TabsContent value="upcoming">
+              <EventGrid events={upcomingEvents} />
+            </TabsContent>
+            <TabsContent value="past">
+              <EventGrid events={pastEvents} />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
       <Footer />
     </div>
   )
 }
+
