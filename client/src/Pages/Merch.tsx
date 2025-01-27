@@ -10,10 +10,10 @@ interface TShirt {
 }
 
 const tshirts: TShirt[] = [
-  { id: 1, name: "Classic Green Tee", image: "https://via.placeholder.com/300x400", price: 29.99 },
-  { id: 2, name: "Eco Warrior", image: "https://via.placeholder.com/300x400", price: 34.99 },
-  { id: 3, name: "Nature Lover", image: "https://via.placeholder.com/300x400", price: 32.99 },
-  { id: 4, name: "Green Mind", image: "https://via.placeholder.com/300x400", price: 31.99 },
+  { id: 1, name: "Classic Green Tee", image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg", price: 29.99 },
+  { id: 2, name: "Eco Warrior", image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg", price: 34.99 },
+  { id: 3, name: "Nature Lover", image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg", price: 32.99 },
+  { id: 4, name: "Green Mind", image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg", price: 31.99 },
 ]
 
 export const Merch: React.FC = () => {
