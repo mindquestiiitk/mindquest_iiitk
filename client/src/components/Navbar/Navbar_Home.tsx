@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 
 import { mindquest_logo } from "../../assets";
 import NavItem from "./NavItems";
+import { Link } from "react-router-dom";
 
 interface NavItemData {
   href: string;
@@ -26,14 +27,14 @@ const Navbar_Home = () => {
   return (
     <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
       <div className="relative flex items-center justify-between w-full">
-        <a
-          href="/"
+        <Link
+          to={"/"}
           aria-label="mindquest"
           title="mindquest"
           className="inline-flex items-center -my-8"
         >
           <img src={mindquest_logo} alt="mindquest logo" />
-        </a>
+        </Link>
         <ul className="hidden lg:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <NavItem
@@ -61,8 +62,8 @@ const Navbar_Home = () => {
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <a
-                      href="/"
+                    <Link
+                      to={"/"}
                       aria-label="Company"
                       title="Company"
                       className="inline-flex items-center"
@@ -72,7 +73,7 @@ const Navbar_Home = () => {
                       <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                         Mindquest - IIITK
                       </span>
-                    </a>
+                    </Link>
                   </div>
                   <div>
                     <button
@@ -98,14 +99,14 @@ const Navbar_Home = () => {
                       </NavItem>
                     ))}
                     <li>
-                      <a
-                        href="/"
+                      <Link
+                        to={"/"}
                         className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-light-green hover:bg-[#457d3e] focus:shadow-outline focus:outline-none"
                         aria-label="Log In"
                         title="Log In"
                       >
                         Log In
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </nav>
