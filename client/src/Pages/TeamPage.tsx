@@ -59,38 +59,6 @@ const TeamPage = () => {
 
       },
     ],
-    // coreMembers: [
-    //   {
-    //     name: "John Doe",
-    //     role: "Core Member",
-    //     image: "/api/placeholder/200/200",
-    //     socials: {
-    //       linkedin: "#",
-    //       twitter: "#",
-    //       website: "#",
-    //     },
-    //   },
-    //   {
-    //     name: "Jane Smith",
-    //     role: "Core Member",
-    //     image: "/api/placeholder/200/200",
-    //     socials: {
-    //       linkedin: "#",
-    //       twitter: "#",
-    //       website: "#",
-    //     },
-    //   },
-    //   {
-    //     name: "Alice Johnson",
-    //     role: "Core Member",
-    //     image: "/api/placeholder/200/200",
-    //     socials: {
-    //       linkedin: "#",
-    //       twitter: "#",
-    //       website: "#",
-    //     },
-    //   },
-    // ],
     members: [
       {
         name: "Bob Brown",
@@ -239,17 +207,6 @@ const TeamPage = () => {
           </div>
         </div>
 
-        {/* Core Members Section
-        <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
-            Core Members
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.coreMembers.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
-          </div>
-        </div> */}
 
         {/* Members Section */}
         <div>
