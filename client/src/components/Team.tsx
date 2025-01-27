@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {team_photo} from '../assets'
 
 const Team = () => {
@@ -21,8 +22,8 @@ const Team = () => {
 
                 {/* Centered Know More Button */}
                 <div className="absolute bottom-0 left-0 w-full flex justify-center pb-8">
-                    <a 
-                        href="/team"
+                    <Link 
+                        to={"/team"}
                         className="flex items-center gap-2 bg-green-100 hover:bg-secondary-green transition-colors px-4 py-2 rounded-full border-2 border-green-600"
                     >
                         <span className="text-primary-green font-medium">Know More</span>
@@ -41,7 +42,7 @@ const Team = () => {
                                 />
                             </svg>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
