@@ -112,10 +112,10 @@ const EventGrid: React.FC<EventGridProps> = ({ events, animate = true }) => (
 export function Events() {
   return (
     <div className="relative flex flex-col min-h-screen">
-      <div className="fixed top-0 left-0 right-0 z-50">
+      <div className=" z-50">
         <Navbar_Home />
       </div>
-      <main className="flex-grow mt-16 bg-eventcard-background/30">
+      <main className="flex-grow bg-eventcard-background/30">
         <div className="container mx-auto py-12 px-4">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
