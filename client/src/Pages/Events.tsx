@@ -50,9 +50,11 @@ const events = [
 
 export function Events() {
   return (
-    <>
-      <Navbar_Home/>
-      <div className="min-h-screen bg-eventcard-background/30">
+    <div className="relative flex flex-col min-h-screen">
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Navbar_Home />
+      </div>
+      <main className="flex-grow mt-16 bg-eventcard-background/30">
         <div className="container mx-auto py-12 px-4">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
@@ -80,9 +82,8 @@ export function Events() {
             ))}
           </motion.div>
         </div>
-      </div>
+      </main>
       <Footer />
-    </>
+    </div>
   )
 }
-
