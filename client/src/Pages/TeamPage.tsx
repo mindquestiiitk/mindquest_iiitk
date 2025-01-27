@@ -16,8 +16,8 @@ const TeamPage = () => {
   const teamMembers = {
     patrons: [
       {
-        name: "Renjitha Mam",
-        role: "Club Coordinator",
+        name: "Dr. G. Kannabiran",
+        role: "Director, IIIT Kottayam",
         image: "/api/placeholder/200/200",
         socials: {
           linkedin: "#",
@@ -26,8 +26,8 @@ const TeamPage = () => {
         },
       },
       {
-        name: "Saarthak Gupta",
-        role: "Club Lead",
+        name: "Dr. Radha Krishnan, IIIT Kottayam",
+        role: "Registar, IIIT Kottayam",
         image: "/api/placeholder/200/200",
         socials: {
           linkedin: "#",
@@ -46,36 +46,17 @@ const TeamPage = () => {
         },
       },
     ],
-    coreMembers: [
+    mentor: [
       {
-        name: "John Doe",
-        role: "Core Member",
+        name: "Sarthak Gupta",
+        role: "Mentor",
         image: "/api/placeholder/200/200",
         socials: {
           linkedin: "#",
           twitter: "#",
           website: "#",
         },
-      },
-      {
-        name: "Jane Smith",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Alice Johnson",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
+
       },
     ],
     members: [
@@ -110,6 +91,39 @@ const TeamPage = () => {
         },
       },
     ],
+
+    developers:[
+      {
+        name: "Sarthak Gupta",
+        role: "Developer",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+      {
+        name: "Charlie Davis",
+        role: "Member",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+      {
+        name: "Eve Wilson",
+        role: "Member",
+        image: "/api/placeholder/200/200",
+        socials: {
+          linkedin: "#",
+          twitter: "#",
+          website: "#",
+        },
+      },
+    ]
   };
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
@@ -163,13 +177,13 @@ const TeamPage = () => {
     <>
       <Navbar_Home />
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-primary-green text-4xl font-bold text-center mb-12 font-acme">
+        <h1 className="text-primary-green text-5xl font-bold text-center mb-12 font-acme">
           Meet our Team
         </h1>
 
         {/* Patrons Section */}
         <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Patrons
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
@@ -179,26 +193,58 @@ const TeamPage = () => {
           </div>
         </div>
 
-        {/* Core Members Section */}
-        <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
-            Core Members
+        {/* Mentor Section */}
+        <div className="mb-16" >
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+            Mentor
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.coreMembers.map((member, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-start-2 justify-self-center">
+              {teamMembers.mentor.map((mentor, index) => (
+                <TeamMemberCard key={index} member={mentor} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+
+        {/* Members Section */}
+        <div>
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+            Members
+          </h2>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2022
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
+            {teamMembers.members.map((member, index) => (
+              <TeamMemberCard key={index} member={member} />
+            ))}
+          </div>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2023
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
+            {teamMembers.members.map((member, index) => (
+              <TeamMemberCard key={index} member={member} />
+            ))}
+          </div>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2024
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
+            {teamMembers.members.map((member, index) => (
               <TeamMemberCard key={index} member={member} />
             ))}
           </div>
         </div>
-
-        {/* Members Section */}
         <div>
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
-            Members
+        <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+            Developers
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.members.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
+            {teamMembers.developers.map((developer, index) => (
+              <TeamMemberCard key={index} member={developer} />
             ))}
           </div>
         </div>

@@ -29,8 +29,14 @@ theme: {
 			'text-green': '#006833',
 			background: 'hsl(var(--background))',
 			foreground: 'hsl(var(--foreground))',
+			eventcard: {
+				background: 'hsl(var(--eventcard-background))',
+			},
 			card: {
 				DEFAULT: 'hsl(var(--card))',
+				overlay:{
+					background: 'hsl(var(--card-overlay-background))',
+				},
 				foreground: 'hsl(var(--card-foreground))'
 			},
 			popover: {
