@@ -1,0 +1,50 @@
+{
+  "events": {
+    "pastEvents": [
+      {
+        "id": "p1",
+        "title": "Meditation Workshop 2023",
+        "image": "https://via.placeholder.com/300x200",
+        "brief": "A deep dive into meditation practices"
+      },
+      {
+        "id": "p2",
+        "title": "Yoga Retreat 2023",
+        "image": "https://via.placeholder.com/300x200",
+        "brief": "Three days of mindful movement"
+      },
+      {
+        "id": "p3",
+        "title": "Mental Health Symposium",
+        "image": "https://via.placeholder.com/300x200",
+        "brief": "Expert talks on mental wellness"
+      },
+      {
+        "id": "p4",
+        "title": "Mindful Eating Workshop",
+        "image": "https://via.placeholder.com/300x200",
+        "brief": "Learn to eat with intention"
+      }
+    ],
+    "upcomingEvents": [
+      {
+        "id": "1",
+        "title": "Mental Wellness Workshop",
+        "image": "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg",
+        "brief": "Join us for a transformative experience"
+      },
+      {
+        "id": "2",
+        "title": "Mindfulness Retreat",
+        "image": "https://via.placeholder.com/300x200",
+        "brief": "Discover inner peace and clarity"
+      },
+      {
+        "id": "3",
+        "title": "Stress Management Seminar",
+        "image": "https://via.placeholder.com/300x200",
+        "brief": "Learn effective coping strategies"
+      }
+    ]
+  }
+}

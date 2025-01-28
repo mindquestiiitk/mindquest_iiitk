@@ -1,5 +1,6 @@
 import Navbar_Home from "../components/Navbar/Navbar_Home";
 import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
 
 interface TeamMember {
   name: string;
@@ -12,119 +13,31 @@ interface TeamMember {
   };
 }
 
+interface TeamData {
+  patrons: TeamMember[];
+  mentors: TeamMember[];
+  batch2022: TeamMember[];
+  batch2023: TeamMember[];
+  batch2024: TeamMember[];
+  developers: TeamMember[];
+}
+
 const TeamPage = () => {
-  const teamMembers = {
-    patrons: [
-      {
-        name: "Dr. G. Kannabiran",
-        role: "Director, IIIT Kottayam",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Dr. Radha Krishnan, IIIT Kottayam",
-        role: "Registar, IIIT Kottayam",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Renjitha Mam",
-        role: "Club Coordinator",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-    ],
-    mentor: [
-      {
-        name: "Sarthak Gupta",
-        role: "Mentor",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
 
-      },
-    ],
-    members: [
-      {
-        name: "Bob Brown",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Charlie Davis",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Eve Wilson",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-    ],
+  const [fetchMembers, setFetchMembers] = useState<{ people: TeamData } | null>(null);
 
-    developers:[
-      {
-        name: "Sarthak Gupta",
-        role: "Developer",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Charlie Davis",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Eve Wilson",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-    ]
-  };
+  useEffect(() => {
+    document.title = "MindQuest - Team";
+    (async () => {
+      fetch("./people.json")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          setFetchMembers(data)
+        })
+    })()
+
+  }, []);
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
     <div className="flex flex-col items-center">
@@ -187,7 +100,7 @@ const TeamPage = () => {
             Patrons
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.patrons.map((patron, index) => (
+            {fetchMembers && fetchMembers.people.patrons && fetchMembers.people.patrons.map((patron, index) => (
               <TeamMemberCard key={index} member={patron} />
             ))}
           </div>
@@ -200,7 +113,7 @@ const TeamPage = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-start-2 justify-self-center">
-              {teamMembers.mentor.map((mentor, index) => (
+              {fetchMembers && fetchMembers.people.mentors && fetchMembers.people.mentors.map((mentor, index) => (
                 <TeamMemberCard key={index} member={mentor} />
               ))}
             </div>
@@ -217,33 +130,36 @@ const TeamPage = () => {
             Batch -2022
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
-            {teamMembers.members.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
+            {fetchMembers &&
+              fetchMembers.people.batch2022.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
           </div>
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Batch -2023
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
-            {teamMembers.members.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
+            {fetchMembers &&
+              fetchMembers.people.batch2023.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
           </div>
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Batch -2024
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
-            {teamMembers.members.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
-            ))}
+            {fetchMembers &&
+              fetchMembers.people.batch2024.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
           </div>
         </div>
         <div>
-        <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Developers
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
-            {teamMembers.developers.map((developer, index) => (
+            {fetchMembers && fetchMembers.people.developers && fetchMembers.people.developers.map((developer, index) => (
               <TeamMemberCard key={index} member={developer} />
             ))}
           </div>
