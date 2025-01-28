@@ -40,12 +40,12 @@ const TeamPage = () => {
   }, []);
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
-    <div className="flex flex-col items-center">
-      <div className="bg-green-100 rounded-2xl p-2 w-48 h-48 mb-4">
+    <div className="flex flex-col items-center w-full md:w-1/4">
+      <div className="bg-lighter-green rounded-2xl p-2 w-56 h-56 mb-4 aspect-square">
         <img
           src={member.image}
           alt={member.name}
-          className="rounded-xl w-full h-full object-cover"
+          className="rounded-xl w-full h-full object-cover object-top"
         />
       </div>
       <h3 className="text-primary-green font-semibold text-lg">{member.name}</h3>
@@ -89,7 +89,7 @@ const TeamPage = () => {
   return (
     <>
       <Navbar_Home />
-      <div className="container mx-auto px-4 py-12">
+      <div className=" container mx-auto px-4 py-12">
         <h1 className="text-primary-green text-5xl font-bold text-center mb-12 font-acme">
           Meet our Team
         </h1>
@@ -99,7 +99,7 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Patrons
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center">
             {fetchMembers && fetchMembers.people.patrons && fetchMembers.people.patrons.map((patron, index) => (
               <TeamMemberCard key={index} member={patron} />
             ))}
@@ -111,13 +111,11 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Mentor
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-start-2 justify-self-center">
+            <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center">
               {fetchMembers && fetchMembers.people.mentors && fetchMembers.people.mentors.map((mentor, index) => (
                 <TeamMemberCard key={index} member={mentor} />
               ))}
             </div>
-          </div>
         </div>
 
 
@@ -129,7 +127,7 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Batch -2022
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
             {fetchMembers &&
               fetchMembers.people.batch2022.map((member, index) => (
                 <TeamMemberCard key={index} member={member} />
@@ -138,7 +136,7 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Batch -2023
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
             {fetchMembers &&
               fetchMembers.people.batch2023.map((member, index) => (
                 <TeamMemberCard key={index} member={member} />
@@ -147,7 +145,7 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
             Batch -2024
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center mb-8">
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
             {fetchMembers &&
               fetchMembers.people.batch2024.map((member, index) => (
                 <TeamMemberCard key={index} member={member} />
@@ -158,7 +156,7 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Developers
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center p-1 mb-8">
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
             {fetchMembers && fetchMembers.people.developers && fetchMembers.people.developers.map((developer, index) => (
               <TeamMemberCard key={index} member={developer} />
             ))}
