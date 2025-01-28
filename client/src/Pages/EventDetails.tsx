@@ -81,7 +81,7 @@ export function EventDetail() {
                         transition={{ delay: 0.3, duration: 0.5 }}
                         className="md:w-1/2 p-8"
                     >
-                        <h1 className="text-3xl font-bold mb-4 text-card-overlay-background">
+                        <h1 className="text-3xl font-bold mb-4 text-card-overlay-background font-acme">
                             {event.title}
                         </h1>
                         <p className="text-card-overlay-background/80 mb-4">

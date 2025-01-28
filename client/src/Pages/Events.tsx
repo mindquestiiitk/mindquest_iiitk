@@ -73,15 +73,15 @@ export function Events() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-bold mb-8 text-card-overlay-background text-center"
+            className="text-4xl font-bold mb-8 text-card-overlay-background text-center font-acme"
           >
             Events
           </motion.h1>
 
           <Tabs defaultValue="upcoming" className="w-full">
             <TabsList className="grid w-full max-w-[400px] grid-cols-2 mx-auto mb-8">
-              <TabsTrigger value="upcoming">Upcoming Events</TabsTrigger>
-              <TabsTrigger value="past">Past Events</TabsTrigger>
+              <TabsTrigger className="data-[state=active]:bg-accent/90 data-[state=active]:text-white" value="upcoming">Upcoming Events</TabsTrigger>
+              <TabsTrigger className="data-[state=active]:bg-accent/90 data-[state=active]:text-white" value="past">Past Events</TabsTrigger>
             </TabsList>
             <TabsContent value="upcoming">
               {eventsData && eventsData.events.upcomingEvents && (
