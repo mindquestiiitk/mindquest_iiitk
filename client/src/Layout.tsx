@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>  
       <div className='relative flex flex-col min-h-screen'>
-        <div className="z-30 ">
+        <div className="z-30 w-full pb-2">
           <Navbar_Home />
         </div>
         <Outlet />
