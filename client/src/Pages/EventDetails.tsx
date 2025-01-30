@@ -26,9 +26,10 @@ export function EventDetail() {
     }
 
     const organizers = [
-        { id: 1, name: "Organizer 1", image: "https://th.bing.com/th/id/OIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4?rs=1&pid=ImgDetMain" },
-        { id: 2, name: "Organizer 2", image: "https://via.placeholder.com/150" },
-        { id: 3, name: "Organizer 3", image: "https://via.placeholder.com/150" },
+        { id: 1, name: "Organizer 1", image: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" },
+        { id: 2, name: "Organizer 2", image: "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" },
+        { id: 3, name: "Organizer 3", image: "https://eu.ui-avatars.com/api/?name=Sarthak+Gupta&size=250" },
+        // use https://eu.ui-avatars.com/api/?name=John+Doe&size=250 to generate random avatar from name
     ];
 
     return (
