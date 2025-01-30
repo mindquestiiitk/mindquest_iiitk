@@ -2,9 +2,9 @@
     "people": {
         "patrons": [
             {
-                "name": "John Doe",
-                "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
+                "name": "Prof. Prasad Krishna",
+                "role": "Director",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -164,7 +164,7 @@
             {
                 "name": "John Doe",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
