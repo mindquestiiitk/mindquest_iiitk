@@ -10,7 +10,7 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ href, ariaLabel, title, children }) => {
   return (
-    <li className="relative cursor-pointer">
+    <li className="relative cursor-pointer w-fit">
       <Link
         to={href}
         aria-label={ariaLabel}
