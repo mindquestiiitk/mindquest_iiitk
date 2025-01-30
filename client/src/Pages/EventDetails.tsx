@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom"
 import { motion } from "framer-motion"
-import Footer from "@/components/Footer"
-import Navbar_Home from "@/components/Navbar/Navbar_Home"
+
 
 // Mock data - replace with actual data fetching logic
 const events = [
@@ -34,7 +33,6 @@ export function EventDetail() {
 
     return (
         <>
-            <Navbar_Home />
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -93,13 +91,12 @@ export function EventDetail() {
                         <p className="text-lg mb-6 text-card-overlay-background">
                             {event.description}
                         </p>
-                        <button className="px-4 py-2 bg-card-overlay-background text-background-primary hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
+                        <button className="px-4 py-2 bg-card-overlay-background text-white hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
                             Register Now
                         </button>
                     </motion.div>
                 </div>
             </motion.div>
-            <Footer />
         </>
     );
 }

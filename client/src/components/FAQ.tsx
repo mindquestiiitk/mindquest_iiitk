@@ -19,7 +19,7 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => 
         {summary}
         <span className="ml-2">{isOpen ? '▲' : '▼'}</span>
       </summary>
-      <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-primary-green">
+      <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-black">
         {content}
       </p>
     </details>
