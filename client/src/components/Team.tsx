@@ -12,7 +12,7 @@ const Team = () => {
 
             {/* Image Container */}
             <div className="relative w-full">
-                <div className="bg-secondary-green rounded-[2rem] p-6">
+                <div className="bg-secondary-green rounded-[2rem] p-2 md:p-6">
                     <img 
                         src={team_photo} // Replace with your actual image path
                         alt="Team photo"
@@ -21,10 +21,10 @@ const Team = () => {
                 </div>
 
                 {/* Centered Know More Button */}
-                <div className="absolute bottom-0 left-0 w-full flex justify-center pb-8">
+                <div className="absolute bottom-0 left-0 w-full flex justify-center pb-4 md:pb-8">
                     <Link 
                         to={"/team"}
-                        className="flex items-center gap-2 bg-green-100 hover:bg-secondary-green transition-colors px-4 py-2 rounded-full border-2 border-green-600"
+                        className="flex items-center gap-2 bg-green-100 hover:bg-secondary-green transition-colors text-xs md:text-base px-2 py-1 md:px-4 md:py-2 rounded-full border-2 border-green-600"
                     >
                         <span className="text-primary-green font-medium">Know More</span>
                         <div className="bg-primary-green rounded-full p-2">
