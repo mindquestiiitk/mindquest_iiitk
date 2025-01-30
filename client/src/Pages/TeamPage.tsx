@@ -30,7 +30,6 @@ const TeamPage = () => {
       fetch("./people.json")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
           setFetchMembers(data)
         })
     })()
