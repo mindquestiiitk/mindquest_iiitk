@@ -1,7 +1,5 @@
 import { motion } from "framer-motion"
 import { EventCard } from "../components/EventCard"
-import Footer from "@/components/Footer"
-import Navbar_Home from "@/components/Navbar/Navbar_Home"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useEffect, useState } from "react"
 
@@ -54,7 +52,6 @@ export function Events() {
       try {
         const response = await fetch("./events.json")
         const data = await response.json()
-        console.log("Fetched events data:", data)
         setEventsData(data)
       } catch (error) {
         console.error("Error fetching events data:", error)
