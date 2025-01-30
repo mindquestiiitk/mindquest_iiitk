@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom"
 import { motion } from "framer-motion"
-import Footer from "@/components/Footer"
-import Navbar_Home from "@/components/Navbar/Navbar_Home"
+
 
 // Mock data - replace with actual data fetching logic
 const events = [
@@ -27,14 +26,14 @@ export function EventDetail() {
     }
 
     const organizers = [
-        { id: 1, name: "Organizer 1", image: "https://th.bing.com/th/id/OIP.2bJ9_f9aKoGCME7ZIff-ZwHaJ4?rs=1&pid=ImgDetMain" },
-        { id: 2, name: "Organizer 2", image: "https://via.placeholder.com/150" },
-        { id: 3, name: "Organizer 3", image: "https://via.placeholder.com/150" },
+        { id: 1, name: "Organizer 1", image: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" },
+        { id: 2, name: "Organizer 2", image: "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" },
+        { id: 3, name: "Organizer 3", image: "https://eu.ui-avatars.com/api/?name=Sarthak+Gupta&size=250" },
+        // use https://eu.ui-avatars.com/api/?name=John+Doe&size=250 to generate random avatar from name
     ];
 
     return (
         <>
-            <Navbar_Home />
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -93,13 +92,12 @@ export function EventDetail() {
                         <p className="text-lg mb-6 text-card-overlay-background">
                             {event.description}
                         </p>
-                        <button className="px-4 py-2 bg-card-overlay-background text-background-primary hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
+                        <button className="px-4 py-2 bg-card-overlay-background text-white hover:bg-card-overlay-background/90 transition-all duration-300 rounded-md">
                             Register Now
                         </button>
                     </motion.div>
                 </div>
             </motion.div>
-            <Footer />
         </>
     );
 }

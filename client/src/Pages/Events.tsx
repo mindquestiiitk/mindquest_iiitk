@@ -1,10 +1,9 @@
 import { motion } from "framer-motion"
 import { EventCard } from "../components/EventCard"
-import Footer from "@/components/Footer"
-import Navbar_Home from "@/components/Navbar/Navbar_Home"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useEffect, useState } from "react"
 
-// Define the Event interface
+// Define interfaces
 interface Event {
   id: string
   title: string
@@ -12,77 +11,12 @@ interface Event {
   brief: string
 }
 
-const upcomingEvents: Event[] = [
-  {
-    id: "1",
-    title: "Mental Wellness Workshop",
-    image: "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg",
-    brief: "Join us for a transformative experience",
-  },
-  {
-    id: "2",
-    title: "Mindfulness Retreat",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Discover inner peace and clarity",
-  },
-  {
-    id: "3",
-    title: "Stress Management Seminar",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Learn effective coping strategies",
-  },
-  {
-    id: "4",
-    title: "Stress Management Seminar",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Learn effective coping strategies",
-  },
-  {
-    id: "5",
-    title: "Stress Management Seminar",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Learn effective coping strategies",
-  },
-  {
-    id: "6",
-    title: "Stress Management Seminar",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Learn effective coping strategies",
-  },
-  {
-    id: "7",
-    title: "Stress Management Seminar",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Learn effective coping strategies",
-  },
-]
-
-const pastEvents: Event[] = [
-  {
-    id: "p1",
-    title: "Meditation Workshop 2023",
-    image: "https://via.placeholder.com/300x200",
-    brief: "A deep dive into meditation practices",
-  },
-  {
-    id: "p2",
-    title: "Yoga Retreat 2023",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Three days of mindful movement",
-  },
-  {
-    id: "p3",
-    title: "Mental Health Symposium",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Expert talks on mental wellness",
-  },
-  {
-    id: "p4",
-    title: "Wellness Conference 2023",
-    image: "https://via.placeholder.com/300x200",
-    brief: "Annual gathering of wellness experts",
-  },
-]
+interface EventsData {
+  events: {
+    upcomingEvents: Event[]
+    pastEvents: Event[]
+  }
+}
 
 interface EventGridProps {
   events: Event[]
@@ -110,11 +44,23 @@ const EventGrid: React.FC<EventGridProps> = ({ events, animate = true }) => (
 )
 
 export function Events() {
+  const [eventsData, setEventsData] = useState<EventsData | null>(null)
+
+  useEffect(() => {
+    document.title = "MindQuest - Events"
+    ;(async () => {
+      try {
+        const response = await fetch("./events.json")
+        const data = await response.json()
+        setEventsData(data)
+      } catch (error) {
+        console.error("Error fetching events data:", error)
+      }
+    })()
+  }, [])
+
   return (
-    <div className="relative flex flex-col min-h-screen">
-      <div className=" z-50">
-        <Navbar_Home />
-      </div>
+    <>
       <main className="flex-grow bg-eventcard-background/30">
         <div className="container mx-auto py-12 px-4">
           <motion.h1
@@ -132,16 +78,18 @@ export function Events() {
               <TabsTrigger className="data-[state=active]:bg-accent/90 data-[state=active]:text-white" value="past">Past Events</TabsTrigger>
             </TabsList>
             <TabsContent value="upcoming">
-              <EventGrid events={upcomingEvents} />
+              {eventsData && eventsData.events.upcomingEvents && (
+                <EventGrid events={eventsData.events.upcomingEvents} />
+              )}
             </TabsContent>
             <TabsContent value="past">
-              <EventGrid events={pastEvents} />
+              {eventsData && eventsData.events.pastEvents && (
+                <EventGrid events={eventsData.events.pastEvents} />
+              )}
             </TabsContent>
           </Tabs>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   )
 }
-

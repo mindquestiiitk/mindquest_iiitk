@@ -1,29 +1,30 @@
+import { Link } from "react-router-dom";
 import { mindquest_logo } from "../assets";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary-green p-8">
+    <footer className="bg-secondary-green py-1 px-8">
       <div className="mx-auto">
         {/* Logo and Name Section */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-12">
+        <div className="flex items-center gap-3 mb-2 mt-2">
+          <div className="w-14 h-14">
             <img src={mindquest_logo} alt="Mind Quest Logo" className="w-full h-full" />
           </div>
-          <span className="text-primary-green text-xl font-semibold">Mind Quest</span>
+          <span className="text-primary-green text-2xl font-semibold">Mind Quest</span>
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
 
 
           {/* Quick Links */}
           <div>
             <h3 className="text-accent font-semibold mb-4">Quick Links</h3>
             <ul className="text-foreground/70 text-sm space-y-2">
-              <li><a href="/" className="hover:text-accent">Home</a></li>
-              <li><a href="/events" className="hover:text-accent">Events</a></li>
-              <li><a href="/merch" className="hover:text-accent">Merch</a></li>
-              <li><a href="/" className="hover:text-accent">About</a></li>
+              <li><Link to={"/"} className="hover:text-accent">Home</Link></li>
+              <li><Link to={"/events"} className="hover:text-accent">Events</Link></li>
+              <li><Link to={"/merch"} className="hover:text-accent">Merch</Link></li>
+              <li><Link to={"/"} className="hover:text-accent">About</Link></li>
             </ul>
           </div>
 
@@ -57,7 +58,7 @@ const Footer = () => {
 
 
         {/* Divider Line */}
-        <div className="w-full h-px bg-accent my-4"></div>
+        <div className="w-full h-px bg-accent mt-4 mb-1"></div>
 
         {/* Copyright */}
         <div className="text-center text-sm text-foreground/70">
