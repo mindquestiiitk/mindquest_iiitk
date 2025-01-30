@@ -39,7 +39,7 @@ const TeamPage = () => {
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
     <div className="flex flex-col items-center w-full md:w-1/4">
-      <div className="bg-lighter-green rounded-2xl p-2 w-56 h-56 mb-4 aspect-square">
+      <div className="bg-lighter-green rounded-2xl p-2 h-44 w-44 md:w-60 md:h-60 mb-4 aspect-square">
         <img
           src={member.image}
           alt={member.name}
