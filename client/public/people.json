@@ -14,7 +14,7 @@
             {
                 "name": "Jane Smith",
                 "role": "UX Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068337/Renjitha_t_r_yrubrm.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068337/Renjitha_t_r_yrubrm.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -23,8 +23,8 @@
             },
             {
                 "name": "John Doe",
-                "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
+                "role": "Director",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -36,7 +36,7 @@
             {
                 "name": "Alice Johnson",
                 "role": "Product Manager",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068079/Sarthak_1_odqkfy.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -48,7 +48,7 @@
             {
                 "name": "Alice Johnson",
                 "role": "Product Manager",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068079/Sarthak_1_odqkfy.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -58,7 +58,7 @@
             {
                 "name": "Pravalika",
                 "role": "UI Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068078/Pravallika_yboryy.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068078/Pravallika_yboryy.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -70,29 +70,20 @@
             {
                 "name": "Charlie Davis",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068100/DSC_0393_3_q7ei2g.jpg",
-                "socials": {
-                    "linkedin": "#",
-                    "twitter": "#",
-                    "website": "#"
-                }
-            },
-            {
-                "name": "David Wilson",
-                "role": "UX Designer",
-                "image": "https://example.com/david-wilson.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068100/DSC_0393_3_q7ei2g.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
                     "website": "#"
                 }
             }
+            
         ],
         "batch2024": [
             {
                 "name": "Eve Young",
                 "role": "Product Manager",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068157/IMG-20241229-WA0038_bvbthc.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068153/IMG_0610_ue8e3i.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -102,7 +93,7 @@
             {
                 "name": "Frank Thompson",
                 "role": "UI Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/Screenshot_20250113-070912.Drive_vanxow.png",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068154/IMG_20250112_150933_ish82o.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -112,7 +103,7 @@
             {
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/samjoe_hy9vdc.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068155/IMG_20240904_160219__02_sa9nhv.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -122,7 +113,7 @@
             {
                 "name": "Eve Young",
                 "role": "Product Manager",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/pfp_formal_abel_tx9dou.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068155/pfp_formal_abel_tx9dou.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -132,7 +123,7 @@
             {
                 "name": "Frank Thompson",
                 "role": "UI Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068153/IMG_0610_ue8e3i.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068156/samjoe_hy9vdc.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -142,7 +133,7 @@
             {
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068154/IMG_20250112_150933_ish82o.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068156/Screenshot_20250113-070912.Drive_vanxow.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -152,7 +143,17 @@
             {
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/IMG_20240904_160219__02_sa9nhv.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068157/IMG-20241229-WA0038_bvbthc.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "name": "Grace Anderson",
+                "role": "Software Engineer",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068324/img_bzxhhu.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -174,7 +175,7 @@
             {
                 "name": "Jane Smith",
                 "role": "UX Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068337/Renjitha_t_r_yrubrm.jpg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -184,7 +185,7 @@
             {
                 "name": "John Doe",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738068337/Renjitha_t_r_yrubrm.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
