@@ -1,5 +1,3 @@
-import Navbar_Home from "../components/Navbar/Navbar_Home";
-import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 
 interface TeamMember {
@@ -88,7 +86,6 @@ const TeamPage = () => {
 
   return (
     <>
-      <Navbar_Home />
       <div className=" container mx-auto px-4 py-12">
         <h1 className="text-primary-green text-5xl font-bold text-center mb-12 font-acme">
           Meet our Team
@@ -163,7 +160,6 @@ const TeamPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

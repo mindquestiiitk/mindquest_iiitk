@@ -63,10 +63,7 @@ export function Events() {
   }, [])
 
   return (
-    <div className="relative flex flex-col min-h-screen">
-      <div className="z-50">
-        <Navbar_Home />
-      </div>
+    <>
       <main className="flex-grow bg-eventcard-background/30">
         <div className="container mx-auto py-12 px-4">
           <motion.h1
@@ -96,7 +93,6 @@ export function Events() {
           </Tabs>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   )
 }
