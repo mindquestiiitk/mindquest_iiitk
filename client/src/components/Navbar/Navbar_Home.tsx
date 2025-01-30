@@ -22,7 +22,7 @@ const Navbar_Home = () => {
     { href: "/merch", ariaLabel: "Merch", title: "Merch", text: "Merch" },
     { href: "/team", ariaLabel: "Team", title: "Team", text: "Our Team" },
     { href: "/events", ariaLabel: "Events", title: "Events", text: "Events" },
-    { href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },
+    /*{ href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },*/
   ];
 
   return (
