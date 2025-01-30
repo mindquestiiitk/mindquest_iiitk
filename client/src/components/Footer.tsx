@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { mindquest_logo } from "../assets";
 
 const Footer = () => {
@@ -20,10 +21,10 @@ const Footer = () => {
           <div>
             <h3 className="text-accent font-semibold mb-4">Quick Links</h3>
             <ul className="text-foreground/70 text-sm space-y-2">
-              <li><a href="/" className="hover:text-accent">Home</a></li>
-              <li><a href="/events" className="hover:text-accent">Events</a></li>
-              <li><a href="/merch" className="hover:text-accent">Merch</a></li>
-              <li><a href="/" className="hover:text-accent">About</a></li>
+              <li><Link to={"/"} className="hover:text-accent">Home</Link></li>
+              <li><Link to={"/events"} className="hover:text-accent">Events</Link></li>
+              <li><Link to={"/merch"} className="hover:text-accent">Merch</Link></li>
+              <li><Link to={"/"} className="hover:text-accent">About</Link></li>
             </ul>
           </div>
 
