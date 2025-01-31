@@ -2,6 +2,7 @@
     "people": {
         "patrons": [
             {
+                "type": "patron",
                 "name": "Prof. Prasad Krishna",
                 "role": "Director",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
@@ -12,9 +13,10 @@
                 }
             },
             {
-                "name": "Jane Smith",
-                "role": "UX Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068337/Renjitha_t_r_yrubrm.jpg",
+                "type": "patron",
+                "name": "Dr. M Radhakrishnan",
+                "role": "Registrar",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -22,9 +24,32 @@
                 }
             },
             {
-                "name": "John Doe",
-                "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
+                "type": "patron",
+                "name": "Dr. Bakkyaraj T",
+                "role": "Associate Dean",
+                "image": "https://iiitkottayam.ac.in/data/images/bakkyaraj.jpeg",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "type": "patron",
+                "name": "Dr. Ebin Deni Raj",
+                "role": "Associate Dean",
+                "image": "https://iiitkottayam.ac.in/data/images/ebin.jpeg",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "type": "patron",
+                "name": "Renjitha T R",
+                "role": "Faculty-in-Charge",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068337/Renjitha_t_r_yrubrm.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -33,9 +58,10 @@
             }
         ],
         "mentors": [
-            {
-                "name": "Alice Johnson",
-                "role": "Product Manager",
+            {   
+                "type": "mentor",
+                "name": "Sarthak Gupta",
+                "role": "Mentor",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
                 "socials": {
                     "linkedin": "#",
@@ -46,8 +72,9 @@
         ],
         "batch2022": [
             {
-                "name": "Alice Johnson",
-                "role": "Product Manager",
+                "type": "lead",
+                "name": "Urvashi",
+                "role": "Lead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
                 "socials": {
                     "linkedin": "#",
@@ -56,8 +83,9 @@
                 }
             },
             {
-                "name": "Pravalika",
-                "role": "UI Designer",
+                "type": "lead",
+                "name": "Pravallika",
+                "role": "Lead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068078/Pravallika_yboryy.jpg",
                 "socials": {
                     "linkedin": "#",
@@ -68,8 +96,9 @@
         ],
         "batch2023": [
             {
-                "name": "Charlie Davis",
-                "role": "Software Engineer",
+                "type": "sublead",
+                "name": "Vishal",
+                "role": "Sublead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068100/DSC_0393_3_q7ei2g.jpg",
                 "socials": {
                     "linkedin": "#",
@@ -80,7 +109,8 @@
         ],
         "batch2024": [
             {
-                "name": "Eve Young",
+                "type": "member",
+                "name": "Niveditha",
                 "role": "Product Manager",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068157/IMG-20241229-WA0038_bvbthc.jpg",
                 "socials": {
@@ -90,6 +120,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Frank Thompson",
                 "role": "UI Designer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/Screenshot_20250113-070912.Drive_vanxow.png",
@@ -100,6 +131,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/samjoe_hy9vdc.jpg",
@@ -110,6 +142,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Eve Young",
                 "role": "Product Manager",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/pfp_formal_abel_tx9dou.jpg",
@@ -120,6 +153,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Frank Thompson",
                 "role": "UI Designer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068153/IMG_0610_ue8e3i.jpg",
@@ -130,6 +164,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068154/IMG_20250112_150933_ish82o.jpg",
@@ -140,6 +175,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/IMG_20240904_160219__02_sa9nhv.jpg",
@@ -150,6 +186,7 @@
                 }
             },
             {
+                "type": "member",
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068324/img_bzxhhu.jpg",
