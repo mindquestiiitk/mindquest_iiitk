@@ -18,7 +18,7 @@ const Navbar_Home = () => {
   //custom hook navbar_home
   //data.acctive
   const navItems: NavItemData[] = [
-    { href: "/", ariaLabel: "About", title: "About", text: "About" },
+    { href: "/", ariaLabel: "Home", title: "Home", text: "Home" },
     { href: "/merch", ariaLabel: "Merch", title: "Merch", text: "Merch" },
     { href: "/team", ariaLabel: "Team", title: "Team", text: "Our Team" },
     { href: "/events", ariaLabel: "Events", title: "Events", text: "Events" },

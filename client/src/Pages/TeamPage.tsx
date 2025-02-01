@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface TeamMember {
+  type: string;
   name: string;
   role: string;
   image: string;
@@ -47,7 +48,8 @@ const TeamPage = () => {
       </div>
       <h3 className="text-primary-green font-semibold text-lg">{member.name}</h3>
       <p className="text-green-600 text-sm mb-2">{member.role}</p>
-      <div className="flex gap-4 text-green-700">
+      {member.type !== "patron" &&
+        <div className="flex gap-4 text-green-700">
         {member.socials.linkedin && (
           <a href={member.socials.linkedin} className="hover:text-green-900">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -80,6 +82,7 @@ const TeamPage = () => {
           </a>
         )}
       </div>
+      }
     </div>
   );
 
