@@ -27,7 +27,7 @@
                 "type": "patron",
                 "name": "Dr. Bakkyaraj T",
                 "role": "Associate Dean",
-                "image": "https://iiitkottayam.ac.in/data/images/bakkyaraj.jpeg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738429074/bakkyaraj_i8npi3.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -38,7 +38,7 @@
                 "type": "patron",
                 "name": "Dr. Ebin Deni Raj",
                 "role": "Associate Dean",
-                "image": "https://iiitkottayam.ac.in/data/images/ebin.jpeg",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738429124/ebin_ikufpt.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
@@ -110,6 +110,39 @@
                 "name": "Vishal",
                 "role": "Sublead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068100/DSC_0393_3_q7ei2g.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Sarthak Yadav",
+                "role": "Sublead",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428526/2_pxaful_q1pvur.png",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Hema",
+                "role": "Sublead",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428474/image_kqgl2t.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Ashmi",
+                "role": "Sublead",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428461/Screenshot_20250201_173122_Gallery_mj1wk9.jpg",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
