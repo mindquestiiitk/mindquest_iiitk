@@ -73,17 +73,6 @@
         "batch2022": [
             {
                 "type": "lead",
-                "name": "Urvashi",
-                "role": "Lead",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
-                "socials": {
-                    "linkedin": "#",
-                    "twitter": "#",
-                    "website": "#"
-                }
-            },
-            {
-                "type": "lead",
                 "name": "Pravallika",
                 "role": "Lead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068078/Pravallika_yboryy.jpg",
@@ -94,8 +83,9 @@
                 }
             },
             {
+                "type": "lead",
                 "name": "Urvashi",
-                "role": "UI Designer",
+                "role": "Lead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738329066/ur_wpezuu.jpg",
                 "socials": {
                     "linkedin": "#",
