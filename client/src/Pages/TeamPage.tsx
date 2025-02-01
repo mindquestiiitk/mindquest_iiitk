@@ -1,5 +1,4 @@
-import NavbarHome from "../components/Navbar/Navbar_Home";
-import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
 
 interface TeamMember {
   name: string;
@@ -12,113 +11,38 @@ interface TeamMember {
   };
 }
 
+interface TeamData {
+  patrons: TeamMember[];
+  mentors: TeamMember[];
+  batch2022: TeamMember[];
+  batch2023: TeamMember[];
+  batch2024: TeamMember[];
+  developers: TeamMember[];
+}
+
 const TeamPage = () => {
-  const teamMembers = {
-    patrons: [
-      {
-        name: "Renjitha Mam",
-        role: "Club Coordinator",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Saarthak Gupta",
-        role: "Club Lead",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Renjitha Mam",
-        role: "Club Coordinator",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-    ],
-    coreMembers: [
-      {
-        name: "John Doe",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Jane Smith",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Alice Johnson",
-        role: "Core Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-    ],
-    members: [
-      {
-        name: "Bob Brown",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Charlie Davis",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-      {
-        name: "Eve Wilson",
-        role: "Member",
-        image: "/api/placeholder/200/200",
-        socials: {
-          linkedin: "#",
-          twitter: "#",
-          website: "#",
-        },
-      },
-    ],
-  };
+
+  const [fetchMembers, setFetchMembers] = useState<{ people: TeamData } | null>(null);
+
+  useEffect(() => {
+    document.title = "MindQuest - Team";
+    (async () => {
+      fetch("./people.json")
+        .then((response) => response.json())
+        .then((data) => {
+          setFetchMembers(data)
+        })
+    })()
+
+  }, []);
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
-    <div className="flex flex-col items-center">
-      <div className="bg-green-100 rounded-2xl p-2 w-48 h-48 mb-4">
+    <div className="flex flex-col items-center w-full md:w-1/4">
+      <div className="bg-lighter-green rounded-2xl p-2 h-44 w-44 md:w-60 md:h-60 mb-4 aspect-square">
         <img
           src={member.image}
           alt={member.name}
-          className="rounded-xl w-full h-full object-cover"
+          className="rounded-xl w-full h-full object-cover object-top"
         />
       </div>
       <h3 className="text-primary-green font-semibold text-lg">{member.name}</h3>
@@ -161,49 +85,80 @@ const TeamPage = () => {
 
   return (
     <>
-      <NavbarHome />
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-primary-green text-4xl font-bold text-center mb-12 font-acme">
+      <div className=" container mx-auto px-4 py-12">
+        <h1 className="text-primary-green text-5xl font-bold text-center mb-12 font-acme">
           Meet our Team
         </h1>
 
         {/* Patrons Section */}
         <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Patrons
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.patrons.map((patron, index) => (
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center">
+            {fetchMembers && fetchMembers.people.patrons && fetchMembers.people.patrons.map((patron, index) => (
               <TeamMemberCard key={index} member={patron} />
             ))}
           </div>
         </div>
 
-        {/* Core Members Section */}
-        <div className="mb-16">
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
-            Core Members
+        {/* Mentor Section */}
+        <div className="mb-16" >
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+            Mentor
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.coreMembers.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center">
+            {fetchMembers && fetchMembers.people.mentors && fetchMembers.people.mentors.map((mentor, index) => (
+              <TeamMemberCard key={index} member={mentor} />
             ))}
           </div>
         </div>
 
+
         {/* Members Section */}
         <div>
-          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Members
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-            {teamMembers.members.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2022
+          </h2>
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
+            {fetchMembers &&
+              fetchMembers.people.batch2022.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
+          </div>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2023
+          </h2>
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
+            {fetchMembers &&
+              fetchMembers.people.batch2023.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
+          </div>
+          <h2 className="text-primary-green text-2xl font-medium text-center mb-8 font-acme">
+            Batch -2024
+          </h2>
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
+            {fetchMembers &&
+              fetchMembers.people.batch2024.map((member, index) => (
+                <TeamMemberCard key={index} member={member} />
+              ))}
+          </div>
+        </div>
+        <div>
+          <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
+            Developers
+          </h2>
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center mb-8">
+            {fetchMembers && fetchMembers.people.developers && fetchMembers.people.developers.map((developer, index) => (
+              <TeamMemberCard key={index} member={developer} />
             ))}
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -19,7 +19,7 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => 
         {summary}
         <span className="ml-4">{isOpen ? '▲' : '▼'}</span>
       </summary>
-      <p className="px-4 py-4 ml-4 text-primary-green">
+      <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-black">
         {content}
       </p>
     </details>
@@ -30,18 +30,19 @@ const FAQ = () => {
   return (
     <section className="bg-white text-primary-green font-roboto">
       <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
-      <h2 className="text-2xl font-acme text-primary-green font-semibold sm:text-4xl my-auto py-6">
-        FAQs
-      </h2>
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-        <DetailsSection
-          key={index}
-          summary={<span className="text-lg">{faq.question}</span>}
-          content={faq.answer}
-        />
-        ))}
-      </div>
+        <h2 className="text-2xl font-acme text-primary-green font-semibold sm:text-4xl my-auto py-6">
+          FAQs
+        </h2>
+        <hr className="border-primary-green mb-4" />
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <DetailsSection
+              key={index}
+              summary={<span className="text-lg">{faq.question}</span>}
+              content={faq.answer}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

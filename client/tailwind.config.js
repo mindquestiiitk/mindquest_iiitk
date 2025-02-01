@@ -24,20 +24,19 @@ export default {
 				'deep-purple-accent-700': '#512da8',
 				'light-green': '#006833',
 				'lighter-green': '#BDFFB4',
-				"primary-green": "#006833",
-				"secondary-green": "#D6F8D1",
-				"text-green": "#006833",
-				background: {
-					DEFAULT: 'hsl(var(--background))',
-					primary: 'hsl(var(--background-primary))',
-					secondary: 'hsl(var(--background-secondary))',
-				},
-				foreground: {
-					DEFAULT: 'hsl(var(--foreground))',
-					primary: 'hsl(var(--foreground-primary))',
+				'primary-green': '#006833',
+				'secondary-green': '#D6F8D1',
+				'text-green': '#006833',
+				background: 'hsl(var(--background))',
+				foreground: 'hsl(var(--foreground))',
+				eventcard: {
+					background: 'hsl(var(--eventcard-background))',
 				},
 				card: {
 					DEFAULT: 'hsl(var(--card))',
+					overlay: {
+						background: 'hsl(var(--card-overlay-background))',
+					},
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				popover: {
@@ -80,8 +79,8 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
-			},
+			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindAnimate, require("tailwindcss-animate")],
 };
