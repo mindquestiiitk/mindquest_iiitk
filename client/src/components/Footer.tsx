@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
         </div>
 
-        
+
           {/* Social Media Links */}
           <div className="flex justify-center gap-4 text-accent mb-4">
             <a href="#" className="hover:text-accent/90">
