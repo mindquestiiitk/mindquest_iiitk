@@ -18,105 +18,95 @@ const Navbar_Home = () => {
 //custom hook navbar_home
 //data.acctive
   const navItems: NavItemData[] = [
-    { href: "/", ariaLabel: "About", title: "About", text: "About" },
+    { href: "/", ariaLabel: "Home", title: "Home", text: "Home" },
     { href: "/merch", ariaLabel: "Merch", title: "Merch", text: "Merch" },
     { href: "/team", ariaLabel: "Team", title: "Team", text: "Our Team" },
     { href: "/events", ariaLabel: "Events", title: "Events", text: "Events" },
-    { href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },
+    /*{ href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },*/
   ];
 
   return (
-    <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
-      <div className="relative flex items-center justify-between w-full">
-        <Link
-          to={"/"}
-          aria-label="mindquest"
-          title="mindquest"
-          className="inline-flex items-center -my-8"
-        >
-          <img src={mindquest_logo} alt="mindquest logo" />
-        </Link>
-        <ul className="hidden lg:flex items-center space-x-8">
-          {navItems.map((item, index) => (
-            <NavItem
-              key={index}
-              href={item.href}
-              ariaLabel={item.ariaLabel}
-              title={item.title}
-            >
-              {item.text}
-            </NavItem>
-          ))}
-        </ul>
+  <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
+  <div className="relative flex items-center justify-between w-full">
+    <Link to={"/"} aria-label="mindquest" title="mindquest" className="inline-flex items-center -my-8">
+      <img src={mindquest_logo} alt="mindquest logo" />
+    </Link>
+    <ul className="hidden lg:flex items-center space-x-8">
+      {navItems.map((item, index) => (
+        <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
+          {item.text}
+        </NavItem>
+      ))}
+    </ul>
+    <Link to={"https://iiitkottayam.ac.in"} aria-label="iiit kottayam" title="iiit kottayam" className="hidden lg:flex items-center -my-8">
+      <img src={"https://iiitkottayam.ac.in/data/images/main/logo.jpg"} className="h-16" alt="IIIT Kottayam" />
+    </Link>
 
-        <div className="lg:hidden">
-          <button
-            aria-label="Open Menu"
-            title="Open Menu"
-            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <HiMenu className="w-7 h-7 text-light-green" />
-          </button>
-          {isMenuOpen && (
-            <div className="absolute top-0 left-0 w-full">
-              <div className="p-5 bg-white border rounded shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <Link
-                      to={"/"}
-                      aria-label="Company"
-                      title="Company"
-                      className="inline-flex items-center"
-                    >
-                      <img src={mindquest_logo} alt="mindquest logo" />
+    <div className="lg:hidden">
+      <button
+        aria-label="Open Menu"
+        title="Open Menu"
+        className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
+        onClick={() => {
+          setIsMenuOpen(true);
+          document.body.classList.add("overflow-hidden");
+        }}
+      >
+        <HiMenu className="w-7 h-7 text-light-green" />
+      </button>
 
-                      <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                        Mindquest - IIITK
-                      </span>
-                    </Link>
-                  </div>
-                  <div>
-                    <button
-                      aria-label="Close Menu"
-                      title="Close Menu"
-                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <MdClose className="w-7 h-7 text-light-green" />
-                    </button>
-                  </div>
-                </div>
-                <nav>
-                  <ul className="space-y-4">
-                    {navItems.map((item, index) => (
-                      <NavItem
-                        key={index}
-                        href={item.href}
-                        ariaLabel={item.ariaLabel}
-                        title={item.title}
-                      >
-                        {item.text}
-                      </NavItem>
-                    ))}
-                    <li>
-                      <Link
-                        to={"/"}
-                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-light-green hover:bg-[#457d3e] focus:shadow-outline focus:outline-none"
-                        aria-label="Log In"
-                        title="Log In"
-                      >
-                        Log In
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
+      {isMenuOpen && (
+        <div className="absolute inset-0 z-50 min-h-screen">
+          <div className="p-5 border shadow-md bg-white">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <Link to={"/"} aria-label="Company" title="Company" className="inline-flex items-center">
+                  <img src={mindquest_logo} alt="mindquest logo" />
+                  <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+                    Mindquest - IIITK
+                  </span>
+                </Link>
+              </div>
+              <div>
+                <button
+                  aria-label="Close Menu"
+                  title="Close Menu"
+                  className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    document.body.classList.remove("overflow-hidden");
+                  }}
+                >
+                  <MdClose className="w-7 h-7 text-light-green" />
+                </button>
               </div>
             </div>
-          )}
+            <nav>
+              <ul className="space-y-4">
+                {navItems.map((item, index) => (
+                  <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
+                    {item.text}
+                  </NavItem>
+                ))}
+                <li>
+                  <Link
+                    to={"/"}
+                    className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-light-green hover:bg-[#457d3e] focus:shadow-outline focus:outline-none"
+                    aria-label="Log In"
+                    title="Log In"
+                  >
+                    Log In
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-      </div>
+      )}
     </div>
+  </div>
+</div>
+
   );
 };
 
