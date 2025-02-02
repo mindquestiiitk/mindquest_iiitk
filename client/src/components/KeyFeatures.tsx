@@ -60,8 +60,8 @@ const KeyFeatures: React.FC = () => {
         </div>
 
         {/* Rest of the component remains unchanged */}
-        <div className="bg-accent rounded-xl p-3 text-center flex items-center justify-center whitespace-nowrap transform cursor-pointer w-full max-w-4xl lg:w-16 h-12 lg:h-64 lg:flex-shrink-0">
-          <div className="w-full lg:w-auto px-54 text-accent-foreground flex items-center justify-between flex-row lg:gap-2 lg:-rotate-90 text-xl">
+        <a href="mailto:counsellor@iiitkottayam.ac.in" className="bg-accent rounded-xl p-3 text-center flex items-center justify-center whitespace-nowrap transform cursor-pointer w-full max-w-4xl lg:w-16 h-12 lg:h-64 lg:flex-shrink-0">
+        <div className="w-full lg:w-auto px-54 text-accent-foreground flex items-center justify-between flex-row lg:gap-2 lg:-rotate-90 text-xl">
             <div className="">
               Contact Councelor
             </div>
@@ -69,7 +69,7 @@ const KeyFeatures: React.FC = () => {
               <ArrowUpRight />
             </div>
           </div>
-        </div>
+        </a>
       </div>
 
       {/* Key Features Section */}
