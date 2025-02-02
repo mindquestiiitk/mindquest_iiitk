@@ -98,6 +98,7 @@ const Timeline = ({ events }: { events: IEvent[] }) => {
         };
 
         window.addEventListener('scroll', handleScroll);
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, [maxScroll]);
 
