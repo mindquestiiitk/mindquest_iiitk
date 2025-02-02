@@ -77,7 +77,7 @@
                 "role": "Lead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068078/Pravallika_yboryy.jpg",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/pravallika-bandaru-a479032a2",
                     "twitter": "#",
                     "website": "#"
                 }
@@ -101,7 +101,7 @@
                 "role": "Sublead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068100/DSC_0393_3_q7ei2g.jpg",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/vishal-dhawal-b69163327/",
                     "twitter": "#",
                     "website": "#"
                 }
@@ -123,7 +123,7 @@
                 "role": "Sublead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428474/image_kqgl2t.jpg",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/hema-sudabathula-629ba8348/",
                     "twitter": "#",
                     "website": "#"
                 }
@@ -138,6 +138,16 @@
                     "twitter": "#",
                     "website": "#"
                 }
+            },{
+                "type": "sublead",
+                "name": "Kshitij Joshi",
+                "role": "Sublead",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738466033/d8aa9699-497a-401c-8059-2076dbfae71a.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/joshi-kshitij-santosh/",
+                    "twitter": "#",
+                    "website": "#"
+                }
             }
         ],
         "batch2024": [
@@ -147,7 +157,7 @@
                 "role": "Product Manager",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068157/IMG-20241229-WA0038_bvbthc.jpg",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/niveditha-gireesan-shyla-094602326/",
                     "twitter": "#",
                     "website": "#"
                 }
@@ -187,11 +197,11 @@
             },
             {
                 "type": "member",
-                "name": "Frank Thompson",
+                "name": "Ann Mary George",
                 "role": "UI Designer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068153/IMG_0610_ue8e3i.jpg",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/ann-mary-george-862002312/",
                     "twitter": "#",
                     "website": "#"
                 }
@@ -223,6 +233,17 @@
                 "name": "Grace Anderson",
                 "role": "Software Engineer",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068324/img_bzxhhu.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "twitter": "#",
+                    "website": "#"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Shivansh Neekhra",
+                "role": " finance and management",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738464619/a3cc1919-0f46-44c2-8c93-876c28c27e1a.png",
                 "socials": {
                     "linkedin": "#",
                     "twitter": "#",
