@@ -27,25 +27,19 @@ const MerchForm: React.FC<{ tshirt: string }> = (props) => {
       }
     )
       .then((res) => {
-        // console.log(res.json())
         return res.json()
   })
       .then((data) => {
         console.log(data);
-        setSuccessMessage("Your order has been successfully submitted!"); // Set success message
-        setFormData({ Name: "", Email: "", Phone: "" }); // Reset form data
-        setSelectedSize(""); // Reset size selection
-        setQuantity(1); // Reset quantity
-        setErrorMessage(null); // Clear any previous error message
+        setSuccessMessage("Your order has been successfully submitted!"); 
+        setFormData({ Name: "", Email: "", Phone: "" });
+        setSelectedSize(""); 
+        setQuantity(1);        setErrorMessage(null);
       })
       .catch((error) => {
         console.log(error);
-        // setSuccessMessage("Your order has been successfully submitted!"); // Set success message
-        // setFormData({ Name: "", Email: "", Phone: "" }); // Reset form data
-        // setSelectedSize(""); // Reset size selection
-        // setQuantity(1);
         setErrorMessage("There was an error submitting your order. Please try again."); // Set error message
-        setSuccessMessage(null); // Clear success message on error
+        setSuccessMessage(null); 
       });
   };
 
@@ -81,18 +75,6 @@ const MerchForm: React.FC<{ tshirt: string }> = (props) => {
           />
         </div>
 
-        {/* Phone Input */}
-        {/* <div className="space-y-4 mb-6">
-          <Label className="text-lg font-semibold text-gray-900">Your Phone</Label>
-          <input
-            name="Phone"
-            type="text"
-            value={formData.Phone}
-            onChange={handleChange}
-            placeholder="Enter your phone number"
-            className="w-full h-12 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-300"
-          />
-        </div> */}
 
         <div className="space-y-4 mb-6">
         <Label className="text-lg font-semibold text-gray-900">Your Phone</Label>

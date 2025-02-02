@@ -1,6 +1,8 @@
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Icon } from '@iconify/react';
 import type React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MerchCard from "./Merch/MerchCard";
 
 interface TShirt {
@@ -11,7 +13,16 @@ interface TShirt {
 }
 
 export const Merch: React.FC = () => {
+  const navigate = useNavigate();
   const [merchData, setMerchData] = useState<TShirt[]>([]);
+  const [cartData, setCartData] = useState<{ tshirts: { name: string; qty: number; size: string }[] }>({ tshirts: [] });
+
+  const updateCartData = (newItem: { name: string; qty: number; size: string }) => {
+    setCartData((prevCart) => ({
+      tshirts: [...prevCart.tshirts, newItem],
+    }));
+    console.log(cartData);
+  };
 
   const targetDate = new Date("2025-02-05T12:00:00");
   const calculateTimeLeft = () => {
@@ -63,18 +74,56 @@ export const Merch: React.FC = () => {
       {/* Countdown Timer Section */}
       <section className="text-center my-6">
       <div className="flex justify-center">
-        <div className="flex justify-center items-center rounded-full bg-white p-6 w-3/4 md:w-1/2 lg:w-1/3">
+        <div className="flex justify-center items-center rounded-full bg-white p-4 w-3/4 md:w-1/2 lg:w-1/3">
           <Icon icon="mdi:stopwatch" className="text-3xl text-gray-800" />
           <p className="text-lg text-center text-gray-800">
             Sale ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
           </p>
         </div>
+        {/* <div className='rounded-full p-10 ml-3 text-3xl bg-white' >🛒</div> */}
+        <Popover>
+          <PopoverTrigger> <div className='rounded-full p-10 ml-3 text-3xl bg-white' >🛒</div></PopoverTrigger>
+        {/*  <PopoverContent>
+            {cartData.tshirts.length > 0 ? (
+              cartData.tshirts.map((item, index) => (
+                <div key={index} className="flex justify-between p-2 border rounded-lg">
+                  <p>
+                    <strong>{item.name}</strong> - {item.size} x {item.qty}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500">Cart is empty</p>
+            )}
+          </PopoverContent> */}
+          <PopoverContent>
+            {cartData.tshirts.length > 0 ? (
+              <>
+                {cartData.tshirts.map((item, index) => (
+                  <div key={index} className="flex justify-between p-2 border rounded-lg">
+                    <p>
+                      <strong>{item.name}</strong> - {item.size} x {item.qty}
+                    </p>
+                  </div>
+                ))}
+                <button
+                  onClick={() => navigate("/merch/checkout", { state: { cartData } })}
+                  className="mt-3 bg-green-500 text-white px-4 py-2 rounded-lg w-full"
+                >
+                  Checkout
+                </button>
+              </>
+            ) : (
+              <p className="text-gray-500">Cart is empty</p>
+            )}
+          </PopoverContent>;
+        </Popover>
       </div>
 
       </section>
         {merchData.length > 0 ? (
           merchData.map((shirt) => (
-            <MerchCard key={shirt.id} name={shirt.name} price={shirt.price} image={shirt.image} />
+            <MerchCard key={shirt.id} name={shirt.name} price={shirt.price} image={shirt.image} updateCartData={updateCartData}/>
           ))
         ) : (
           <div>Loading...</div>
