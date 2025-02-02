@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 
 
 interface IEvent {
@@ -16,9 +17,10 @@ interface IEventProps {
     title: string;
     description: string;
     top: number;
+    id: string;
 }
 
-const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLeft }) => {
+const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLeft, id }) => {
     const elementRef = useRef(null);
     const animation = useRef(null);
 
@@ -42,16 +44,18 @@ const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLef
     }, [isActive]);
 
     return (
-        <div
-            ref={elementRef}
-            className={`absolute w-full ${isLeft ? 'text-right pr-12' : 'text-left pl-12'}`}
-            style={{ top: `${top}%` }}
-        >
-            <div className="bg-white p-4 rounded-lg shadow-lg h-[100px] ">
-                <h3 className="text-xl font-bold mb-2">{title}</h3>
-                <p className="text-gray-600 hidden md:block truncate">{description}</p>
+        <Link to={`/events/${id}`}>
+            <div
+                ref={elementRef}
+                className={`absolute w-full ${isLeft ? 'text-right md:pr-12' : 'text-left md:pl-12'} `}
+                style={{ top: `${top}%` }}
+            >
+                <div className="bg-lighter-green p-4 rounded-lg shadow-lg hover:-translate-y-2">
+                    <h3 className="text-xl text-green-800 font-bold mb-2 md:truncate">{title}</h3>
+                    <p className="text-gray-600 hidden md:block truncate">{description}</p>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
@@ -228,6 +232,7 @@ const Timeline = ({ events }: { events: IEvent[] }) => {
                                     title={event.title}
                                     description={event.brief}
                                     top={(2 * i / events.length) * 100}
+                                    id={event.id}
                                 />
                             ))}
                     </div>
@@ -290,6 +295,7 @@ const Timeline = ({ events }: { events: IEvent[] }) => {
                                     title={event.title}
                                     description={event.brief}
                                     top={((2 * i + 1) / events.length) * 100}
+                                    id={event.id}
                                 />
                             ))}
                     </div>
