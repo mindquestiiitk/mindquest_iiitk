@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { faqs } from './faqs';
+import gsap from 'gsap';
 
 type DetailsSectionProps = {
     summary: React.ReactNode;
@@ -8,21 +9,81 @@ type DetailsSectionProps = {
 
 const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const animation = useRef<gsap.core.Tween>();
+    const arrowRef = useRef<HTMLSpanElement>(null);
+
+    useEffect(() => {
+        if (!contentRef.current) return;
+
+        // Animation setup
+        const ctx = gsap.context(() => {
+            // Initial state
+            gsap.set(contentRef.current, { height: 0, opacity: 0 });
+            gsap.set(arrowRef.current, { rotate: isOpen ? 180 : 0 });
+        });
+
+        return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        if (!contentRef.current || !arrowRef.current) return;
+
+        const contentHeight = contentRef.current.scrollHeight;
+
+        if (isOpen) {
+            // Open animation sequence
+            animation.current = gsap.timeline()
+                .to(arrowRef.current, {
+                    rotate: 180,
+                    duration: 0.2,
+                    ease: "power2.out"
+                })
+                .to(contentRef.current, {
+                    height: contentHeight,
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.inOut"
+                }, "<0.1");
+        } else {
+            // Close animation sequence
+            animation.current = gsap.timeline()
+                .to(arrowRef.current, {
+                    rotate: 0,
+                    duration: 0.2,
+                    ease: "power2.out"
+                })
+                .to(contentRef.current, {
+                    height: 0,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.inOut"
+                }, "<0.1");
+        }
+
+        return () => animation.current?.kill();
+    }, [isOpen]);
 
     return (
-        <details
-            className="w-full border-b border-primary-green font-roboto hover:cursor-pointer text-primary-green"
-            open={isOpen}
-            onToggle={() => setIsOpen(!isOpen)}
-        >
-            <summary className="px-4 py-2 flex justify-between items-center focus:outline-none focus-visible:text-primary-green">
+        <div className="w-full border-b border-primary-green font-roboto text-primary-green">
+            <button
+                className="w-full px-4 py-2 flex justify-between items-center focus:outline-none hover:text-green-600 transition-colors"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+            >
                 {summary}
-                <span className="ml-4">{isOpen ? '▲' : '▼'}</span>
-            </summary>
-            <p className="px-4 py-6 pt-0 ml-4 mt-4 text-black">
-                {content}
-            </p>
-        </details>
+                <span ref={arrowRef} className="ml-4">▼</span>
+            </button>
+            <div
+                ref={contentRef}
+                className="overflow-hidden will-change-transform"
+                style={{ opacity: 0, height: 0 }}
+            >
+                <div className="px-4 py-6 pt-0 ml-4 mt-4 text-black">
+                    {content}
+                </div>
+            </div>
+        </div>
     );
 };
 
