@@ -28,8 +28,8 @@ const Footer = () => {
             <h3 className="text-accent font-semibold mb-4">Contact Us</h3>
             <ul className="text-foreground/70 text-sm space-y-2">
               <li>IIIT Kottayam</li>
-              <li>Email: info@mindquest.com</li>
-              <li>Phone: (123) 456-7890</li>
+              <li>Email: mindquest@iiitkottayam.ac.in</li>
+              <li>Address: Valavoor P O, Pala, Kottayam, Kerala, India - 686635</li>
             </ul>
           </div>
         </div>
@@ -44,7 +44,7 @@ const Footer = () => {
 
           {/* Social Media Links */}
           <div className="flex justify-center gap-4 text-accent mb-4">
-            <a href="#" className="hover:text-accent/90">
+            <a href="https://www.linkedin.com/company/mind-quest" className="hover:text-accent/90">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
               </svg></a>
