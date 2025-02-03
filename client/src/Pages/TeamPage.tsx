@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface TeamMember {
@@ -7,8 +8,8 @@ interface TeamMember {
   image: string;
   socials: {
     linkedin?: string;
-    twitter?: string;
-    website?: string;
+    instagram?: string;
+    // website?: string;
   };
 }
 
@@ -57,30 +58,12 @@ const TeamPage = () => {
             </svg>
           </a>
         )}
-        {member.socials.twitter && (
-          <a href={member.socials.twitter} className="hover:text-green-900">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-            </svg>
+        {member.socials.instagram && (
+          <a href={member.socials.instagram} className="hover:text-green-900">
+            <Instagram />
           </a>
         )}
-        {member.socials.website && (
-          <a href={member.socials.website} className="hover:text-green-900">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-              />
-            </svg>
-          </a>
-        )}
+      
       </div>
       }
     </div>
