@@ -52,7 +52,7 @@ const Footer = () => {
                     <a href="https://www.instagram.com/mindquest_iiitk_/" className="hover:text-green-900">
                         <Instagram />
                     </a>
-                    <a href="#" className="hover:text-green-900">
+                    <a href="/" className="hover:text-green-900">
                         <Globe />
                     </a>
                 </div>
