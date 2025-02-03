@@ -1,4 +1,5 @@
-import { Icon } from '@iconify/react';
+import SaleTicker from '@/SaleTicker';
+import { Icon } from '@iconify/react/dist/iconify.js';
 import type React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -66,10 +67,20 @@ export const Merch: React.FC = () => {
       <header className="py-6 px-4 bg-card-overlay-background text-[#D4F3D9] text-center">
         <h1 className="text-4xl font-bold">Unlock Your Mind Merch</h1>
       </header>
+      {/* <section className="text-center my-0">
+  <div className="overflow-hidden bg-gradient-to-r from-green-400 to-green-600 p-6 relative">
+    <div className="absolute left-0 animate-slide text-white text-lg font-bold whitespace-nowrap">
+      <Icon icon="mdi:stopwatch" className="inline-block text-xl" />
+      Sale ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+    </div>
+  </div>
+</section> */}
+{/* <LogoTicker /> */}
+<SaleTicker timeLeft={timeLeft}/>
 
 
 
-      <main className="container mx-auto py-12 px-4">
+      <main className="container mx-auto px-4">
       {/* Countdown Timer Section */}
       <section className="text-center my-6">
       <div className="flex justify-center">

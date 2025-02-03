@@ -41,7 +41,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
     // alert("Item added to cart!");
     window.location.href = 'https://www.google.com';
   };
-  const sizeOptions = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  const sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
 
   return (
     <Card className="w-full max-w-[90%] md:max-w-[85%] mx-auto p-6 md:p-10 shadow-2xl border-2 border-emerald-100/50 rounded-[2rem] bg-gradient-to-br from-white to-emerald-50/30 hover:shadow-3xl transition-all duration-500 ease-out hover:border-emerald-200/50 mb-10">

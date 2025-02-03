@@ -2,7 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
-  CarouselItem
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import * as React from "react";
@@ -36,6 +38,8 @@ export const MerchCarousel: React.FC<MerchCarouselProps> = (props) => {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <CarouselPrevious />
+  <CarouselNext />
     </Carousel>
   )
 }
