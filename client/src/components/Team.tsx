@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import {team_photo} from '../assets'
+import { team_photo } from '../assets'
 
 const Team = () => {
     return (
@@ -13,7 +13,7 @@ const Team = () => {
             {/* Image Container */}
             <div className="relative w-full">
                 <div className="bg-secondary-green rounded-[2rem] p-2 md:p-6">
-                    <img 
+                    <img
                         src={team_photo} // Replace with your actual image path
                         alt="Team photo"
                         className="w-full h-full rounded-[1.5rem] object-cover"
@@ -22,7 +22,7 @@ const Team = () => {
 
                 {/* Centered Know More Button */}
                 <div className="absolute bottom-0 left-0 w-full flex justify-center pb-4 md:pb-8">
-                    <Link 
+                    <Link
                         to={"/team"}
                         className="flex items-center gap-2 bg-green-100 hover:bg-secondary-green transition-colors text-xs md:text-base px-2 py-1 md:px-4 md:py-2 rounded-full border-2 border-green-600"
                     >
