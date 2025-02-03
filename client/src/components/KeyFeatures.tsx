@@ -7,19 +7,30 @@ const KeyFeatures: React.FC = () => {
     {
       title: "Binaural Beats",
       description:
-        "Binaural beats use different frequencies in each ear to stimulate the brain and enhance focus, relaxation, and meditation.",
+        "Experience the power of sound therapy with binaural beats! These audio frequencies are specially designed to stimulate your brain, enhance focus and induce relaxation for a more balanced mind.",
     },
     {
-      title: "AI-Powered Recommendations",
+      title: "Mood Tracker",
       description:
-        "Get personalized music and sound recommendations based on your mood and activity, powered by AI algorithms.",
+        "Keep a check on your emotions with ease using our intuitive mood tracker. Identify patterns, gain insights, and manage your mental well-being more effectively!",
     },
     {
-      title: "Deep Sleep Mode",
+      title: "Chat with a Counselor",
       description:
-        "A curated selection of soothing sounds designed to improve sleep quality and help you wake up refreshed.",
+        "Need a little pep talk or just someone to listen? Chat with our friendly counselors anytime and get expert advice that feels like a warm hug for your soul.",
     },
   ];
+
+  const greetings = [
+    "Welcome aboard!",
+    "Glad to have you here!",
+    "Hello, explorer!",
+    "Hey there, friend!",
+    "Good to see you!",
+  ];
+
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+
 
   return (
     <>
@@ -48,11 +59,11 @@ const KeyFeatures: React.FC = () => {
           {/* Right side content */}
           <div className="flex-grow flex flex-wrap gap-2">
             <div className="text-green-800 font-medium mb-2 text-lg sm:text-xl lg:text-2xl sm:w-full font-acme">
-              Hi,
+               {randomGreeting}
             </div>
-            <div className="text-green-800 font-medium mb-2 text-lg sm:text-xl lg:text-2xl font-acme">
+            {/* <div className="text-green-800 font-medium mb-2 text-lg sm:text-xl lg:text-2xl font-acme">
               Steve Jobs
-            </div>
+            </div> */}
             <div className="relative mt-4 sm:mt-16 lg:mt-24 w-full">
               <input
                 type="text"
@@ -106,7 +117,7 @@ const KeyFeatures: React.FC = () => {
               <h2 className="font-bold mb-2 bg-accent rounded-full px-4 py-2 text-center text-secondary-green">
                 {feature.title}
               </h2>
-              <p className="text-accent text-center p-4 text-sm sm:text-base">
+              <p className="text-accent text-center p-4 text-sm sm:text-base font-roboto">
                 {feature.description}
               </p>
             </div>

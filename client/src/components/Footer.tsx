@@ -13,8 +13,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div >
-            <h3 className="text-accent font-semibold mb-4">Quick Links</h3>
-            <ul className="text-foreground/70 text-sm space-y-2">
+            <h3 className="text-accent font-semibold mb-4 text-lg">Quick Links</h3>
+            <ul className="text-foreground/70 text-md space-y-2">
               <li><Link to={"/"} className="hover:text-accent">Home</Link></li>
               <li><Link to={"/events"} className="hover:text-accent">Events</Link></li>
               <li><Link to={"/merch"} className="hover:text-accent">Merch</Link></li>
@@ -25,8 +25,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-accent font-semibold mb-4">Contact Us</h3>
-            <ul className="text-foreground/70 text-sm space-y-2">
+            <h3 className="text-accent font-semibold mb-4 text-lg">Contact Us</h3>
+            <ul className="text-foreground/70 text-md space-y-2">
               <li>IIIT Kottayam</li>
               <li>Email: mindquest@iiitkottayam.ac.in</li>
               <li>Address: Valavoor P O, Pala, Kottayam, Kerala, India - 686635</li>
