@@ -11,7 +11,6 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -35,13 +34,14 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 1000);
     e.preventDefault();
-    if (!selectedSize) return alert("Please select a size");
+    // if (!selectedSize) return alert("Please select a size");
 
-    props.updateCartData({ name: props.name, qty: quantity, size: selectedSize });
+    // props.updateCartData({ name: props.name, qty: quantity, size: selectedSize });
 
-    alert("Item added to cart!");
+    // alert("Item added to cart!");
+    window.location.href = 'https://www.google.com';
   };
-  const sizeOptions = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+  const sizeOptions = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
   return (
     <Card className="w-full max-w-[90%] md:max-w-[85%] mx-auto p-6 md:p-10 shadow-2xl border-2 border-emerald-100/50 rounded-[2rem] bg-gradient-to-br from-white to-emerald-50/30 hover:shadow-3xl transition-all duration-500 ease-out hover:border-emerald-200/50 mb-10">
@@ -78,7 +78,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <Label className="text-lg font-semibold text-gray-900">
-                        Select Size 🌐
+                        Sizes 🌐
                       </Label>
                       <button
                         type="button"
@@ -91,7 +91,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                         </Popover>
                       </button>
                     </div>
-                    <Select onValueChange={setSelectedSize} value={selectedSize}>
+                    {/* <Select onValueChange={setSelectedSize} value={selectedSize}>
                       <SelectTrigger className="h-12 text-base border-2 border-gray-200 hover:border-emerald-200">
                         <SelectValue placeholder="Choose your size" />
                       </SelectTrigger>
@@ -106,11 +106,23 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                           </SelectItem>
                         ))}
                       </SelectContent>
-                    </Select>
+                    </Select> */}
+                    <div className="flex space-x-4"> {/* Add flex to align items in a row */}
+                        {sizeOptions.map((size) => (
+                          <p
+                            key={size} // It's important to keep the key prop to ensure each element is uniquely identified in the list
+                            className="text-base data-[state=checked]:bg-emerald-50"
+                          >
+                            {size}
+                          </p>
+                        ))}
+                      </div>
+                      <br></br>
+
                   </div>
 
                   {/* Quantity Selector */}
-                  <div className="space-y-4">
+                  {/* <div className="space-y-4">
                     <Label className="text-lg font-semibold text-gray-900">
                       Quantity 📦
                     </Label>
@@ -146,7 +158,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                         +
                       </Button>
                     </div>
-                  </div>
+                  </div> */}
 
                 </div>
               </form>
@@ -175,7 +187,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
         <span className={`mr-2 ${isAnimating ? 'animate-spin' : ''}`}>
           🛒
         </span>
-        Add to cart
+        Continue to Forms
       </Button>
     
     {isAnimating && (

@@ -1,4 +1,3 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Icon } from '@iconify/react';
 import type React from "react";
 import { useEffect, useState } from "react";
@@ -81,8 +80,8 @@ export const Merch: React.FC = () => {
           </p>
         </div>
         {/* <div className='rounded-full p-10 ml-3 text-3xl bg-white' >🛒</div> */}
-        <Popover>
-          <PopoverTrigger> <div className='rounded-full p-10 ml-3 text-3xl bg-white' >🛒</div></PopoverTrigger>
+        {/* <Popover>
+          <PopoverTrigger> <div className='rounded-full p-10 ml-3 text-3xl bg-white' >🛒</div></PopoverTrigger> */}
         {/*  <PopoverContent>
             {cartData.tshirts.length > 0 ? (
               cartData.tshirts.map((item, index) => (
@@ -96,7 +95,7 @@ export const Merch: React.FC = () => {
               <p className="text-gray-500">Cart is empty</p>
             )}
           </PopoverContent> */}
-          <PopoverContent>
+          {/* <PopoverContent>
             {cartData.tshirts.length > 0 ? (
               <>
                 {cartData.tshirts.map((item, index) => (
@@ -117,7 +116,7 @@ export const Merch: React.FC = () => {
               <p className="text-gray-500">Cart is empty</p>
             )}
           </PopoverContent>;
-        </Popover>
+        </Popover> */}
       </div>
 
       </section>
