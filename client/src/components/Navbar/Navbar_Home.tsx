@@ -31,7 +31,7 @@ const Navbar_Home = () => {
         <Link to={"/"} aria-label="mindquest" title="mindquest" className="inline-flex items-center -my-8">
           <img src={mindquest_logo} alt="mindquest logo" />
         </Link>
-        <ul className="hidden lg:flex items-center space-x-8">
+        <ul className="hidden lg:flex items-center space-x-8 text-xl">
           {navItems.map((item, index) => (
             <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
               {item.text}
