@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -30,6 +31,9 @@ export const MerchCarousel: React.FC<MerchCarouselProps> = (props) => {
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
+            <Badge variant="outline" className="m-0 p-0 bg-emerald-100/50 text-emerald-800">
+                ⚡ Limited Stock
+              </Badge>
                 <CardContent className="flex aspect-square items-center justify-center p-0">
                   <img src={image} alt={`Merch item ${index}`} className="rounded-2xl" />
                 </CardContent>

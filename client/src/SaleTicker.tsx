@@ -13,7 +13,7 @@ interface SaleTickerProps {
   };
 }
 
-const SaleTicker: React.FC<SaleTickerProps> = ({ timeLeft }) => {
+const SaleTicker: React.FC<SaleTickerProps> = () => {
   return (
     <div className="relative overflow-hidden bg-black py-[20px] sm:py-5 shadow-lg border-t-2 border-yellow-500">
       <motion.div
