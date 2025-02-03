@@ -10,7 +10,6 @@ import {
 
 
 import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -80,16 +79,6 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                       <Label className="text-lg font-semibold text-gray-900">
                         Sizes 🌐
                       </Label>
-                      <button
-                        type="button"
-                        className="text-sm font-medium text-primary-green flex items-center gap-1"
-                      >
-                        <Icon icon="mdi:ruler" className="w-4 h-4" />
-                        <Popover>
-                          <PopoverTrigger>Size Guide</PopoverTrigger>
-                          <PopoverContent ><img className="w-96" src="sizeguide.png"/></PopoverContent>
-                        </Popover>
-                      </button>
                     </div>
                     {/* <Select onValueChange={setSelectedSize} value={selectedSize}>
                       <SelectTrigger className="h-12 text-base border-2 border-gray-200 hover:border-emerald-200">
@@ -181,7 +170,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
     className="relative"
   >
       <Button
-        className="w-full lg:w-[80%] h-14 text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-100/50"
+        className="w-full lg:w-[100%] h-14 text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-100/50"
         onClick={handleAddToCart}
       >
         <span className={`mr-2 ${isAnimating ? 'animate-spin' : ''}`}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Wand2 } from "lucide-react";
 import React from "react";
 
 interface SaleTickerProps {
@@ -14,10 +15,10 @@ interface SaleTickerProps {
 
 const SaleTicker: React.FC<SaleTickerProps> = ({ timeLeft }) => {
   return (
-    <div className="bg-gradient-to-r from-green-400 to-green-600 text-white py-[30px] sm:py-5 relative">
+    <div className="relative overflow-hidden bg-black py-[20px] sm:py-5 shadow-lg border-t-2 border-yellow-500">
       <motion.div
-        className="flex flex-none items-center gap-16 whitespace-nowrap text-white text-lg font-bold"
-        initial={{ translateX: 0}}
+        className="flex flex-none items-center gap-6 whitespace-nowrap text-yellow-400 text-3xl font-bold font-harryp tracking-wider"
+        initial={{ translateX: 0 }}
         animate={{ translateX: "-50%" }}
         transition={{
           duration: 10,
@@ -25,38 +26,18 @@ const SaleTicker: React.FC<SaleTickerProps> = ({ timeLeft }) => {
           ease: "linear",
         }}
       >
-        {Array(10)
+        {Array(6)
           .fill(null)
           .map((_, index) => (
-            <div key={index} className="flex items-center gap-2 text-white">
-              {/* <Icon icon="mdi:stopwatch" className="text-xl" /> */}
-              {/* Sale ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s */}
-              Harry Potter Sale 
+            <div key={index} className="flex items-center gap-2 transition">
+              <Wand2 className="text-yellow-300 text-xl animate-pulse" />
+              <span className="drop-shadow-md">
+                ⚡ Sale! Harry Potter T-Shirts Await! ⚡
+              </span>
             </div>
           ))}
       </motion.div>
     </div>
-    // <div className="bg-gradient-to-r from-green-400 to-green-600 p-3 overflow-hidden relative">
-    //   <motion.div
-    //     className="flex items-center gap-16 whitespace-nowrap text-white text-lg font-bold"
-    //     initial={{ translateX: 0}}
-    //     animate={{ translateX: "-50%" }}
-    //     transition={{
-    //       duration: 10,
-    //       repeat: Infinity,
-    //       ease: "linear",
-    //     }}
-    //   >
-    //     {Array(5)
-    //       .fill(null)
-    //       .map((_, index) => (
-    //         <div key={index} className="flex items-center gap-2">
-    //           <Icon icon="mdi:stopwatch" className="text-xl" />
-    //           Sale ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-    //         </div>
-    //       ))}
-    //   </motion.div>
-    // </div>
   );
 };
 

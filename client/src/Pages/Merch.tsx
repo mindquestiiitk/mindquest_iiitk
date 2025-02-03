@@ -84,9 +84,9 @@ export const Merch: React.FC = () => {
       {/* Countdown Timer Section */}
       <section className="text-center my-6">
       <div className="flex justify-center">
-        <div className="flex justify-center items-center rounded-full bg-white p-4 w-3/4 md:w-1/2 lg:w-1/3">
+        <div className="flex justify-center items-center rounded-full bg-white p-6 w-3/4 md:w-1/2 lg:w-1/3">
           <Icon icon="mdi:stopwatch" className="text-3xl text-gray-800" />
-          <p className="text-lg text-center text-gray-800">
+          <p className="text-lg text-bold md:text-3xl text-center text-gray-800">
             Sale ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
           </p>
         </div>
