@@ -64,9 +64,9 @@
                 "role": "Mentor",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
-                    "website": "#"
+                    "linkedin": "https://www.linkedin.com/in/sarthak-gupta-webdev/",
+                    "instagram": "https://www.instagram.com/spyboy.jsx",
+                    "website": "https://sarthakg043.github.io/portfolio/"
                 }
             }
         ],
@@ -88,8 +88,8 @@
                 "role": "Lead",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738329066/ur_wpezuu.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/urvashi-salonia-72461b259/",
+                    "instagram": "https://www.instagram.com/urvashisalonia/",
                     "website": "#"
                 }
             }
@@ -98,7 +98,7 @@
             {
                 "type": "sublead",
                 "name": "Vishal",
-                "role": "Sublead",
+                "role": "Sublead - Art",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068100/DSC_0393_3_q7ei2g.jpg",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/vishal-dhawal-b69163327/",
@@ -109,18 +109,18 @@
             {
                 "type": "sublead",
                 "name": "Sarthak Yadav",
-                "role": "Sublead",
+                "role": "Sublead - Tech",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428526/2_pxaful_q1pvur.png",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/sarthakyadav1/",
+                    "instagram": "https://www.instagram.com/the___enigma_/",
                     "website": "#"
                 }
             },
             {
                 "type": "sublead",
                 "name": "Hema",
-                "role": "Sublead",
+                "role": "Sublead - PR",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428474/image_kqgl2t.jpg",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/hema-sudabathula-629ba8348/",
@@ -130,18 +130,18 @@
             },
             {
                 "type": "sublead",
-                "name": "Ashmi",
-                "role": "Sublead",
+                "name": "Ashmi S N",
+                "role": "Sublead - PR",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428461/Screenshot_20250201_173122_Gallery_mj1wk9.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/ashmi-s-n-67581a315/",
+                    "instagram": "https://www.instagram.com/ashmi_s_n/",
                     "website": "#"
                 }
             },{
                 "type": "sublead",
-                "name": "Kshitij Joshi",
-                "role": "Sublead",
+                "name": "Joshi Kshitij Santosh",
+                "role": "Sublead - Event Management",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738466033/d8aa9699-497a-401c-8059-2076dbfae71a.png",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/joshi-kshitij-santosh/",
@@ -154,7 +154,7 @@
             {
                 "type": "member",
                 "name": "Niveditha",
-                "role": "Product Manager",
+                "role": "Art Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068157/IMG-20241229-WA0038_bvbthc.jpg",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/niveditha-gireesan-shyla-094602326/",
@@ -164,41 +164,41 @@
             },
             {
                 "type": "member",
-                "name": "Frank Thompson",
-                "role": "UI Designer",
+                "name": "Kushal Arora",
+                "role": "Event Management Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/Screenshot_20250113-070912.Drive_vanxow.png",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/kushal-arora-141183306/",
                     "instagram": "#",
                     "website": "#"
                 }
             },
             {
                 "type": "member",
-                "name": "Grace Anderson",
-                "role": "Software Engineer",
+                "name": "Sam Joe Chalissery",
+                "role": "Tech Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/samjoe_hy9vdc.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/samjoe404/",
+                    "instagram": "https://www.instagram.com/samjoe.png/",
                     "website": "#"
                 }
             },
             {
                 "type": "member",
-                "name": "Eve Young",
-                "role": "Product Manager",
+                "name": "Abel Abraham",
+                "role": "Content Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/pfp_formal_abel_tx9dou.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/abel-abraham-990236166/",
+                    "instagram": "https://www.instagram.com/the_r3al_able/",
                     "website": "#"
                 }
             },
             {
                 "type": "member",
                 "name": "Ann Mary George",
-                "role": "UI Designer",
+                "role": "PR Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068153/IMG_0610_ue8e3i.jpg",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/ann-mary-george-862002312/",
@@ -208,30 +208,30 @@
             },
             {
                 "type": "member",
-                "name": "Grace Anderson",
-                "role": "Software Engineer",
+                "name": "Anupama Ajith",
+                "role": "Event Management Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068154/IMG_20250112_150933_ish82o.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/anupama-ajith-18a527341/",
+                    "instagram": "https://www.instagram.com/anupama_ajith67/",
                     "website": "#"
                 }
             },
             {
                 "type": "member",
-                "name": "Grace Anderson",
-                "role": "Software Engineer",
+                "name": "Ruchitha Mare",
+                "role": "Coverage Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/IMG_20240904_160219__02_sa9nhv.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#",
+                    "linkedin": "https://www.linkedin.com/in/ruchitha-mare-629301327/",
+                    "instagram": "https://www.instagram.com/__ruchxx_/",
                     "website": "#"
                 }
             },
             {
                 "type": "member",
-                "name": "Grace Anderson",
-                "role": "Software Engineer",
+                "name": "Salil K Jha",
+                "role": "Finance Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068324/img_bzxhhu.jpg",
                 "socials": {
                     "linkedin": "#",
@@ -242,7 +242,7 @@
             {
                 "type": "member",
                 "name": "Shivansh Neekhra",
-                "role": " finance and management",
+                "role": "Finance Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738464619/a3cc1919-0f46-44c2-8c93-876c28c27e1a.png",
                 "socials": {
                     "linkedin": "#",
