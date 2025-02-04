@@ -4,16 +4,8 @@ import { motion } from "framer-motion";
 import { Wand2 } from "lucide-react";
 import React from "react";
 
-interface SaleTickerProps {
-  timeLeft: {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  };
-}
 
-const SaleTicker: React.FC<SaleTickerProps> = () => {
+const SaleTicker: React.FC = () => {
   return (
     <div className="relative overflow-hidden bg-black py-[20px] sm:py-5 shadow-lg border-t-2 border-yellow-500">
       <motion.div
