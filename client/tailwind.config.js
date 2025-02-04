@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import tailwindAnimate from 'tailwindcss-animate'
+import tailwindAnimate from 'tailwindcss-animate';
 export default {
 	darkMode: ["class"],
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -17,7 +17,11 @@ export default {
 				roboto: [
 					'Roboto',
 					'sans-serif'
-				]
+				],
+				harryp: [
+					"Harryp",
+					"serif"
+				],
 			},
 			colors: {
 				'deep-purple-accent-400': '#7e57c2',

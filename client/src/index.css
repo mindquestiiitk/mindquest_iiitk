@@ -11,7 +11,23 @@
     scroll-behavior: smooth;
   }
 
-
+  @font-face {
+    font-family: "Lumos"; /* Your font name */
+    src: url("/fonts/Lumos.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Harryp"; /* Your font name */
+    src: url("/fonts/HarryP-MVZ6w.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Optional: Add a glow effect for a magical look */
+  .text-magic {
+    text-shadow: 2px 2px 8px rgba(255, 223, 0, 0.8);
+  }
 
   @layer base {
   :root {
