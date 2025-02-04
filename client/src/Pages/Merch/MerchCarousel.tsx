@@ -17,7 +17,7 @@ export const MerchCarousel: React.FC<MerchCarouselProps> = (props) => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
-  
+
   return (
     <Carousel
       plugins={[plugin.current]}
@@ -39,7 +39,7 @@ export const MerchCarousel: React.FC<MerchCarouselProps> = (props) => {
         ))}
       </CarouselContent>
       <CarouselPrevious />
-  <CarouselNext />
+      <CarouselNext />
     </Carousel>
   )
 }

@@ -51,8 +51,8 @@ const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLef
                 style={{ top: `${top}%` }}
             >
                 <div className="bg-lighter-green p-4 rounded-lg shadow-lg hover:-translate-y-2">
-                    <h3 className="text-xl text-green-800 font-bold mb-2 md:truncate">{title}</h3>
-                    <p className="text-gray-600 hidden md:block truncate">{description}</p>
+                    <h3 className="text-xl text-green-800 font-bold mb-2 ">{title}</h3>
+                    <p className="text-gray-600 hidden md:block ">{description}</p>
                 </div>
             </div>
         </Link>
