@@ -6,19 +6,13 @@ const Footer = () => {
     <footer className="bg-secondary-green py-1 px-8">
       <div className="mx-auto">
         {/* Logo and Name Section */}
-        <div className="flex items-center gap-3 mb-2 mt-2">
-          <div className="w-14 h-14">
-            <img src={mindquest_logo} alt="Mind Quest Logo" className="w-full h-full" />
-          </div>
-          <span className="text-primary-green text-2xl font-semibold">Mind Quest</span>
-        </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4 mt-8">
 
 
           {/* Quick Links */}
-          <div>
+          <div >
             <h3 className="text-accent font-semibold mb-4">Quick Links</h3>
             <ul className="text-foreground/70 text-sm space-y-2">
               <li><Link to={"/"} className="hover:text-accent">Home</Link></li>
@@ -40,7 +34,14 @@ const Footer = () => {
           </div>
         </div>
 
-        
+        <div className="flex justify-center items-center gap-3 mb-4 mt-2">
+          <div className="w-14 h-14">
+            <img src={mindquest_logo} alt="Mind Quest Logo" className="w-full h-full" />
+          </div>
+          <span className="text-primary-green text-2xl font-semibold">Mind Quest</span>
+        </div>
+
+
           {/* Social Media Links */}
           <div className="flex justify-center gap-4 text-accent mb-4">
             <a href="https://www.linkedin.com/company/mind-quest" className="hover:text-accent/90">

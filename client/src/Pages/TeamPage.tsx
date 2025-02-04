@@ -110,11 +110,11 @@ const TeamPage = () => {
           <h2 className="text-primary-green text-4xl font-medium text-center mb-8 font-acme">
             Mentor
           </h2>
-            <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center">
-              {fetchMembers && fetchMembers.people.mentors && fetchMembers.people.mentors.map((mentor, index) => (
-                <TeamMemberCard key={index} member={mentor} />
-              ))}
-            </div>
+          <div className="flex flex-wrap justify-center gap-x-24 gap-y-8 items-center">
+            {fetchMembers && fetchMembers.people.mentors && fetchMembers.people.mentors.map((mentor, index) => (
+              <TeamMemberCard key={index} member={mentor} />
+            ))}
+          </div>
         </div>
 
 
