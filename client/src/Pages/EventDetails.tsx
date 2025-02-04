@@ -43,16 +43,16 @@ export function EventDetail() {
                         className="md:w-1/2 flex flex-col"
                     >
                         {/* Top half - Event Image */}
-                        <div className="h-1/2 flex-shrink-0 flex items-center justify-center">
-                            <img
-                                src={event.poster || "/placeholder.svg"}
-                                alt={event.title}
-                                className="w-full h-full object-cover object-top"
-                            />
-                        </div>
-                        <div className="h-full bg-background-secondary px-4 flex justify-center items-center">
+                        {event.poster &&
+                            <div className="max-h-1/2 flex-shrink-0 flex items-center justify-center">
+                                <img
+                                    src={event.poster || "/placeholder.svg"}
+                                    alt={event.title}
+                                    className="w-full h-full object-cover object-top"
+                                />
+                            </div>
+                        }
                             <EventCarousel images={event.images} />
-                        </div>
 
                     </motion.div>
 

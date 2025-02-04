@@ -9,7 +9,6 @@
                 "socials": {
                     "linkedin": "#",
                     "instagram": "#"
-                    
                 }
             },
             {
@@ -20,7 +19,6 @@
                 "socials": {
                     "linkedin": "#",
                     "instagram": "#"
-                    
                 }
             },
             {
@@ -31,7 +29,6 @@
                 "socials": {
                     "linkedin": "#",
                     "instagram": "#"
-                    
                 }
             },
             {
@@ -42,7 +39,6 @@
                 "socials": {
                     "linkedin": "#",
                     "instagram": "#"
-                    
                 }
             },
             {
@@ -53,12 +49,11 @@
                 "socials": {
                     "linkedin": "#",
                     "instagram": "#"
-                    
                 }
             }
         ],
         "mentors": [
-            {   
+            {
                 "type": "mentor",
                 "name": "Sarthak Gupta",
                 "role": "Mentor",
@@ -78,7 +73,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/pravallika-bandaru-a479032a2",
                     "instagram": "https://www.instagram.com/pkband6?igsh=MWQxNW1sZWVyODgxMQ=="
-                    
                 }
             },
             {
@@ -89,7 +83,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/urvashi-salonia-72461b259/",
                     "instagram": "https://www.instagram.com/urvashisalonia/"
-                    
                 }
             }
         ],
@@ -102,7 +95,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/vishal-dhawal-b69163327/",
                     "instagram": "https://www.instagram.com/visshu_7880/profilecard/?igsh=OG4wYjQydXBxd2Ry"
-                    
                 }
             },
             {
@@ -113,7 +105,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/sarthakyadav1/",
                     "instagram": "https://www.instagram.com/the___enigma_/"
-                    
                 }
             },
             {
@@ -124,7 +115,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/hema-sudabathula-629ba8348/",
                     "instagram": "https://www.instagram.com/h_ema456?igsh=d2UwNm5jYjNnZHU2"
-                    
                 }
             },
             {
@@ -135,9 +125,9 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/ashmi-s-n-67581a315/",
                     "instagram": "https://www.instagram.com/ashmi_s_n/"
-                    
                 }
-            },{
+            },
+            {
                 "type": "sublead",
                 "name": "Joshi Kshitij Santosh",
                 "role": "Sublead - Event Management",
@@ -145,7 +135,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/joshi-kshitij-santosh/",
                     "instagram": "https://www.instagram.com/ksjoshi2106?igsh=ZHZyYXFrN3lhMzM1"
-                    
                 }
             }
         ],
@@ -158,18 +147,26 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/niveditha-gireesan-shyla-094602326/",
                     "instagram": "https://www.instagram.com/justnivv?igsh=ZnN1OTNmdzU5OTlu"
-                    
                 }
             },
             {
                 "type": "member",
                 "name": "Kushal Arora",
                 "role": "Event Management Team",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/Screenshot_20250113-070912.Drive_vanxow.png",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648655/Screenshot_2025-02-04_112708_klf4fx.png",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/kushal-arora-141183306/",
                     "instagram": "#"
-                    
+                }
+            },
+            {
+                "type": "member",
+                "name": "Prajwal",
+                "role": "Event Management Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648707/Screenshot_2025-02-04_112812_omu9j8.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/prajwal-k-632411307/",
+                    "instagram": "https://www.instagram.com/prajwal_k_k_/"
                 }
             },
             {
@@ -180,7 +177,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/samjoe404/",
                     "instagram": "https://www.instagram.com/samjoe.png/"
-                    
                 }
             },
             {
@@ -191,7 +187,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/abel-abraham-990236166/",
                     "instagram": "https://www.instagram.com/the_r3al_able/"
-                    
                 }
             },
             {
@@ -202,7 +197,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/ann-mary-george-862002312/",
                     "instagram": "https://www.instagram.com/annaammoo?igsh=MXhwZjJidzd4NWpqcg=="
-                    
                 }
             },
             {
@@ -213,7 +207,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/anupama-ajith-18a527341/",
                     "instagram": "https://www.instagram.com/anupama_ajith67/"
-                    
                 }
             },
             {
@@ -224,7 +217,6 @@
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/ruchitha-mare-629301327/",
                     "instagram": "https://www.instagram.com/__ruchxx_/"
-                    
                 }
             },
             {
@@ -233,9 +225,8 @@
                 "role": "Finance Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068324/img_bzxhhu.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#"
-                    
+                    "linkedin": "https://in.linkedin.com/in/salil-jha-3b9a7b281",
+                    "instagram": "https://www.instagram.com/salil_1221?igsh=amxteWs3eDh3YW9v"
                 }
             },
             {
@@ -244,41 +235,57 @@
                 "role": "Finance Team",
                 "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738464619/a3cc1919-0f46-44c2-8c93-876c28c27e1a.png",
                 "socials": {
+                    "linkedin": "https://www.linkedin.com/in/shivansh-neekhra-2903a930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                    "instagram": "https://www.instagram.com/shivansh_neekhra"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Shaurya Chaturvedi",
+                "role": "PR Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648555/shaurya_sevgzx.png",
+                "socials": {
                     "linkedin": "#",
                     "instagram": "#"
-                    
+                }
+            },
+            {
+                "type": "member",
+                "name": "Amirthinini",
+                "role": "PR Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648472/amir_idabgk.png",
+                "socials": {
+                    "linkedin": "https://in.linkedin.com/in/amirthini-r-o-5b0268315",
+                    "instagram": "https://www.instagram.com/ami_mweetuminti?igsh=MWtmYW0zcDF0emFudg=="
                 }
             }
         ],
         "developers": [
             {
-                "name": "John Doe",
+                "name": "Sarthak Yadav",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738650078/Screenshot_2025-02-04_115104_xqgafe.png",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#"
-                    
+                    "linkedin": "https://www.linkedin.com/in/sarthakyadav1/",
+                    "instagram": "https://www.instagram.com/the___enigma_/"
                 }
             },
             {
-                "name": "Jane Smith",
+                "name": "Adnan",
                 "role": "UX Designer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068337/Renjitha_t_r_yrubrm.jpg",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738648916/adnan_nginm5.jpg",
                 "socials": {
-                    "linkedin": "#",
-                    "instagram": "#"
-                    
+                    "linkedin": "https://www.linkedin.com/in/adnan-omar-c/",
+                    "instagram": "https://www.instagram.com/adiladnan321/#"
                 }
             },
             {
-                "name": "John Doe",
+                "name": "Tarun Varier",
                 "role": "Software Engineer",
-                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738649616/WhatsApp_Image_2025-02-04_at_11.34.26_c6d30d5d_oopcka.jpg",
                 "socials": {
-                    "linkedin": "#",
+                    "linkedin": "https://www.linkedin.com/in/tarun-varier-15957732b/",
                     "instagram": "#"
-                    
                 }
             }
         ]
