@@ -28,7 +28,6 @@ interface MerchCardProps {
   price: number;
   image: string[];
   key: string | number;
-  qty: number;
 }
 
 const MerchCard: React.FC<MerchCardProps> = (props) => {

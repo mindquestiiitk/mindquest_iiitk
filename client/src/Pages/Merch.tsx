@@ -1,7 +1,6 @@
 import SaleTicker from '@/SaleTicker';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import MerchCard from "./Merch/MerchCard";
 
 interface TShirt {
@@ -17,17 +16,16 @@ interface SaleData {
 }
 
 export const Merch: React.FC = () => {
-  const navigate = useNavigate();
   const [merchData, setMerchData] = useState<TShirt[]>([]);
   const [saleData, setSaleData] = useState<SaleData | null>(null);
-  const [cartData, setCartData] = useState<{ tshirts: { name: string; qty: number; size: string }[] }>({ tshirts: [] });
+  // const [cartData, setCartData] = useState<{ tshirts: { name: string; qty: number; size: string }[] }>({ tshirts: [] });
 
-  const updateCartData = (newItem: { name: string; qty: number; size: string }) => {
-    setCartData((prevCart) => ({
-      tshirts: [...prevCart.tshirts, newItem],
-    }));
-    console.log(cartData);
-  };
+  // const updateCartData = (newItem: { name: string; qty: number; size: string }) => {
+  //   setCartData((prevCart) => ({
+  //     tshirts: [...prevCart.tshirts, newItem],
+  //   }));
+  //   console.log(cartData);
+  // };
 
   const calculateTimeLeft = (targetDate: Date) => {
     const currentTime = new Date().getTime();
@@ -99,7 +97,7 @@ export const Merch: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-3 mt-3">
           {merchData.length > 0 ? (
             merchData.map((shirt) => (
-              <MerchCard key={shirt.id} name={shirt.name} price={shirt.price} image={shirt.image} updateCartData={updateCartData} />
+              <MerchCard key={shirt.id} name={shirt.name} price={shirt.price} image={shirt.image} />
             ))
           ) : (
             <div className="text-center text-xl">Loading...</div>
