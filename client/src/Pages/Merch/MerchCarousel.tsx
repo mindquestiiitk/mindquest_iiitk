@@ -18,7 +18,6 @@ export const MerchCarousel: React.FC<MerchCarouselProps> = (props) => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
-  
   return (
     <Carousel
       plugins={[plugin.current]}
@@ -28,14 +27,16 @@ export const MerchCarousel: React.FC<MerchCarouselProps> = (props) => {
     >
       <CarouselContent>
         {props.images.length > 0 && props.images.slice(0, 2).map((image, index) => (
+          
           <CarouselItem key={index}>
             <div className="p-1">
-              <Card>
-            <Badge variant="outline" className="m-0 p-0 bg-emerald-100/50 text-emerald-800">
-                ⚡ Limited Stock
-              </Badge>
-                <CardContent className="flex aspect-square items-center justify-center p-0">
-                  <img src={image} alt={`Merch item ${index}`} className="rounded-2xl" />
+             
+              <Card className="outline-none border-none">
+                <Badge variant="outline" className="m-0 p-0 bg-emerald-100/50 text-emerald-800">
+                  ⚡ Limited Stock
+                </Badge>
+                <CardContent className="w-full flex items-center justify-center p-0 overflow-hidden rounded-2xl">
+                  <img src={image} alt={`Merch item ${index}`} className=" w-full rounded-2xl scale-125 translate-y-5" />
                 </CardContent>
               </Card>
             </div>

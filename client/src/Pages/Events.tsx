@@ -48,15 +48,15 @@ export function Events() {
 
   useEffect(() => {
     document.title = "MindQuest - Events"
-    ;(async () => {
-      try {
-        const response = await fetch("./events.json")
-        const data = await response.json()
-        setEventsData(data)
-      } catch (error) {
-        console.error("Error fetching events data:", error)
-      }
-    })()
+      ; (async () => {
+        try {
+          const response = await fetch("./events.json")
+          const data = await response.json()
+          setEventsData(data)
+        } catch (error) {
+          console.error("Error fetching events data:", error)
+        }
+      })()
   }, [])
 
   return (
@@ -72,19 +72,19 @@ export function Events() {
             Events
           </motion.h1>
 
-          <Tabs defaultValue="upcoming" className="w-full">
+          <Tabs defaultValue="past" className="w-full">
             <TabsList className="grid w-full max-w-[400px] grid-cols-2 mx-auto mb-8">
-              <TabsTrigger className="data-[state=active]:bg-accent/90 data-[state=active]:text-white" value="upcoming">Upcoming Events</TabsTrigger>
               <TabsTrigger className="data-[state=active]:bg-accent/90 data-[state=active]:text-white" value="past">Past Events</TabsTrigger>
+              <TabsTrigger className="data-[state=active]:bg-accent/90 data-[state=active]:text-white" value="upcoming">Upcoming Events</TabsTrigger>
             </TabsList>
+            <TabsContent value="past">
+              {eventsData && eventsData.events && (
+                <EventGrid events={eventsData.events} />
+              )}
+            </TabsContent>
             <TabsContent value="upcoming">
               {eventsData && eventsData.events.upcomingEvents && (
                 <EventGrid events={eventsData.events.upcomingEvents} />
-              )}
-            </TabsContent>
-            <TabsContent value="past">
-              {eventsData && eventsData.events.pastEvents && (
-                <EventGrid events={eventsData.events.pastEvents} />
               )}
             </TabsContent>
           </Tabs>

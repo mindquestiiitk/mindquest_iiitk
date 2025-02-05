@@ -5,10 +5,12 @@ interface EventCardProps {
   id: string
   title: string
   image: string
+  images: string[]
+  poster: string
   brief: string
 }
 
-export function EventCard({ id, title, image, brief }: EventCardProps) {
+export function EventCard({ id, title, images, poster, brief }: EventCardProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -19,7 +21,7 @@ export function EventCard({ id, title, image, brief }: EventCardProps) {
     >
       <div className="p-0">
         <img
-          src={image || "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg"}
+          src={poster || images[0]}
           alt={title}
           className="w-full h-[200px] object-cover transition-all duration-500 transform"
           style={{

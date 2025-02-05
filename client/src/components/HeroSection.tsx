@@ -2,6 +2,18 @@
 import { hero_avatar } from "../assets";
 
 const HeroSection = () => {
+  const scrollSlowly = () => {
+    let distance = 0;
+    const step = 20; 
+    const interval = setInterval(() => {
+      if (distance >= 770) {
+        clearInterval(interval);
+      } else {
+        window.scrollBy(0, step);
+        distance += step;
+      }
+    }, 8); 
+  };
   return (
     <section
       id="about-us"
@@ -27,6 +39,7 @@ const HeroSection = () => {
           <div className="mt-2 mx-auto lg:mx-0">
             <button
               className={`px-6 py-2 my-2 bg-primary-green text-secondary-green font-bold rounded-lg`}
+              onClick={scrollSlowly}
             >
               Explore
             </button>
