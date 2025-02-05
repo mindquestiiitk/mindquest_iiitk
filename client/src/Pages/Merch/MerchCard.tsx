@@ -25,7 +25,9 @@ import { MerchCarousel } from "./MerchCarousel";
 
 interface MerchCardProps {
   name: string;
+  material: string;
   price: number;
+  discounted_price: number;
   image: string[];
   key: string | number;
 }
@@ -50,6 +52,20 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
     window.location.href = 'https://forms.gle/diMb5u6T5iQAabJt6';
   };
 
+  const renderPrice = (price: number, discounted_price: number) => {
+    if(discounted_price === price) {
+      return `₹${price}`;
+    }
+    else{
+      return (
+        <>
+          <span className="text-base line-through text-gray-500">₹{price}</span>
+          <span className="text-2xl font-bold text-primary-green"> ₹{discounted_price}</span>
+        </>
+      );
+    }
+  };
+
   return (
     <Card className={`w-full mx-auto shadow-2xl border-2 border-emerald-100/50 rounded-[2rem] bg-gradient-to-br from-white to-emerald-50/30 hover:shadow-3xl transition-all duration-500 ease-out hover:border-emerald-200/50 ${
       isMobile 
@@ -61,12 +77,12 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
         {/* Media Section */}
         <div className={`${isMobile ? 'w-[80%] lg:w-full' : 'w-full lg:w-[65%]'} mx-auto`}>
           <MerchCarousel images={props.image} />
-          {!isMobile && (
+          {/* {!isMobile && (
             <div className="mt-6 flex gap-4 items-center justify-center">
               <Icon icon="mdi:leaf" className="w-6 h-6 text-emerald-600" />
               <span className="text-sm font-medium text-gray-600">Eco-Friendly</span>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Product Details */}
@@ -75,12 +91,12 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
             <Drawer>
               <DrawerTrigger>
                 <CardHeader className="px-0 pt-0 mb-0 p-0">
-                  <div className="mb-4">
+                  <div className="mb-4 flex-col flex items-center gap-2">
                     <CardTitle className="text-2xl md:text-xl font-bold text-primary-green">
                       {props.name}
                     </CardTitle>
-                    <CardDescription className="text-xs md:text-lg text-gray-500 font-medium">
-                      Organic Cotton Premium Fit
+                    <CardDescription className="text-xs md:text-lg text-gray-500 font-medium break-words text-wrap w-2/3">
+                      {props?.material}
                     </CardDescription>
                   </div>
                 </CardHeader>
@@ -105,7 +121,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                         </div>
                       </div>
                       <div className="text-3xl font-bold text-primary-green">
-                        ₹{props.price}
+                        {renderPrice(props.price, props.discounted_price)}
                       </div>
                     </div>
                   </DrawerDescription>
@@ -131,13 +147,13 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                     {props.name}
                   </CardTitle>
                   <CardDescription className="text-lg md:text-xl text-gray-500 mt-3 font-medium">
-                    Organic Cotton Premium Fit | UV Protection | Wrinkle-Free
+                    {props?.material}
                   </CardDescription>
                 </div>
               </CardHeader>
 
               <CardContent className="px-0">
-                <div className="grid w-full gap-8">
+                <div className="grid w-full gap-4">
                   <div className="space-y-4">
                     <Label className="text-lg font-semibold text-gray-900">
                       Sizes 🌐
@@ -152,9 +168,9 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
                   </div>
                   <div className="space-y-1">
                     <div className="text-4xl font-bold text-primary-green">
-                      ₹{props.price}
+                      {renderPrice(props.price, props.discounted_price)}
                     </div>
-                    <p className="text-sm text-gray-500">Inclusive of all taxes</p>
+                    <p className="text-sm text-gray-500"> <span className="line-through">Inclusive of all taxes</span> We don't pay tax here!</p>
                   </div>
                 </div>
               </CardContent>
