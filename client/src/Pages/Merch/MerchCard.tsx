@@ -141,7 +141,7 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
               <CardHeader className="px-0 pt-0">
                 <div className="mb-4">
                   <Badge variant="outline" className="mb-3 bg-emerald-100/50 text-emerald-800">
-                    ⚡ Limited Stock: 12 Left
+                    ⚡ Limited Stock
                   </Badge>
                   <CardTitle className="text-4xl md:text-5xl font-bold text-primary-green">
                     {props.name}
