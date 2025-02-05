@@ -263,7 +263,7 @@
         "developers": [
             {
                 "name": "Sarthak Yadav",
-                "role": "Software Engineer",
+                "role": "Project Manaeger",
                 "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738650078/Screenshot_2025-02-04_115104_xqgafe.png",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/sarthakyadav1/",
@@ -272,7 +272,7 @@
             },
             {
                 "name": "Adnan",
-                "role": "UX Designer",
+                "role": "Frontent Developer",
                 "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738648916/adnan_nginm5.jpg",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/adnan-omar-c/",
@@ -281,10 +281,19 @@
             },
             {
                 "name": "Tarun Varier",
-                "role": "Software Engineer",
+                "role": "Frontend Developer",
                 "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738649616/WhatsApp_Image_2025-02-04_at_11.34.26_c6d30d5d_oopcka.jpg",
                 "socials": {
                     "linkedin": "https://www.linkedin.com/in/tarun-varier-15957732b/",
+                    "instagram": "#"
+                }
+            },
+            {
+                "name": "Sachin Saini",
+                "role": "Full Stack Developer",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738699362/rmjeh8gp_j78gmf.png",
+                "socials": {
+                    "linkedin": "#",
                     "instagram": "#"
                 }
             }
