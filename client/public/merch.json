@@ -1,41 +1,49 @@
 {
     "sale": {
-      "endDate": "2025-02-05T12:00:00",
+      "endDate": "2025-02-07T12:00:00",
       "tickerText": "Limited Time Offer! Grab your favorite merch before the sale ends!"
     },
     "products": [
       {
         "id": 1,
         "name": "Classic Green Tee",
+        "material": "75% Cotton + 25% Polyester | 170-180 gsm | Regular fit",
         "image": [
           "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg",
           "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg"
         ],
-        "price": 29.99
+        "price": 400.00,
+        "discounted_price": 299.00
       },
       {
         "id": 2,
         "name": "Eco Warrior",
+        "material": "75% Cotton + 25% Polyester | 170-180 gsm | Regular fit",
         "image": [
           "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg"
         ],
-        "price": 34.99
+        "price": 400.00,
+        "discounted_price": 299.00
       },
       {
         "id": 3,
         "name": "Nature Lover",
+        "material": "75% Cotton + 25% Polyester | 170-180 gsm | Regular fit",
         "image": [
           "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg"
         ],
-        "price": 32.99
+        "price": 400.00,
+        "discounted_price": 299.00
       },
       {
         "id": 4,
         "name": "Green Mind",
+        "material": "75% Cotton + 25% Polyester | 170-180 gsm | Regular fit",
         "image": [
           "https://www.thewowstyle.com/wp-content/uploads/2015/01/nature-images..jpg"
         ],
-        "price": 31.99
+        "price": 400.00,
+        "discounted_price": 299.00
       }
     ]
   }
