@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { mindquest_logo } from "../assets";
-import { Globe, Instagram, Linkedin, WebhookIcon } from "lucide-react";
-import { CgWebsite } from "react-icons/cg";
+import { Globe, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
     return (

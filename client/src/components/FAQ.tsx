@@ -10,7 +10,7 @@ type DetailsSectionProps = {
 const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
-    const animation = useRef<gsap.core.Tween>();
+    const animation = useRef<gsap.core.Timeline>();
     const arrowRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => 
             gsap.set(arrowRef.current, { rotate: isOpen ? 180 : 0 });
         });
 
-        return () => ctx.revert();
+        return () => { ctx.revert(); };
     }, []);
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({ summary, content }) => 
                 }, "<0.1");
         }
 
-        return () => animation.current?.kill();
+        return () => {animation.current?.kill();}
     }, [isOpen]);
 
     return (

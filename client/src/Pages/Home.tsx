@@ -3,7 +3,6 @@ import FAQ from '../components/FAQ'
 import KeyFeatures from '@/components/KeyFeatures'
 import Team from '../components/Team'
 import Timeline from '@/components/Timeline'
-import { events } from '../../public/events.json'
 
 const Home = () => {
     return (
@@ -12,7 +11,7 @@ const Home = () => {
                 <HeroSection />
             </section>
             <KeyFeatures />
-            <Timeline events={events} />
+            <Timeline />
             <Team />
             <FAQ />
         </>

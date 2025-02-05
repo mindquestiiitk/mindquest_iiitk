@@ -1,4 +1,3 @@
-import { Instagram } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface TeamMember {
@@ -9,7 +8,7 @@ interface TeamMember {
   socials: {
     linkedin?: string;
     instagram?: string;
-    // website?: string;
+    website?: string;
   };
 }
 

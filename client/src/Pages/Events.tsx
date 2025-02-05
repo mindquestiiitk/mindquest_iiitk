@@ -8,14 +8,13 @@ interface Event {
   id: string
   title: string
   image: string
+  images: string[]
+  poster: string
   brief: string
 }
 
 interface EventsData {
-  events: {
-    upcomingEvents: Event[]
-    pastEvents: Event[]
-  }
+  events: Event[]
 }
 
 interface EventGridProps {
@@ -83,8 +82,8 @@ export function Events() {
               )}
             </TabsContent>
             <TabsContent value="upcoming">
-              {eventsData && eventsData.events.upcomingEvents && (
-                <EventGrid events={eventsData.events.upcomingEvents} />
+              {eventsData && eventsData.events && (
+                <EventGrid events={eventsData.events} />
               )}
             </TabsContent>
           </Tabs>

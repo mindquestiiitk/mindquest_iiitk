@@ -19,12 +19,12 @@ export function EventDetail() {
         return <div>Event not found</div>;
     }
 
-    const organizers = [
-        { id: 1, name: "Organizer 1", image: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" },
-        { id: 2, name: "Organizer 2", image: "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" },
-        { id: 3, name: "Organizer 3", image: "https://eu.ui-avatars.com/api/?name=Sarthak+Gupta&size=250" },
-        // use https://eu.ui-avatars.com/api/?name=John+Doe&size=250 to generate random avatar from name
-    ];
+    // const organizers = [
+    //     { id: 1, name: "Organizer 1", image: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" },
+    //     { id: 2, name: "Organizer 2", image: "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" },
+    //     { id: 3, name: "Organizer 3", image: "https://eu.ui-avatars.com/api/?name=Sarthak+Gupta&size=250" },
+    //     // use https://eu.ui-avatars.com/api/?name=John+Doe&size=250 to generate random avatar from name
+    // ];
 
     return (
         <>
@@ -73,7 +73,7 @@ export function EventDetail() {
                             {event.location}
                         </p>
                         {
-                            event.description.split('\n').map((line, index) => (
+                            event.description.split('\n').map((line) => (
                                 <p className="text-lg mb-6 text-card-overlay-background">
                                     {line}
                                 </p>

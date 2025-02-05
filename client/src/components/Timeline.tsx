@@ -22,7 +22,7 @@ interface IEventProps {
 
 const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLeft, id }) => {
     const elementRef = useRef(null);
-    const animation = useRef(null);
+    const animation = useRef<gsap.core.Tween | null>(null);
 
     useEffect(() => {
         animation.current = gsap.fromTo(elementRef.current, {
@@ -35,12 +35,12 @@ const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLef
             paused: true,
         });
 
-        return () => animation.current.kill();
+        return () => { if (animation.current) animation.current.kill(); }
     }, [isLeft]);
 
     useEffect(() => {
-        if (isActive) animation.current.play();
-        else animation.current.reverse();
+        if (isActive && animation.current) animation.current.play();
+        else if (animation.current) animation.current.reverse();
     }, [isActive]);
 
     return (
@@ -60,15 +60,31 @@ const Event: React.FC<IEventProps> = ({ isActive, title, description, top, isLef
 };
 
 
-const Timeline = ({ events }: { events: IEvent[] }) => {
+const Timeline = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [dotPosition, setDotPosition] = useState({ x: 0, y: 0 });
-    const [maxScroll, setMaxScroll] = useState(0);
+    const [maxScroll, setMaxScroll] = useState<number>(0);
     const [isStuck, setIsStuck] = useState(false); // Initially, side content is stuck
     const [activeIndex, setActiveIndex] = useState(-1);
-    const pathRef = useRef(null);
-    const contentRef = useRef(null);
+    const pathRef = useRef<SVGSVGElement | null>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const circleRef = useRef(null);
+    // state of events
+    const [events, setEvents] = useState<IEvent[]>([]);
+
+    // Fetch events data
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const response = await fetch('./events.json');
+                const data = await response.json();
+                setEvents(data.events);
+            } catch (error) {
+                console.error('Error fetching events data:', error);
+            }
+        };
+        fetchEvents();
+    }, []);
 
     // Wave parameters
     const height = 1000; // Total height of the path
@@ -86,20 +102,25 @@ const Timeline = ({ events }: { events: IEvent[] }) => {
     }, []);
 
     useEffect(() => {
-        const handleScroll = () => {
+        const handleScroll = (): void => {
             const position = window.scrollY;
-            const rect = contentRef.current.getBoundingClientRect();
-            if (rect && rect.top <= maxScroll) {
-                setScrollPosition(maxScroll - rect.top);
-            } else {
-                setScrollPosition(0);
+            if (contentRef.current) {
+                const rect = contentRef.current.getBoundingClientRect();
+                if (rect.top <= maxScroll) {
+                    setScrollPosition(maxScroll - rect.top);
+                }   else {
+                    setScrollPosition(0);
+                }
             }
-            if (position < rect.top) return;
+            if (contentRef.current) {
+                const rect = contentRef.current.getBoundingClientRect();
+                if (position < rect.top) return;
+            }
         };
 
         window.addEventListener('scroll', handleScroll);
         handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
+        return (): void => window.removeEventListener('scroll', handleScroll);
     }, [maxScroll]);
 
     useEffect(() => {
@@ -208,7 +229,7 @@ const Timeline = ({ events }: { events: IEvent[] }) => {
         return pathData;
     };
 
-    const handleRef = (ref) => {
+    const handleRef = (ref: SVGSVGElement | null): void => {
         pathRef.current = ref;
     };
 
