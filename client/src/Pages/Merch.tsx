@@ -1,7 +1,8 @@
-import SaleTicker from '@/SaleTicker';
-import { Icon } from '@iconify/react/dist/iconify.js';
-import React, { useEffect, useState } from "react";
-import MerchCard from "./Merch/MerchCard";
+import React, { useEffect, useState, lazy, Suspense } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
+
+const SaleTicker = lazy(() => import("@/SaleTicker"));
+const MerchCard = lazy(() => import("./Merch/MerchCard"));
 
 interface TShirt {
   id: number;
@@ -20,14 +21,6 @@ interface SaleData {
 export const Merch: React.FC = () => {
   const [merchData, setMerchData] = useState<TShirt[]>([]);
   const [saleData, setSaleData] = useState<SaleData | null>(null);
-  // const [cartData, setCartData] = useState<{ tshirts: { name: string; qty: number; size: string }[] }>({ tshirts: [] });
-
-  // const updateCartData = (newItem: { name: string; qty: number; size: string }) => {
-  //   setCartData((prevCart) => ({
-  //     tshirts: [...prevCart.tshirts, newItem],
-  //   }));
-  //   console.log(cartData);
-  // };
 
   const calculateTimeLeft = (targetDate: Date) => {
     const currentTime = new Date().getTime();
@@ -76,14 +69,11 @@ export const Merch: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#D4F3D9] text-card-overlay-background">
-      {/* <header className="py-6 px-4 bg-card-overlay-background text-[#D4F3D9] text-center">
-        <h1 className="text-4xl font-bold">Unlock Your Mind Merch</h1>
-      </header> */}
-
-      <SaleTicker />
+      <Suspense fallback={<div className="text-center text-xl">Loading Sale Ticker...</div>}>
+        <SaleTicker />
+      </Suspense>
 
       <main className="container mx-auto px-4">
-        {/* Countdown Timer Section */}
         {saleData && (
           <section className="text-center my-6">
             <div className="flex justify-center">
@@ -98,9 +88,11 @@ export const Merch: React.FC = () => {
         )}
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-3 mt-3">
           {merchData.length > 0 ? (
-            merchData.map((shirt) => (
-              <MerchCard key={shirt.id} name={shirt.name} price={shirt.price} image={shirt.image} material={shirt.material} discounted_price={shirt.discounted_price} />
-            ))
+            <Suspense fallback={<div className="text-center text-xl">Loading Merch...</div>}>
+              {merchData.map((shirt) => (
+                <MerchCard key={shirt.id} name={shirt.name} price={shirt.price} image={shirt.image} material={shirt.material} discounted_price={shirt.discounted_price} />
+              ))}
+            </Suspense>
           ) : (
             <div className="text-center text-xl">Loading...</div>
           )}
