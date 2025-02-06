@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 interface Event {
   id: string
   title: string
+  date: string
   image: string
   images: string[]
   poster: string
@@ -58,6 +59,15 @@ export function Events() {
       })()
   }, [])
 
+  const findUpcomingEvents = (events: Event[]) => {
+    const currentDate = new Date();
+    return events.filter((event) => {
+      const [day,month, year] = event.date.split("/").map(Number);
+      const eventDate = new Date(year, month - 1, day); // Month is 0-based in JavaScript Date()
+      return eventDate > currentDate;
+    });
+  };
+
   return (
     <>
       <main className="flex-grow bg-eventcard-background/30">
@@ -83,7 +93,7 @@ export function Events() {
             </TabsContent>
             <TabsContent value="upcoming">
               {eventsData && eventsData.events && (
-                <EventGrid events={eventsData.events} />
+                <EventGrid events={findUpcomingEvents(eventsData.events)} />
               )}
             </TabsContent>
           </Tabs>

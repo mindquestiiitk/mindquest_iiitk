@@ -2,10 +2,10 @@
     "events": [
         {
             "id": "p1",
-            "title": "Game On: Fresher’s Challenge",
+            "title": "Game On: Fresher's Challenge",
             "date": "11/10/2024",
             "brief": "Freshers' team-building games and creative challenges.",
-            "description": "Mind Quest, in collaboration with Reboot, organized Game On: Fresher’s Challenge' on October 11th Oct, 2024 bringing together freshers for an exhilarating night of games, strategy, and teamwork. Designed to break the ice and encourage camaraderie among students, the event was packed with interactive challenges, competitive spirit, and exciting rewards.\n  Event Highlights\n 🎯 Tower of Hanoi – A test of logic and problem-solving where teams raced against time to complete the classic puzzle.\n  🎨 Drawing Relay – A fun and creative challenge requiring coordination and teamwork to convey ideas through sketches.\n  🤔 Who Am I? – An engaging guessing game that encouraged interaction and laughter.\n  🖌 Pictionary – A game of quick thinking and artistic expression, bringing out the competitive side of participants.\n\n  💡 The event also featured an exciting prize for the winners—a one-month Netflix 4K subscription for four users, adding an extra layer of motivation and thrill to the competition.\n  The event saw enthusiastic participation, creating an energetic and welcoming atmosphere for the freshers. Game On was a massive success, fostering new friendships, teamwork, and unforgettable memories for everyone involved!\n ",
+            "description": "Mind Quest, in collaboration with Reboot, organized Game On: Fresher's Challenge' on October 11th Oct, 2024 bringing together freshers for an exhilarating night of games, strategy, and teamwork. Designed to break the ice and encourage camaraderie among students, the event was packed with interactive challenges, competitive spirit, and exciting rewards.\n  Event Highlights\n 🎯 Tower of Hanoi – A test of logic and problem-solving where teams raced against time to complete the classic puzzle.\n  🎨 Drawing Relay – A fun and creative challenge requiring coordination and teamwork to convey ideas through sketches.\n  🤔 Who Am I? – An engaging guessing game that encouraged interaction and laughter.\n  🖌 Pictionary – A game of quick thinking and artistic expression, bringing out the competitive side of participants.\n\n  💡 The event also featured an exciting prize for the winners—a one-month Netflix 4K subscription for four users, adding an extra layer of motivation and thrill to the competition.\n  The event saw enthusiastic participation, creating an energetic and welcoming atmosphere for the freshers. Game On was a massive success, fostering new friendships, teamwork, and unforgettable memories for everyone involved!\n ",
             "location": "IIIT Kottayam",
             "poster": "https://i.ibb.co/LdBpLhY2/Whats-App-Image-2025-02-03-at-7-26-21-PM.jpg",
             "images": [
@@ -63,6 +63,18 @@
                 "https://res.cloudinary.com/dijm6tezu/image/upload/fl_preserve_transparency/v1738645408/20250124_154406_yqiuyc.jpg?_s=public-apps",
                 "https://res.cloudinary.com/dijm6tezu/image/upload/fl_preserve_transparency/v1738645408/20250124_154512_xdkagd.jpg?_s=public-apps",
                 "https://res.cloudinary.com/dijm6tezu/image/upload/fl_preserve_transparency/v1738645407/IMG_20250124_144855435_HDR_iz0tsk.jpg?_s=public-apps"
+            ],
+            "organisers": []
+        },
+        {
+            "id": "p5",
+            "title": "Apoorv's Got Latent🌟",
+            "poster": "",
+            "date": "08/03/2025",
+            "brief": "A parody to India's got Latent!",
+            "description": "Do you have what it takes to impress? 🌟✨ At Apoorv's Got Latent, step into the spotlight and showcase your unique talents! 🎤🎭 Whether it's storytelling, music, dance, art, stand-up comedy, or something extraordinary, this is your moment to shine. ✨🌈 With an exciting prize of ₹5,000 up for grabs, 💸🏆 don't hold back—let's see what you've got! 🎉\n",
+            "location": "IIIT Kottayam",
+            "images": [
             ],
             "organisers": []
         }
