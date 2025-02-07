@@ -13,7 +13,7 @@
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735272/9_ko7f8d.png"
       ],
       "price": 400.0,
-      "discounted_price": 299.0
+      "discounted_price": 349.0
     },
     {
       "id": 2,
@@ -24,7 +24,7 @@
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735269/13_ppdjmj.png"
       ],
       "price": 400.0,
-      "discounted_price": 299.0
+      "discounted_price": 349.0
     },
    
     {
@@ -36,7 +36,7 @@
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735269/4_zdkuya.png"
       ],
       "price": 400.0,
-      "discounted_price": 299.0
+      "discounted_price": 349.0
     },
     {
       "id": 5,
@@ -46,7 +46,7 @@
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735272/10_f9yhlh.png"
       ],
       "price": 400.0,
-      "discounted_price": 299.0
+      "discounted_price": 349.0
     }
   ]
 }
