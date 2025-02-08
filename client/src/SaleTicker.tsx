@@ -11,20 +11,22 @@ const SaleTicker: React.FC = () => {
       <motion.div
         className="flex flex-none items-center gap-6 whitespace-nowrap text-yellow-400 text-3xl font-bold font-harryp tracking-wider"
         initial={{ translateX: 0 }}
-        animate={{ translateX: "-50%" }}
+        animate={{ translateX: "-100%" }}
         transition={{
           duration: 10,
           repeat: Infinity,
           ease: "linear",
         }}
       >
-        {Array(6)
+        {Array(10)
           .fill(null)
           .map((_, index) => (
             <div key={index} className="flex items-center gap-2 transition">
               <Wand2 className="text-yellow-300 text-xl animate-pulse" />
               <span className="drop-shadow-md">
                 ⚡ Sale! Harry Potter T-Shirts Await! ⚡
+              </span>
+              <span className="drop-shadow-md w-20">
               </span>
             </div>
           ))}
