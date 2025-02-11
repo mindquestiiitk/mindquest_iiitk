@@ -258,6 +258,16 @@
                     "linkedin": "https://in.linkedin.com/in/amirthini-r-o-5b0268315",
                     "instagram": "https://www.instagram.com/ami_mweetuminti?igsh=MWtmYW0zcDF0emFudg=="
                 }
+            },
+            {
+                "type": "member",
+                "name": "Muhammed Basil",
+                "role": "Member",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1739107830/photo_umdxof.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/muhammed-basil-5b1144326/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                    "instagram": "https://www.instagram.com/basi__gar?igsh=MW1pM2NrcjN3c2dpcg=="
+                }
             }
         ],
         "developers": [
