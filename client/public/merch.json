@@ -7,7 +7,7 @@
     {
       "id": 1,
       "name": "Gryffindor",
-      "material": "70% Cotton + 30% Polyester | 170-180 gsm | Regular fit",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
       "image": [
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735271/8_rdizpc.png",
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735272/9_ko7f8d.png"
@@ -18,7 +18,7 @@
     {
       "id": 2,
       "name": "Slytherin",
-      "material": "70% Cotton + 30% Polyester | 170-180 gsm | Regular fit",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
       "image": [
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735273/12_lg2rkh.png",
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735269/13_ppdjmj.png"
@@ -30,7 +30,7 @@
     {
       "id": 4,
       "name": "Ravenclaw",
-      "material": "70% Cotton + 30% Polyester | 170-180 gsm | Regular fit",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
       "image": [
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735270/3_vet0m0.png",
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735269/4_zdkuya.png"
@@ -41,7 +41,7 @@
     {
       "id": 5,
       "name": "IIIT K",
-      "material": "70% Cotton + 30% Polyester | 170-180 gsm | Regular fit",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
       "image": [
         "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735272/10_f9yhlh.png"
       ],
