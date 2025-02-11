@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { mindquest_logo } from "../assets";
 import { Globe, Instagram, Linkedin } from "lucide-react";
-
+import navItems from "./Navbar/navlist";
 const Footer = () => {
     return (
         <footer className="bg-secondary-green py-1 px-8">
@@ -16,10 +16,13 @@ const Footer = () => {
                     <div >
                         <h3 className="text-accent font-semibold mb-4 text-lg">Quick Links</h3>
                         <ul className="text-foreground/70 text-md space-y-2">
-                            <li><Link to={"/"} className="hover:text-accent">Home</Link></li>
-                            <li><Link to={"/events"} className="hover:text-accent">Events</Link></li>
-                            <li><Link to={"/merch"} className="hover:text-accent">Merch</Link></li>
-                            <li><Link to={"/"} className="hover:text-accent">About</Link></li>
+                           {navItems.map((item, index) => (
+                                <li key={index}>
+                                    <Link to={item.href} className="hover:text-accent/90">
+                                        {item.text}
+                                    </Link>
+                                </li>
+                           ))}
                         </ul>
                     </div>
 

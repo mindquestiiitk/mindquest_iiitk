@@ -1,29 +1,13 @@
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
-
 import { mindquest_logo } from "../../assets";
 import NavItem from "./NavItems";
 import { Link } from "react-router-dom";
-
-interface NavItemData {
-  href: string;
-  ariaLabel: string;
-  title: string;
-  text: string;
-}
+import navItems from "./navlist";
 
 const Navbar_Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  //custom hook navbar_home
-  //data.acctive
-  const navItems: NavItemData[] = [
-    { href: "/", ariaLabel: "Home", title: "Home", text: "Home" },
-    { href: "/merch", ariaLabel: "Merch", title: "Merch", text: "Merch" },
-    { href: "/team", ariaLabel: "Team", title: "Team", text: "Our Team" },
-    { href: "/events", ariaLabel: "Events", title: "Events", text: "Events" },
-    /*{ href: "/", ariaLabel: "Chat", title: "Chat", text: "Chat" },*/
-  ];
 
   return (
     <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
