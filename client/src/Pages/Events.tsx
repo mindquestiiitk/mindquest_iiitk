@@ -68,6 +68,16 @@ export function Events() {
     });
   };
 
+  const findPastEvents = (events: Event[]) => {
+    const currentDate = new Date();
+    return events.filter((event) => {
+      const [day, month, year] = event.date.split("/").map(Number);
+      const eventDate = new Date(year, month - 1, day); // Month is 0-based in JavaScript Date()
+      return eventDate < currentDate;
+    });
+  };
+  
+
   return (
     <>
       <main className="flex-grow bg-eventcard-background/30">
@@ -88,7 +98,7 @@ export function Events() {
             </TabsList>
             <TabsContent value="past">
               {eventsData && eventsData.events && (
-                <EventGrid events={eventsData.events} />
+                <EventGrid events={findPastEvents(eventsData.events)} />
               )}
             </TabsContent>
             <TabsContent value="upcoming">
