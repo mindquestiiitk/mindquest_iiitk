@@ -8,6 +8,7 @@ interface EventCardProps {
   images: string[]
   poster: string
   brief: string
+  thumbnail: string
 }
 
 export function EventCard({ id, title, images, poster, brief }: EventCardProps) {
