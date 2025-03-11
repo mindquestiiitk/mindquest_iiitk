@@ -1,3 +1,5 @@
+.env
+
 # filepath: client/.gitignore
 .env
 
