@@ -1,16 +1,18 @@
+import { supabase } from "../supabaseClient.ts";
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+
 
 const SaleTicker = lazy(() => import("@/SaleTicker"));
 const MerchCard = lazy(() => import("./Merch/MerchCard"));
 
-interface TShirt {
-  id: number;
+interface Product {
+  id: string;
   name: string;
   material: string;
   image: string[];
   price: number;
-  discounted_price: number;
+  discounted_price: number ;
 }
 
 interface SaleData {
@@ -19,8 +21,10 @@ interface SaleData {
 }
 
 export const Merch: React.FC = () => {
-  const [merchData, setMerchData] = useState<TShirt[]>([]);
+  const [merchData, setMerchData] = useState<Product[]>([]);
   const [saleData, setSaleData] = useState<SaleData | null>(null);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  
 
   const calculateTimeLeft = (targetDate: Date) => {
     const currentTime = new Date().getTime();
@@ -37,7 +41,6 @@ export const Merch: React.FC = () => {
     return { days, hours, minutes, seconds };
   };
 
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     async function fetchData() {
@@ -58,11 +61,54 @@ export const Merch: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        console.log("🔄 Fetching merch and sale data...");
+        
+        const { data: products, error: productError } = await supabase
+          .from("products")
+          .select("id, name, material, price, discounted_price, sale_id, product_images (image_url)");
+
+        if (productError) throw productError;
+        
+        // ✅ Fetch sale details (if exists)
+        const { data: sale, error: saleError } = await supabase
+          .from("sales")
+          .select("id, end_date, ticker_text")
+          .limit(1)
+          .single();
+
+        if (saleError && saleError.code !== "PGRST116") console.error("Sale fetch error:", saleError);
+
+        // ✅ Format & set data
+        setMerchData(products.map(product => ({
+          id: product.id,
+          name: product.name,
+          material: product.material,
+          price: product.price,
+          discounted_price: product.discounted_price,
+          image: product.product_images?.map(img => img.image_url) || [],
+        })));
+
+        if (sale) {
+          setSaleData({
+            endDate: sale.end_date,
+            tickerText: sale.ticker_text,
+          });
+          setTimeLeft(calculateTimeLeft(new Date(sale.end_date)));
+        }
+      } catch (error) {
+        console.error("❌ Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     if (saleData) {
       const interval = setInterval(() => {
         setTimeLeft(calculateTimeLeft(new Date(saleData.endDate)));
       }, 1000);
-
       return () => clearInterval(interval);
     }
   }, [saleData]);
