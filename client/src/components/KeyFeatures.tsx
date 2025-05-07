@@ -108,7 +108,7 @@ const KeyFeatures: React.FC = () => {
         <h1 className="font-acme text-3xl sm:text-4xl text-accent font-medium text-center my-6">
           Key Features
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {keyFeatures.map((feature, index) => (
             <div
               key={index}
