@@ -1,0 +1,55 @@
+{
+  "sale": {
+    "endDate": "2025-02-07T23:59:59",
+    "tickerText": "Limited Time Offer! Grab your favorite merch before the sale ends!"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Gryffindor",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
+      "image": [
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735271/8_rdizpc.png",
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735272/9_ko7f8d.png"
+      ],
+      "price": 400.0,
+      "discounted_price": 349.0
+    },
+    {
+      "id": 2,
+      "name": "Slytherin",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
+      "image": [
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735273/12_lg2rkh.png",
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735269/13_ppdjmj.png"
+      ],
+      "price": 400.0,
+      "discounted_price": 349.0
+    },
+   
+    {
+      "id": 4,
+      "name": "Ravenclaw",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
+      "image": [
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735270/3_vet0m0.png",
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735269/4_zdkuya.png"
+      ],
+      "price": 400.0,
+      "discounted_price": 349.0
+    },
+    {
+      "id": 5,
+      "name": "IIIT K",
+      "material": "Single Jersy Cotton | 210 gsm | Regular fit",
+      "image": [
+        "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738735272/10_f9yhlh.png"
+      ],
+      "price": 400.0,
+      "discounted_price": 349.0
+    }
+  ]
+}
+
+
+

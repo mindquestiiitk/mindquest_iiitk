@@ -1,0 +1,312 @@
+{
+    "people": {
+        "patrons": [
+            {
+                "type": "patron",
+                "name": "Prof. Prasad Krishna",
+                "role": "Director",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070757/7d5ce25b-c24a-48c9-a1eb-0f18fbf72832.png",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            },
+            {
+                "type": "patron",
+                "name": "Dr. M Radhakrishnan",
+                "role": "Registrar",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738070800/4abcadfd-d0a1-4eeb-b32f-125a5f2aee82.png",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            },
+            {
+                "type": "patron",
+                "name": "Dr. Bakkyaraj T",
+                "role": "Associate Dean",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738429074/bakkyaraj_i8npi3.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            },
+            {
+                "type": "patron",
+                "name": "Dr. Ebin Deni Raj",
+                "role": "Associate Dean",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738429124/ebin_ikufpt.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            },
+            {
+                "type": "patron",
+                "name": "Renjitha T R",
+                "role": "Faculty-in-Charge",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068337/Renjitha_t_r_yrubrm.jpg",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            }
+        ],
+        "mentors": [
+            {
+                "type": "mentor",
+                "name": "Sarthak Gupta",
+                "role": "Mentor",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068079/Sarthak_1_odqkfy.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/sarthak-gupta-webdev/",
+                    "instagram": "https://www.instagram.com/spyboy.jsx"
+                }
+            }
+        ],
+        "batch2022": [
+            {
+                "type": "lead",
+                "name": "Pravallika",
+                "role": "Lead",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068078/Pravallika_yboryy.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/pravallika-bandaru-a479032a2",
+                    "instagram": "https://www.instagram.com/pkband6?igsh=MWQxNW1sZWVyODgxMQ=="
+                }
+            },
+            {
+                "type": "lead",
+                "name": "Urvashi",
+                "role": "Lead",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738329066/ur_wpezuu.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/urvashi-salonia-72461b259/",
+                    "instagram": "https://www.instagram.com/urvashisalonia/"
+                }
+            }
+        ],
+        "batch2023": [
+            {
+                "type": "sublead",
+                "name": "Vishal",
+                "role": "Sublead - Art",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068100/DSC_0393_3_q7ei2g.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/vishal-dhawal-b69163327/",
+                    "instagram": "https://www.instagram.com/visshu_7880/profilecard/?igsh=OG4wYjQydXBxd2Ry"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Sarthak Yadav",
+                "role": "Sublead - Tech",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428526/2_pxaful_q1pvur.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/sarthakyadav1/",
+                    "instagram": "https://www.instagram.com/the___enigma_/"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Hema",
+                "role": "Sublead - PR",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428474/image_kqgl2t.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/hema-sudabathula-629ba8348/",
+                    "instagram": "https://www.instagram.com/h_ema456?igsh=d2UwNm5jYjNnZHU2"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Ashmi S N",
+                "role": "Sublead - PR",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738428461/Screenshot_20250201_173122_Gallery_mj1wk9.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/ashmi-s-n-67581a315/",
+                    "instagram": "https://www.instagram.com/ashmi_s_n/"
+                }
+            },
+            {
+                "type": "sublead",
+                "name": "Joshi Kshitij Santosh",
+                "role": "Sublead - Event Management",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738466033/d8aa9699-497a-401c-8059-2076dbfae71a.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/joshi-kshitij-santosh/",
+                    "instagram": "https://www.instagram.com/ksjoshi2106?igsh=ZHZyYXFrN3lhMzM1"
+                }
+            }
+        ],
+        "batch2024": [
+            {
+                "type": "member",
+                "name": "Niveditha",
+                "role": "Art Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068157/IMG-20241229-WA0038_bvbthc.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/niveditha-gireesan-shyla-094602326/",
+                    "instagram": "https://www.instagram.com/justnivv?igsh=ZnN1OTNmdzU5OTlu"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Kushal Arora",
+                "role": "Event Management Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648655/Screenshot_2025-02-04_112708_klf4fx.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/kushal-arora-141183306/",
+                    "instagram": "#"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Prajwal",
+                "role": "Event Management Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648707/Screenshot_2025-02-04_112812_omu9j8.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/prajwal-k-632411307/",
+                    "instagram": "https://www.instagram.com/prajwal_k_k_/"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Sam Joe Chalissery",
+                "role": "Tech Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068156/samjoe_hy9vdc.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/samjoe404/",
+                    "instagram": "https://www.instagram.com/samjoe.png/"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Abel Abraham",
+                "role": "Content Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/pfp_formal_abel_tx9dou.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/abel-abraham-990236166/",
+                    "instagram": "https://www.instagram.com/the_r3al_able/"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Ann Mary George",
+                "role": "PR Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068153/IMG_0610_ue8e3i.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/ann-mary-george-862002312/",
+                    "instagram": "https://www.instagram.com/annaammoo?igsh=MXhwZjJidzd4NWpqcg=="
+                }
+            },
+            {
+                "type": "member",
+                "name": "Anupama Ajith",
+                "role": "Event Management Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068154/IMG_20250112_150933_ish82o.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/anupama-ajith-18a527341/",
+                    "instagram": "https://www.instagram.com/anupama_ajith67/"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Ruchitha Mare",
+                "role": "Coverage Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068155/IMG_20240904_160219__02_sa9nhv.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/ruchitha-mare-629301327/",
+                    "instagram": "https://www.instagram.com/__ruchxx_/"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Salil K Jha",
+                "role": "Finance Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738068324/img_bzxhhu.jpg",
+                "socials": {
+                    "linkedin": "https://in.linkedin.com/in/salil-jha-3b9a7b281",
+                    "instagram": "https://www.instagram.com/salil_1221?igsh=amxteWs3eDh3YW9v"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Shivansh Neekhra",
+                "role": "Finance Team",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738464619/a3cc1919-0f46-44c2-8c93-876c28c27e1a.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/shivansh-neekhra-2903a930a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                    "instagram": "https://www.instagram.com/shivansh_neekhra"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Shaurya Chaturvedi",
+                "role": "PR Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648555/shaurya_sevgzx.png",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            },
+            {
+                "type": "member",
+                "name": "Amirthinini",
+                "role": "PR Team",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738648472/amir_idabgk.png",
+                "socials": {
+                    "linkedin": "https://in.linkedin.com/in/amirthini-r-o-5b0268315",
+                    "instagram": "https://www.instagram.com/ami_mweetuminti?igsh=MWtmYW0zcDF0emFudg=="
+                }
+            },
+            {
+                "type": "member",
+                "name": "Muhammed Basil",
+                "role": "Graphic Designer",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1739107830/photo_umdxof.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/muhammed-basil-5b1144326/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                    "instagram": "https://www.instagram.com/basi__gar?igsh=MW1pM2NrcjN3c2dpcg=="
+                }
+            }
+        ],
+        "developers": [
+            {
+                "name": "Sarthak Yadav",
+                "role": "Project Manager",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738650078/Screenshot_2025-02-04_115104_xqgafe.png",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/sarthakyadav1/",
+                    "instagram": "https://www.instagram.com/the___enigma_/"
+                }
+            },
+            {
+                "name": "Adnan",
+                "role": "Frontent Developer",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1738648916/adnan_nginm5.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/adnan-omar-c/",
+                    "instagram": "https://www.instagram.com/adiladnan321/#"
+                }
+            },
+            {
+                "name": "Tarun Varier",
+                "role": "Frontend Developer",
+                "image": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1738649616/WhatsApp_Image_2025-02-04_at_11.34.26_c6d30d5d_oopcka.jpg",
+                "socials": {
+                    "linkedin": "https://www.linkedin.com/in/tarun-varier-15957732b/",
+                    "instagram": "#"
+                }
+            },
+            {
+                "name": "Sachin Saini",
+                "role": "Full Stack Developer",
+                "image": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1738699362/rmjeh8gp_j78gmf.png",
+                "socials": {
+                    "linkedin": "#",
+                    "instagram": "#"
+                }
+            }
+        ]
+    }
+}
