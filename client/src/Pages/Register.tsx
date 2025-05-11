@@ -3,28 +3,56 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { login_hero } from "../assets";
 import NavbarLogin from "../components/Navbar/navbar_login";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Login() {
-  const { login, loginWithGoogle } = useAuth();
+interface PasswordValidation {
+  length: boolean;
+  uppercase: boolean;
+  lowercase: boolean;
+  number: boolean;
+  special: boolean;
+  match: boolean;
+}
+
+export default function Register() {
+  const { register, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [validation, setValidation] = useState<PasswordValidation>({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false,
+    match: false,
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
-
-    // Check Firebase configuration in development mode
-    if (import.meta.env.NODE_ENV) {
-      checkFirebaseConfig();
-    }
-
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, []);
+
+  useEffect(() => {
+    const validatePassword = () => {
+      setValidation({
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+        match: password === confirmPassword && password !== "",
+      });
+    };
+
+    validatePassword();
+  }, [password, confirmPassword]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,59 +60,21 @@ export default function Login() {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
     const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
 
-    // Basic validation
-    if (!email || !password) {
-      setError("Please enter both email and password");
+    if (!Object.values(validation).every(Boolean)) {
+      setError("Please meet all password requirements");
       setIsSubmitting(false);
       return;
     }
 
     try {
-      console.log("Attempting to login with email:", email);
-      await login(email, password);
-      console.log("Login successful, navigating to home page");
+      await register(name, email, password);
       const from = location.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     } catch (error: any) {
-      console.error("Login error in component:", error);
-
-      // Provide a more user-friendly error message
-      if (error.message && error.message.includes("auth/invalid-credential")) {
-        setError(
-          "Invalid login credentials. Please check your email and password."
-        );
-      } else if (
-        error.message &&
-        error.message.includes("auth/user-not-found")
-      ) {
-        setError(
-          "No account found with this email. Please check your email or register."
-        );
-      } else if (
-        error.message &&
-        error.message.includes("auth/wrong-password")
-      ) {
-        setError("Incorrect password. Please try again.");
-      } else if (
-        error.message &&
-        error.message.includes("auth/too-many-requests")
-      ) {
-        setError(
-          "Too many unsuccessful login attempts. Please try again later or reset your password."
-        );
-      } else if (
-        error.message &&
-        error.message.includes("auth/network-request-failed")
-      ) {
-        setError(
-          "Network error. Please check your internet connection and try again."
-        );
-      } else {
-        setError(error.message || "Invalid email or password");
-      }
+      setError(error.message || "Registration failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -93,38 +83,51 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      // const from = location.state?.from?.pathname || "/";
-      // navigate(from, { replace: true });
+      const from = location.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
     } catch (error: any) {
-      console.error("Google login error:", error);
       setError(error.message || "Google login failed. Please try again.");
     }
   };
 
-  // Function to check Firebase configuration
-  const checkFirebaseConfig = () => {
-    try {
-      // Check if Firebase config values are set
-      const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
-      const authDomain = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
-      const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
-
-      if (!apiKey || !authDomain || !projectId) {
-        console.error("Firebase configuration is incomplete:", {
-          apiKey: apiKey ? "Set" : "Missing",
-          authDomain: authDomain ? "Set" : "Missing",
-          projectId: projectId ? "Set" : "Missing",
-        });
-        setError(
-          "Firebase configuration is incomplete. Please contact support."
-        );
-      } else {
-        console.log("Firebase configuration is complete");
-      }
-    } catch (error) {
-      console.error("Error checking Firebase configuration:", error);
-    }
-  };
+  const PasswordRequirement = ({
+    met,
+    text,
+  }: {
+    met: boolean;
+    text: string;
+  }) => (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      className="flex items-center space-x-2 text-sm"
+    >
+      <div
+        className={`w-4 h-4 rounded-full flex items-center justify-center ${
+          met ? "bg-green-500" : "bg-red-500"
+        }`}
+      >
+        {met && (
+          <motion.svg
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-3 h-3 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </motion.svg>
+        )}
+      </div>
+      <span className={met ? "text-green-600" : "text-red-600"}>{text}</span>
+    </motion.div>
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-[#9FE196]">
@@ -142,14 +145,14 @@ export default function Login() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              Unlock Your Mind
+              Join the Quest
             </motion.h1>
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Begin Your Quest
+              Start Your Journey
             </motion.h1>
           </header>
           <motion.div
@@ -176,15 +179,32 @@ export default function Login() {
           <div className="w-full max-w-md space-y-8">
             <div>
               <h2 className="text-center text-3xl font-bold text-gray-900">
-                Welcome Back
+                Create Account
               </h2>
               <p className="mt-2 text-center text-sm text-gray-600">
-                Sign in to continue your journey
+                Begin your learning journey today
               </p>
             </div>
 
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+
                 <div>
                   <label
                     htmlFor="email"
@@ -203,31 +223,12 @@ export default function Login() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-center">
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Password
-                    </label>
-                    <Link
-                      to="/forgot-password"
-                      className="text-xs font-medium text-[#006833] hover:text-[#005229] transition-colors"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                  <p className="mt-1 text-xs text-gray-500">
-                    Using Google Sign-In?{" "}
-                    <a
-                      href="https://myaccount.google.com/security"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#006833] hover:text-[#005229]"
-                    >
-                      Manage your Google account
-                    </a>
-                  </p>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
                   <div className="relative">
                     <input
                       maxLength={40}
@@ -235,8 +236,20 @@ export default function Login() {
                       name="password"
                       type={showPassword ? "text" : "password"}
                       required
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors"
-                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors ${
+                        password
+                          ? validation.length &&
+                            validation.uppercase &&
+                            validation.lowercase &&
+                            validation.number &&
+                            validation.special
+                            ? "border-green-500"
+                            : "border-red-500"
+                          : "border-gray-300"
+                      }`}
+                      placeholder="Create a password"
                     />
                     <button
                       type="button"
@@ -247,6 +260,72 @@ export default function Login() {
                     </button>
                   </div>
                 </div>
+
+                <div>
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Confirm Password
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors ${
+                      confirmPassword
+                        ? validation.match
+                          ? "border-green-500"
+                          : "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                    placeholder="Confirm your password"
+                  />
+                </div>
+
+                <AnimatePresence>
+                  {password && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="space-y-2 mt-4 p-4 bg-gray-50 rounded-md"
+                    >
+                      <h4 className="text-sm font-medium text-gray-700">
+                        Password Requirements:
+                      </h4>
+                      <div className="space-y-2">
+                        <PasswordRequirement
+                          met={validation.length}
+                          text="At least 8 characters"
+                        />
+                        <PasswordRequirement
+                          met={validation.uppercase}
+                          text="One uppercase letter"
+                        />
+                        <PasswordRequirement
+                          met={validation.lowercase}
+                          text="One lowercase letter"
+                        />
+                        <PasswordRequirement
+                          met={validation.number}
+                          text="One number"
+                        />
+                        <PasswordRequirement
+                          met={validation.special}
+                          text="One special character"
+                        />
+                        <PasswordRequirement
+                          met={validation.match}
+                          text="Passwords match"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {error && (
@@ -292,7 +371,7 @@ export default function Login() {
                       className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                     />
                   ) : (
-                    "Sign In"
+                    "Create Account"
                   )}
                 </button>
               </div>
@@ -322,27 +401,14 @@ export default function Login() {
               </button>
 
               <p className="mt-2 text-center text-sm text-gray-600">
-                Don't have an account?{" "}
+                Already have an account?{" "}
                 <Link
-                  to="/register"
+                  to="/login"
                   className="font-medium text-[#006833] hover:text-[#005229] transition-colors"
                 >
-                  Sign up
+                  Sign in
                 </Link>
               </p>
-
-              {/* Hidden in production, only for debugging */}
-              {import.meta.env.NODE_ENV && (
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    onClick={checkFirebaseConfig}
-                    className="w-full text-xs text-gray-500 hover:text-gray-700"
-                  >
-                    Check Firebase Configuration
-                  </button>
-                </div>
-              )}
             </form>
           </div>
         </motion.div>
