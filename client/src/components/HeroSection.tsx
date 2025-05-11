@@ -3,16 +3,10 @@ import { hero_avatar } from "../assets";
 
 const HeroSection = () => {
   const scrollSlowly = () => {
-    let distance = 0;
-    const step = 20; 
-    const interval = setInterval(() => {
-      if (distance >= 770) {
-        clearInterval(interval);
-      } else {
-        window.scrollBy(0, step);
-        distance += step;
-      }
-    }, 8); 
+    window.scrollTo({
+      top: 770,
+      behavior: 'smooth',
+    });
   };
   return (
     <section
