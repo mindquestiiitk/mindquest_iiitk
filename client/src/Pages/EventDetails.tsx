@@ -40,20 +40,21 @@ export function EventDetail() {
                         initial={{ x: -50, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="md:w-1/2 flex flex-col"
+                        className="md:w-1/2 flex flex-col gap-4"
                     >
                         {/* Top half - Event Image */}
-                        {event.poster &&
-                            <div className="max-h-1/2 flex-shrink-0 flex items-center justify-center">
+                        {event.poster && (
+                            <div className="flex-shrink-0 flex items-center justify-center p-4 overflow-hidden rounded-2xl">
                                 <img
                                     src={event.poster || "/placeholder.svg"}
                                     alt={event.title}
-                                    className="w-full h-full object-cover object-top"
+                                    className="w-full h-auto object-contain"
                                 />
                             </div>
-                        }
+                        )}
+                        <div className="p-4">
                             <EventCarousel images={event.images} />
-
+                        </div>
                     </motion.div>
 
                     {/* Right Section */}

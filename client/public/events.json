@@ -70,7 +70,7 @@
         {
             "id": "p5",
             "title": "Apoorv's Got Latent🌟",
-            "poster": "",
+            "poster": "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1740745528/apoorv_s_got_latent_mra19y.jpg",
             "date": "07/03/2025",
             "brief": "A parody to India's got Latent!",
             "description": "Do you have what it takes to impress? 🌟✨ At Apoorv's Got Latent, step into the spotlight and showcase your unique talents! 🎤🎭 Whether it's storytelling, music, dance, art, stand-up comedy, or something extraordinary, this is your moment to shine. ✨🌈 With an exciting prize of ₹5,000 up for grabs, 💸🏆 don't hold back—let's see what you've got! 🎉\n",
@@ -83,13 +83,31 @@
         {
             "id": "p6",
             "title": "MindQuest Christmas Bash - A Night of Joy, Games & Festive Magic! 🎄✨",
-            "poster": "",
+            "poster": "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1747329006/images_mq4qcl.jpg",
             "date": "24/12/2024",
             "brief": "A Christmas Eve filled with laughter, unexpected twists, and unforgettable moments, made special by MindQuest volunteers.",
             "description": "The MindQuest Christmas celebration was nothing short of spectacular! With surprise performances, friendly game rivalries, and non-stop laughter, it was a night to remember. \n\n🎭 Unforgettable Moments: \n🎅 Unexpected themed getups that had everyone in splits! \n🎮 A rollercoaster of fun in Scribble, Gartic Phone, and card battles—where strategy met pure chaos. \n🎵 Beatboxing, quirky pickup lines, and impromptu performances that stole the show! \n❄ A surprise contestant who turned the tables and left everyone amazed! \n📸 Silent snapshots capturing the best moments—reels coming soon!\n\nThis wasn't just a party—it was an experience. From the first laugh to the final cheer, the night was filled with the true spirit of Christmas! Until next time, let the memories live on! 🎉❄\n",
             "location": "Online",
             "images": [
-                "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1740831072/christmas1_tk25n5.jpg"
+                "https://res.cloudinary.com/dbzn4dpnn/image/upload/v1740831072/christmas1_tk25n5.jpg",
+                "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1747330338/ChatGPT_Image_May_15_2025_10_47_21_PM_tl30vb.png"
+            ],
+            "organisers": []
+        },
+        {
+            "id": "p7",
+            "title": "Mind Quest Inauguration Ceremony",
+            "date": "05/02/2025",
+            "brief": "Formal inauguration of the Mind Quest club with speeches, performances, and an expert session.",
+            "description": "Mind Quest was officially inaugurated on February 5th, 2025, at IIIT Kottayam in a vibrant ceremony held at Tapovan. The event marked the launch of the club dedicated to fostering mental wellness, creative exploration, and student engagement.\n\n🕊️ **Event Flow:**\n- 🎶 **Prayer Song** – A soulful beginning that set a serene tone for the ceremony.\n- 🎙️ **Welcome Speech** by Renjitha T R (FIC, Mind Quest) warmly greeted the audience and shared the club’s vision.\n- 🗣️ **Inauguration Speech** by Dr. M Radhakrishnan (Registrar) highlighted the significance of student mental health and extracurricular engagement.\n- 🕯️ **Lighting the Lamp** – A symbolic start to the journey of growth and enlightenment.\n- 🎓 **Felicitation Address** by Dr. Bakkayaraj T (Associate Dean of Student Affairs).\n- 👥 **Team Reveal** – Introduction of the dedicated team behind Mind Quest.\n- 🙏 **Vote of Thanks** by Sarthak Gupta (Club Mentor), appreciating all who contributed to the launch.\n- 💃 **Dance Performance** – A vibrant cultural display celebrating youth and creativity.\n- 🧠 **Expert Session** by Dr. Mammen P Cherian, Medical Officer, PHC Peruva, on “Challenges of Youth in Relationships, Sexuality & Substance Abuse,” provided deep insights and practical advice for student well-being.\n\nThe inauguration was a remarkable start for Mind Quest, establishing a foundation for events focused on holistic development, mental health awareness, and community building.",
+            "location": "IIIT Kottayam, Tapovan",
+            "thumbnail": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1747301360/mindquest/ooy75irryxghmwsll9jx.jpg",
+            "poster": "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1747301360/mindquest/ooy75irryxghmwsll9jx.jpg",
+            "images": [
+                "https://res.cloudinary.com/dvqu0s6lq/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1747315973/0Y4A4804_omercj.jpg",
+                "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1747315997/0Y4A4818_xeyjyl.jpg",
+                "https://res.cloudinary.com/dvqu0s6lq/image/upload/v1747315957/IMG_3287_bw9cc7.heic"
+
             ],
             "organisers": []
         }
