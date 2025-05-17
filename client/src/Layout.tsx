@@ -4,10 +4,10 @@ import Navbar_Home_Auth from "./components/Navbar/Navbar_Home_Auth";
 import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { useAuth } from "./contexts/AuthContext";
+import { useFirebaseAuth } from "./contexts/FirebaseAuthContext";
 
 const Layout = () => {
-  const { user } = useAuth();
+  const { user } = useFirebaseAuth();
   const location = useLocation();
 
   // Don't show the authenticated navbar on login and register pages

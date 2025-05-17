@@ -48,7 +48,18 @@ const MerchCard: React.FC<MerchCardProps> = (props) => {
     e.preventDefault();
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 1000);
-    window.location.href = "https://forms.gle/diMb5u6T5iQAabJt6";
+
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // If not logged in, redirect to login page with return URL
+      const returnUrl = encodeURIComponent(window.location.pathname);
+      window.location.href = `/login?returnUrl=${returnUrl}&action=buy`;
+    } else {
+      // If logged in, redirect to checkout
+      window.location.href = "/merch/checkout";
+    }
   };
 
   const renderPrice = (price: number, discounted_price: number) => {

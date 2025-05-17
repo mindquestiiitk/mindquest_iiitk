@@ -1,83 +1,82 @@
-import axios from "axios";
+/**
+ * API Interceptors - DEPRECATED
+ *
+ * This file is deprecated and should not be used.
+ * Use the apiService from services/api.service.ts instead,
+ * which provides a production-ready implementation with proper
+ * interceptors, error handling, and token management.
+ */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+import { apiService } from "../services/api.service";
 
-// Loading state management
-let activeRequests = 0;
+// Re-export loading state for backward compatibility
 export const loadingState = {
   increment: () => {
-    activeRequests++;
     document.body.classList.add("loading");
   },
   decrement: () => {
-    activeRequests--;
-    if (activeRequests === 0) {
-      document.body.classList.remove("loading");
-    }
+    document.body.classList.remove("loading");
   },
 };
 
-// Request interceptor
-export const requestInterceptor = async (config: any) => {
-  const token = localStorage.getItem("auth_token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-};
-
-// Response interceptor
-export const responseInterceptor = async (response: any) => {
-  if (response.status === 401) {
-    localStorage.removeItem("auth_token");
-    window.location.href = "/login";
-    throw new Error("Session expired. Please login again.");
-  }
-  return response;
-};
-
-// Create axios instance with interceptors
-const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-});
-
-axiosInstance.interceptors.request.use(requestInterceptor);
-axiosInstance.interceptors.response.use(responseInterceptor);
-
-// Fetch wrapper with interceptors
+// Deprecated - use apiService instead
 export const fetchWithInterceptors = async (
   url: string,
   options: RequestInit = {}
 ) => {
+  console.warn(
+    "fetchWithInterceptors is deprecated. Use apiService from services/api.service.ts instead."
+  );
+
   try {
     loadingState.increment();
 
-    // Get token from localStorage
-    const token = localStorage.getItem("auth_token");
+    // Extract the path from the URL
+    const path = url.replace(/^(https?:\/\/[^/]+)?\/?/, "/");
 
-    // Add Authorization header if token exists
-    const headers = {
-      ...options.headers,
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    };
+    // Determine the method
+    const method = options.method?.toLowerCase() || "get";
 
-    const response = await fetch(url, {
-      ...options,
-      headers,
-      credentials: "include",
-    });
-
-    // Handle 401 Unauthorized
-    if (response.status === 401) {
-      localStorage.removeItem("auth_token");
-      window.location.href = "/login";
-      throw new Error("Session expired. Please login again.");
+    // Extract the body if it exists
+    let body = undefined;
+    if (options.body && typeof options.body === "string") {
+      try {
+        body = JSON.parse(options.body);
+      } catch (e) {
+        console.error("Could not parse request body as JSON");
+      }
     }
 
-    return response;
+    // Call the appropriate method on apiService
+    let response;
+    switch (method) {
+      case "get":
+        response = await apiService.get(path);
+        break;
+      case "post":
+        response = await apiService.post(path, body);
+        break;
+      case "put":
+        response = await apiService.put(path, body);
+        break;
+      case "delete":
+        response = await apiService.delete(path);
+        break;
+      default:
+        throw new Error(`Unsupported method: ${method}`);
+    }
+
+    // Convert the response to a fetch-like Response object
+    return {
+      ok: true,
+      status: 200,
+      json: async () => response,
+      headers: {
+        get: () => null,
+      },
+    } as unknown as Response;
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error("API error:", error);
     throw error;
   } finally {
     loadingState.decrement();

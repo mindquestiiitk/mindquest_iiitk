@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { authService } from "../services/auth.service";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
+import { userService } from "../services/user.service";
 import { avatarImages } from "../constants/avatars";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -23,7 +23,7 @@ import { toast } from "../components/ui/use-toast";
 import { Avatar } from "../components/Avatar";
 
 export default function Profile() {
-  const { user, updateUserProfile, logout, changePassword } = useAuth();
+  const { user, updateProfile, logout, changePassword } = useFirebaseAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -67,14 +67,8 @@ export default function Profile() {
         avatarId: selectedAvatarId,
       };
 
-      // Update profile in Firebase and local state
-      await authService.updateProfile(updateData);
-
-      // Update local user state
-      updateUserProfile({
-        ...user,
-        ...updateData,
-      });
+      // Update profile using Firebase Auth context
+      await updateProfile(updateData);
 
       toast({
         title: "Profile Updated",

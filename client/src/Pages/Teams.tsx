@@ -64,8 +64,20 @@ export function Teams() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log("Raw team data received:", data);
+        const responseData = await response.json();
+        console.log("Raw team data received:", responseData);
+
+        // Handle standardized response format
+        let data;
+        if (responseData.success && responseData.data) {
+          // New standardized format
+          data = responseData.data;
+          console.log("Using standardized response format with data field");
+        } else {
+          // Fallback to direct data
+          data = responseData;
+          console.log("Using direct data format");
+        }
 
         // Check if data is an array
         if (Array.isArray(data)) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -16,7 +16,7 @@ import { toast } from "../components/ui/use-toast";
 import { mindquest_logo } from "../assets";
 
 export default function ForgotPassword() {
-  const { forgotPassword } = useAuth();
+  const { forgotPassword } = useFirebaseAuth();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
 import { login_hero } from "../assets";
 import NavbarLogin from "../components/Navbar/navbar_login";
 import { motion, AnimatePresence } from "framer-motion";
+import { validatePassword } from "../utils/validation";
+import Loading from "../components/ui/loading";
 
 interface PasswordValidation {
   length: boolean;
@@ -15,7 +17,7 @@ interface PasswordValidation {
 }
 
 export default function Register() {
-  const { register, loginWithGoogle } = useAuth();
+  const { register, loginWithGoogle, user } = useFirebaseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [password, setPassword] = useState("");
@@ -32,6 +34,17 @@ export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (user) {
+      console.log(
+        "User is already authenticated, redirecting from register page"
+      );
+      const from = location.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+    }
+  }, [user, navigate, location.state]);
+
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => {
@@ -40,18 +53,39 @@ export default function Register() {
   }, []);
 
   useEffect(() => {
-    const validatePassword = () => {
-      setValidation({
-        length: password.length >= 8,
-        uppercase: /[A-Z]/.test(password),
-        lowercase: /[a-z]/.test(password),
-        number: /[0-9]/.test(password),
-        special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-        match: password === confirmPassword && password !== "",
-      });
-    };
+    // Use the validation utility to check password requirements
+    const passwordValidation = validatePassword(password);
 
-    validatePassword();
+    setValidation({
+      // Use the results from our validation utility
+      length: passwordValidation.errors
+        ? !passwordValidation.errors.includes(
+            "Password must be at least 8 characters long"
+          )
+        : true,
+      uppercase: passwordValidation.errors
+        ? !passwordValidation.errors.includes(
+            "Password must include at least one uppercase letter"
+          )
+        : true,
+      lowercase: passwordValidation.errors
+        ? !passwordValidation.errors.includes(
+            "Password must include at least one lowercase letter"
+          )
+        : true,
+      number: passwordValidation.errors
+        ? !passwordValidation.errors.includes(
+            "Password must include at least one number"
+          )
+        : true,
+      special: passwordValidation.errors
+        ? !passwordValidation.errors.includes(
+            "Password must include at least one special character"
+          )
+        : true,
+      // Check if passwords match separately
+      match: password === confirmPassword && password !== "",
+    });
   }, [password, confirmPassword]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,8 +97,19 @@ export default function Register() {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
 
-    if (!Object.values(validation).every(Boolean)) {
-      setError("Please meet all password requirements");
+    // Validate password using our utility
+    const passwordValidation = validatePassword(password);
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Check password requirements
+    if (!passwordValidation.isValid) {
+      setError(passwordValidation.message);
       setIsSubmitting(false);
       return;
     }
@@ -74,7 +119,22 @@ export default function Register() {
       const from = location.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     } catch (error: any) {
-      setError(error.message || "Registration failed. Please try again.");
+      // Extract the most useful part of Firebase error messages
+      let errorMessage =
+        error.message || "Registration failed. Please try again.";
+
+      // Handle specific Firebase password validation errors
+      if (errorMessage.includes("Password validation failed")) {
+        errorMessage = errorMessage.replace("Password validation failed: ", "");
+      }
+
+      // Handle domain validation errors
+      if (errorMessage.includes("iiitkottayam.ac.in")) {
+        errorMessage =
+          "Please use an IIIT Kottayam email address (@iiitkottayam.ac.in).";
+      }
+
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -218,8 +278,11 @@ export default function Register() {
                     type="email"
                     required
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors"
-                    placeholder="Enter your email"
+                    placeholder="Enter your iiitkottayam.ac.in email"
                   />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Only iiitkottayam.ac.in email addresses are allowed
+                  </p>
                 </div>
 
                 <div>
@@ -361,15 +424,18 @@ export default function Register() {
                   }`}
                 >
                   {isSubmitting ? (
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                      className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                    />
+                    <div className="flex items-center justify-center">
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
+                      />
+                      <span>Creating account...</span>
+                    </div>
                   ) : (
                     "Create Account"
                   )}

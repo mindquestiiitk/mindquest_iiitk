@@ -54,14 +54,22 @@ export const Merch: React.FC = () => {
         const productsResponse = await fetch(
           import.meta.env.VITE_API_URL + "/merch/products"
         );
-        const products = await productsResponse.json();
+        const productsData = await productsResponse.json();
+
+        // Handle standardized response format
+        const products = productsData.success
+          ? productsData.data
+          : productsData;
 
         // Fetch sale details from backend API
         const saleResponse = await fetch(
           import.meta.env.VITE_API_URL + "/merch/sales"
         );
 
-        const sale = await saleResponse.json();
+        const saleData = await saleResponse.json();
+
+        // Handle standardized response format
+        const sale = saleData.success ? saleData.data : saleData;
 
         setMerchData(products);
 

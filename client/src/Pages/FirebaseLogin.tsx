@@ -1,30 +1,73 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
+import { arcjetService } from "../services/arcjet.service";
 import { login_hero } from "../assets";
 import NavbarLogin from "../components/Navbar/navbar_login";
 import { motion } from "framer-motion";
+import Loading from "../components/ui/loading";
 
-export default function Login() {
-  const { login, loginWithGoogle } = useAuth();
+export default function FirebaseLogin() {
+  const { login, loginWithGoogle, error: authError, user } = useFirebaseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (user) {
+      console.log("User is already authenticated, redirecting from login page");
+      const from = location.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+    }
+  }, [user, navigate, location.state]);
+
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
 
     // Check Firebase configuration in development mode
-    if (import.meta.env.NODE_ENV) {
+    if (import.meta.env.DEV) {
       checkFirebaseConfig();
+    }
+
+    // Parse error from URL if present
+    const params = new URLSearchParams(location.search);
+    const errorParam = params.get("error");
+
+    if (errorParam) {
+      let errorMessage = "An error occurred during authentication.";
+
+      switch (errorParam) {
+        case "auth_failed":
+          errorMessage = "Authentication failed. Please try again.";
+          break;
+        case "session_expired":
+          errorMessage = "Your session has expired. Please sign in again.";
+          break;
+        case "no_token":
+          errorMessage = "No authentication token was provided.";
+          break;
+        case "google_auth_failed":
+          errorMessage = "Google authentication failed. Please try again.";
+          break;
+      }
+
+      setError(errorMessage);
     }
 
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
-  }, []);
+  }, [location.search]);
+
+  // Set error from auth context
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,6 +86,9 @@ export default function Login() {
     }
 
     try {
+      // Apply Arcjet protection for authentication
+      await arcjetService.protectAuth(email);
+
       console.log("Attempting to login with email:", email);
       await login(email, password);
       console.log("Login successful, navigating to home page");
@@ -51,38 +97,14 @@ export default function Login() {
     } catch (error: any) {
       console.error("Login error in component:", error);
 
-      // Provide a more user-friendly error message
-      if (error.message && error.message.includes("auth/invalid-credential")) {
-        setError(
-          "Invalid login credentials. Please check your email and password."
-        );
-      } else if (
-        error.message &&
-        error.message.includes("auth/user-not-found")
+      // Check if it's an Arcjet error
+      if (
+        error.message?.includes("blocked") ||
+        error.message?.includes("rate limit")
       ) {
-        setError(
-          "No account found with this email. Please check your email or register."
-        );
-      } else if (
-        error.message &&
-        error.message.includes("auth/wrong-password")
-      ) {
-        setError("Incorrect password. Please try again.");
-      } else if (
-        error.message &&
-        error.message.includes("auth/too-many-requests")
-      ) {
-        setError(
-          "Too many unsuccessful login attempts. Please try again later or reset your password."
-        );
-      } else if (
-        error.message &&
-        error.message.includes("auth/network-request-failed")
-      ) {
-        setError(
-          "Network error. Please check your internet connection and try again."
-        );
+        setError("Too many login attempts. Please try again later.");
       } else {
+        // Error message is already handled by the Firebase auth service
         setError(error.message || "Invalid email or password");
       }
     } finally {
@@ -92,12 +114,28 @@ export default function Login() {
 
   const handleGoogleLogin = async () => {
     try {
+      setIsSubmitting(true);
+
+      // Apply Arcjet protection for Google login
+      await arcjetService.protectSocialAuth("google");
+
       await loginWithGoogle();
-      // const from = location.state?.from?.pathname || "/";
-      // navigate(from, { replace: true });
+      const from = location.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
     } catch (error: any) {
       console.error("Google login error:", error);
-      setError(error.message || "Google login failed. Please try again.");
+
+      // Check if it's an Arcjet error
+      if (
+        error.message?.includes("blocked") ||
+        error.message?.includes("rate limit")
+      ) {
+        setError("Too many login attempts. Please try again later.");
+      } else {
+        setError(error.message || "Google login failed. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -217,17 +255,6 @@ export default function Login() {
                       Forgot password?
                     </Link>
                   </div>
-                  <p className="mt-1 text-xs text-gray-500">
-                    Using Google Sign-In?{" "}
-                    <a
-                      href="https://myaccount.google.com/security"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#006833] hover:text-[#005229]"
-                    >
-                      Manage your Google account
-                    </a>
-                  </p>
                   <div className="relative">
                     <input
                       maxLength={40}
@@ -282,15 +309,18 @@ export default function Login() {
                   }`}
                 >
                   {isSubmitting ? (
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                      className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                    />
+                    <div className="flex items-center justify-center">
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
+                      />
+                      <span>Signing in...</span>
+                    </div>
                   ) : (
                     "Sign In"
                   )}
@@ -330,19 +360,6 @@ export default function Login() {
                   Sign up
                 </Link>
               </p>
-
-              {/* Hidden in production, only for debugging */}
-              {import.meta.env.NODE_ENV && (
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    onClick={checkFirebaseConfig}
-                    className="w-full text-xs text-gray-500 hover:text-gray-700"
-                  >
-                    Check Firebase Configuration
-                  </button>
-                </div>
-              )}
             </form>
           </div>
         </motion.div>

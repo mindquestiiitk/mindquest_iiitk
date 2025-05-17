@@ -6,33 +6,52 @@ import NavItem from "./NavItems";
 import { Link } from "react-router-dom";
 import navItems from "./navlist";
 import { UserMenu } from "../UserMenu";
-import { useAuth } from "../../contexts/AuthContext";
+import { useFirebaseAuth } from "../../contexts/FirebaseAuthContext";
 
 const Navbar_Home_Auth = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const { user } = useFirebaseAuth();
 
   return (
     <div className="flex justify-center items-center px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 xl:px-4">
       <div className="relative flex items-center justify-between w-full">
-        <Link to={"/"} aria-label="mindquest" title="mindquest" className="inline-flex items-center -my-8">
+        <Link
+          to={"/"}
+          aria-label="mindquest"
+          title="mindquest"
+          className="inline-flex items-center -my-8"
+        >
           <img src={mindquest_logo} alt="mindquest logo" />
         </Link>
         <ul className="hidden lg:flex items-center space-x-8 text-xl">
           {navItems.map((item, index) => (
-            <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
+            <NavItem
+              key={index}
+              href={item.href}
+              ariaLabel={item.ariaLabel}
+              title={item.title}
+            >
               {item.text}
             </NavItem>
           ))}
         </ul>
-        
+
         <div className="hidden lg:flex items-center space-x-6">
           {/* User Menu */}
           <UserMenu />
-          
+
           {/* IIIT Kottayam Logo */}
-          <Link to={"https://iiitkottayam.ac.in"} aria-label="iiit kottayam" title="iiit kottayam" className="items-center -my-8">
-            <img src={"https://iiitkottayam.ac.in/data/images/main/logo.jpg"} className="h-16" alt="IIIT Kottayam" />
+          <Link
+            to={"https://iiitkottayam.ac.in"}
+            aria-label="iiit kottayam"
+            title="iiit kottayam"
+            className="items-center -my-8"
+          >
+            <img
+              src={"https://iiitkottayam.ac.in/data/images/main/logo.jpg"}
+              className="h-16"
+              alt="IIIT Kottayam"
+            />
           </Link>
         </div>
 
@@ -54,7 +73,12 @@ const Navbar_Home_Auth = () => {
               <div className="p-5 border shadow-md bg-white">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <Link to={"/"} aria-label="Company" title="Company" className="inline-flex items-center">
+                    <Link
+                      to={"/"}
+                      aria-label="Company"
+                      title="Company"
+                      className="inline-flex items-center"
+                    >
                       <img src={mindquest_logo} alt="mindquest logo" />
                       <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                         Mindquest - IIITK
@@ -78,7 +102,12 @@ const Navbar_Home_Auth = () => {
                 <nav>
                   <ul className="space-y-4">
                     {navItems.map((item, index) => (
-                      <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
+                      <NavItem
+                        key={index}
+                        href={item.href}
+                        ariaLabel={item.ariaLabel}
+                        title={item.title}
+                      >
                         {item.text}
                       </NavItem>
                     ))}
@@ -89,7 +118,7 @@ const Navbar_Home_Auth = () => {
                         aria-label="Profile"
                         title="Profile"
                       >
-                        {user ? 'My Profile' : 'Log In'}
+                        {user ? "My Profile" : "Log In"}
                       </Link>
                     </li>
                   </ul>

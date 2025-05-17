@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { api } from "../lib/api";
+import { apiService } from "../services/api.service";
 
 const ConnectionStatus = () => {
   const [status, setStatus] = useState<"checking" | "connected" | "error">(
@@ -16,10 +16,10 @@ const ConnectionStatus = () => {
   const checkConnection = async () => {
     try {
       setStatus("checking");
-      const response = await api.health.check();
+      const response = await apiService.get("/health");
       setStatus("connected");
-      setMessage(response.message);
-      setTimestamp(response.timestamp);
+      setMessage(response.message || response.status || "Connected");
+      setTimestamp(response.timestamp || new Date().toISOString());
       setRetryCount(0); // Reset retry count on success
     } catch (error) {
       setStatus("error");

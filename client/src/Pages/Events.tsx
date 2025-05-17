@@ -58,8 +58,25 @@ export function Events() {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
-        console.log("Raw events data received:", data);
+        const responseData = await response.json();
+        console.log("Raw events data received:", responseData);
+
+        // Handle standardized response format
+        let data;
+        if (responseData.success && responseData.data) {
+          // New standardized format
+          data = responseData.data;
+          console.log("Using standardized response format with data field");
+        } else {
+          // Fallback to direct data
+          data = responseData;
+          console.log("Using direct data format");
+        }
+
+        if (!Array.isArray(data)) {
+          throw new Error("Received data is not in the expected format");
+        }
+
         console.log("Number of events received:", data.length);
 
         // Transform the data to match the Event interface

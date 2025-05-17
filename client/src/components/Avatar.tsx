@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
 import { avatarImages } from "../constants/avatars";
 
 interface AvatarProps {
@@ -16,7 +16,7 @@ export function Avatar({
   className = "",
   clickable = true,
 }: AvatarProps) {
-  const { user } = useAuth();
+  const { user } = useFirebaseAuth();
   const [avatarSrc, setAvatarSrc] = useState<string>(
     "/avatars/default-avatar.png"
   );
@@ -44,7 +44,7 @@ export function Avatar({
     if (defaultAvatar) {
       setAvatarSrc(defaultAvatar.src);
     }
-  }, [user]);
+  }, [user?.avatarId]); // Only re-run when avatarId changes
 
   // If no user, don't render anything
   if (!user) return null;
