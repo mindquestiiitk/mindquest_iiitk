@@ -5,7 +5,7 @@ import { login_hero } from "../assets";
 import NavbarLogin from "../components/Navbar/navbar_login";
 import { motion, AnimatePresence } from "framer-motion";
 import { validatePassword } from "../utils/validation";
-import Loading from "../components/ui/loading";
+// import Loading from "../components/ui/loading";
 
 interface PasswordValidation {
   length: boolean;
@@ -146,7 +146,24 @@ export default function Register() {
       const from = location.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     } catch (error: any) {
-      setError(error.message || "Google login failed. Please try again.");
+      console.error("Google registration error:", error);
+      
+      // Check for the password validation error (Google OAuth issue)
+      if (error.message?.includes("Password must be at least 8 characters")) {
+        console.error("OAuth password validation issue detected, retrying login...");
+        try {
+          // Try a direct login without registration
+          await loginWithGoogle(true); // Add a parameter to skip registration
+          const from = location.state?.from?.pathname || "/";
+          navigate(from, { replace: true });
+          return;
+        } catch (retryError: any) {
+          console.error("Retry also failed:", retryError);
+          setError("Authentication service issue. Please try again later or contact support.");
+        }
+      } else {
+        setError(error.message || "Google login failed. Please try again.");
+      }
     }
   };
 

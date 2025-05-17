@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
 import { arcjetService } from "../services/arcjet.service";
+import { firebaseAuthService } from "../services/firebase-auth.service";
+import { userService } from "../services/user.service";
 import { login_hero } from "../assets";
 import NavbarLogin from "../components/Navbar/navbar_login";
 import { motion } from "framer-motion";
-import Loading from "../components/ui/loading";
 
 export default function FirebaseLogin() {
   const { login, loginWithGoogle, error: authError, user } = useFirebaseAuth();
@@ -131,6 +132,46 @@ export default function FirebaseLogin() {
         error.message?.includes("rate limit")
       ) {
         setError("Too many login attempts. Please try again later.");
+      } 
+      // Check for the password validation error (Google OAuth issue)
+      else if (error.message?.includes("Password must be at least 8 characters") || 
+                error.message?.includes("validation")) {
+        console.error("OAuth password validation issue detected, retrying login...");
+        try {
+          // Try a direct login without registration
+          await loginWithGoogle(true); // Add a parameter to skip registration
+          const from = location.state?.from?.pathname || "/";
+          navigate(from, { replace: true });
+          return;
+        } catch (retryError: any) {
+          console.error("Retry also failed:", retryError);
+          setError("Authentication service issue. Please try again later or contact support.");
+        }
+      } 
+      // Check for response format error
+      else if (error.message?.includes("Invalid response format")) {
+        console.error("Invalid response format error detected, running diagnostic and retry...");
+        try {
+          // Get current Firebase user and run our diagnostic test
+          const currentUser = firebaseAuthService.getCurrentUser();
+          if (currentUser) {
+            // Run our diagnostic test first to gather data
+            const diagnosticResult = await userService.testBackendResponseFormat(currentUser);
+            console.log("🔍 Diagnostic test result:", diagnosticResult);
+            
+            // Now use the OAuth-specific registration method directly
+            await userService.registerOAuthUser(currentUser);
+            
+            // Try again with skip registration
+            await loginWithGoogle(true);
+            const from = location.state?.from?.pathname || "/";
+            navigate(from, { replace: true });
+            return;
+          }
+        } catch (diagnosticError) {
+          console.error("Diagnostic test failed:", diagnosticError);
+          setError("We're experiencing technical difficulties with Google login. Please try again or use email login.");
+        }
       } else {
         setError(error.message || "Google login failed. Please try again.");
       }

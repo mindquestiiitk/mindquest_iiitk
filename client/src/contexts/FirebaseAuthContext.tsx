@@ -12,7 +12,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: (skipRegistration?: boolean) => Promise<void>;
   updateProfile: (data: { name?: string; avatarId?: string }) => Promise<User>;
   forgotPassword: (email: string) => Promise<void>;
   resetPassword: (code: string, password: string) => Promise<void>;
@@ -203,7 +203,7 @@ export const FirebaseAuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (skipRegistration = false) => {
     try {
       setError(null);
       setLoading(true);
@@ -211,12 +211,20 @@ export const FirebaseAuthProvider: React.FC<{ children: React.ReactNode }> = ({
       // Sign in with Google
       const userCredential = await firebaseAuthService.signInWithGoogle();
 
-      // If this is a new user, register with backend
+      // If this is a new user, register with backend (unless skipRegistration is true)
       if (
+        !skipRegistration &&
         userCredential.user.metadata.creationTime ===
         userCredential.user.metadata.lastSignInTime
       ) {
-        await userService.registerWithBackend(userCredential.user);
+        try {
+          // Use the specific OAuth registration method
+          await userService.registerOAuthUser(userCredential.user);
+        } catch (registrationError) {
+          console.warn("Backend registration error, continuing with login:", registrationError);
+          // Continue with authentication flow even if registration failed
+          // This allows users to login even if backend registration has issues
+        }
       }
 
       // Auth state listener will handle setting the user

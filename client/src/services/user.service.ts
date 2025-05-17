@@ -67,6 +67,9 @@ class UserService {
         idToken,
         provider: user.providerData[0]?.providerId || "password",
         emailVerified: user.emailVerified,
+        // Explicitly set tokenBased to true for third-party providers (OAuth)
+        tokenBased: user.providerData[0]?.providerId !== "password",
+        isOAuthLogin: user.providerData[0]?.providerId !== "password",
         // Include device info for better security
         deviceInfo: {
           screenResolution: `${window.screen.width}x${window.screen.height}`,
@@ -133,36 +136,77 @@ class UserService {
         });
 
         console.log("✅ Registration response received:", {
-          status: "success",
+          status: response?.data?.success,
+          message: response?.data?.message,
           hasUser: !!response?.data?.user,
           hasData: !!response?.data?.data,
         });
+        
+        // Debug: Log full response structure to understand format
+        console.log("📦 Full response structure:", JSON.stringify(response?.data, null, 2));
 
         // Verify the response contains user data
-        if (!response?.data?.user) {
-          // If we get a successful response but no user data, try to extract it from the data field
-          if (response?.data?.data) {
-            console.log("User data found in response.data.data");
-            return response.data.data;
-          }
-
-          console.error(
-            "Invalid response format from server during registration:",
-            response
+        if (response?.data?.user) {
+          console.log("User data found in response.data.user");
+          // Store the user's UID as the session ID for collection-based security
+          localStorage.setItem("sessionId", user.uid);
+          console.log(
+            "Using user UID as session ID for collection-based security:",
+            user.uid
           );
-          throw new Error("Invalid response format from server");
+          console.log("User registered successfully with backend");
+          return response.data.user;
+        } else if (response?.data?.data) {
+          console.log("User data found in response.data.data");
+          // Store the user's UID as the session ID
+          localStorage.setItem("sessionId", user.uid);
+          return response.data.data;
+        } else if (response?.data?.success === true && response?.data?.message?.includes("already registered")) {
+          // Special case for "User already registered" response format
+          console.log("User already registered in backend, continuing with authentication");
+          localStorage.setItem("sessionId", user.uid);
+          
+          // If the response includes a user object, use it
+          if (response?.data?.user) {
+            console.log("Using user object from 'already registered' response");
+            return response.data.user;
+          }
+          
+          // Otherwise create a basic user object
+          return {
+            id: user.uid,
+            email: user.email || "",
+            name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            role: "user",
+            isAdmin: false,
+            emailVerified: user.emailVerified,
+            photoURL: user.photoURL,
+          };
+        } else if (response?.data?.success === true) {
+          // If success is true but we don't have user data in the expected format
+          console.log("Response indicates success but no user data in expected location");
+          localStorage.setItem("sessionId", user.uid);
+          
+          // Return a basic user object derived from Firebase
+          return {
+            id: user.uid,
+            email: user.email || "",
+            name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            role: "user",
+            isAdmin: false,
+            emailVerified: user.emailVerified,
+            photoURL: user.photoURL,
+          };
         }
-
-        // Store the user's UID as the session ID for collection-based security
-        // In collection ID-based security, the session ID is always the user's UID
-        localStorage.setItem("sessionId", user.uid);
-        console.log(
-          "Using user UID as session ID for collection-based security:",
-          user.uid
+        
+        // If we get here, we don't have user data in the expected format
+        console.error(
+          "Invalid response format from server during registration:",
+          response
         );
-
-        console.log("User registered successfully with backend");
-        return response.data.user;
+        throw new Error("Invalid response format from server");
       } catch (requestError: any) {
         // Log detailed error information for debugging
         console.error("❌ Registration request failed:", {
@@ -196,12 +240,44 @@ class UserService {
             );
 
             console.log("✅ Fallback registration successful:", {
-              status: "success",
+              status: fallbackResponse?.data?.success,
+              message: fallbackResponse?.data?.message,
               hasUser: !!fallbackResponse?.data?.user,
               hasData: !!fallbackResponse?.data?.data,
             });
 
-            return fallbackResponse;
+            // Handle different response formats
+            if (fallbackResponse?.data?.user) {
+              // Store user's UID as session ID
+              localStorage.setItem("sessionId", user.uid);
+              return fallbackResponse.data.user;
+            } else if (fallbackResponse?.data?.data) {
+              // Store user's UID as session ID
+              localStorage.setItem("sessionId", user.uid);
+              return fallbackResponse.data.data;
+            } else if (fallbackResponse?.data?.success === true && fallbackResponse?.data?.message?.includes("already registered")) {
+              // Special case for "User already registered" response format
+              console.log("User already registered in backend, continuing with authentication");
+              localStorage.setItem("sessionId", user.uid);
+              return {
+                id: user.uid,
+                email: user.email || "",
+                name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+                displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+                role: "user",
+                isAdmin: false,
+                emailVerified: user.emailVerified,
+                photoURL: user.photoURL,
+              };
+            }
+            
+            // If we get here, we don't have user data in the expected format
+            console.error(
+              "Invalid response format from server during fallback registration:",
+              fallbackResponse?.data
+            );
+            
+            return fallbackResponse.data;
           } catch (fallbackError: any) {
             console.error("❌ Fallback registration also failed:", {
               status: fallbackError?.response?.status,
@@ -258,21 +334,28 @@ class UserService {
         error?.response?.status === 400 &&
         error?.response?.data?.error?.message
       ) {
-        const errorMessage = error.response.data.error.message;
+        const errorMessage = error.response.data.error.message;          // Check if this is a password validation error during token-based registration
+          if (
+            errorMessage.includes("Password") &&
+            errorMessage.includes("validation") &&
+            user.uid // If we have a user ID, this is token-based auth
+          ) {
+            console.error(
+              "Password validation error during token-based registration:",
+              errorMessage
+            );
 
-        // Check if this is a password validation error during token-based registration
-        if (
-          errorMessage.includes("Password") &&
-          errorMessage.includes("validation") &&
-          user.uid // If we have a user ID, this is token-based auth
-        ) {
-          console.error(
-            "Password validation error during token-based registration:",
-            errorMessage
-          );
+            // This is a bug - token-based registration shouldn't require password validation
+            // Check if this is an OAuth login and use the OAuth-specific method
+            if (user.providerData[0]?.providerId !== "password") {
+              try {
+                return await this.registerOAuthUser(user);
+              } catch (oauthError) {
+                console.error("OAuth registration also failed:", oauthError);
+              }
+            }
 
-          // This is a bug - token-based registration shouldn't require password validation
-          // Try again with a more explicit request that this is token-based auth
+            // Try again with a more explicit request that this is token-based auth
           try {
             console.log("Retrying registration with explicit token-based flag");
 
@@ -291,6 +374,8 @@ class UserService {
                 provider: user.providerData[0]?.providerId || "password",
                 emailVerified: user.emailVerified,
                 tokenBased: true, // Add explicit flag
+                isOAuthLogin: user.providerData[0]?.providerId !== "password",
+                skipPasswordValidation: true, // Explicitly request to skip password validation
                 deviceInfo: {
                   screenResolution: `${window.screen.width}x${window.screen.height}`,
                   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -334,6 +419,216 @@ class UserService {
 
       console.error("Error registering with backend:", error);
       throw this.handleError(error);
+    }
+  }
+
+  /**
+   * Handle OAuth registration specifically
+   * This method is used when registering users who have signed in with OAuth providers
+   */
+  async registerOAuthUser(user: FirebaseUser): Promise<User> {
+    try {
+      // Get Firebase ID token
+      let idToken = await user.getIdToken(true);
+
+      // Prepare user data with explicit OAuth flags
+      const userData = {
+        email: user.email,
+        name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+        idToken,
+        provider: user.providerData[0]?.providerId || "oauth",
+        emailVerified: user.emailVerified,
+        tokenBased: true, 
+        isOAuthLogin: true,
+        skipPasswordValidation: true,
+        deviceInfo: {
+          screenResolution: `${window.screen.width}x${window.screen.height}`,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          language: navigator.language,
+          userAgent: navigator.userAgent,
+        },
+      };
+
+      console.log("Registering OAuth user with backend:", {
+        uid: user.uid,
+        email: user.email,
+        provider: userData.provider,
+      });
+
+      try {
+        // First try the OAuth-specific endpoint
+        let oauthResponse;
+        try {
+          oauthResponse = await apiService.post("/auth/oauth-register", userData, {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+            timeout: 15000,
+          });
+          console.log("OAuth-specific endpoint successful");
+        } catch (endpointError: any) {
+          // If we get a 404, the endpoint doesn't exist
+          if (endpointError?.response?.status === 404) {
+            console.log("OAuth-specific endpoint not found, using standard register endpoint");
+            // Try the standard register endpoint
+            oauthResponse = await apiService.post("/auth/register", userData, {
+              headers: {
+                Authorization: `Bearer ${idToken}`,
+              },
+              timeout: 15000,
+            });
+          } else {
+            throw endpointError; // Rethrow other errors
+          }
+        }
+
+        // Log the full response for debugging
+        console.log("📦 OAuth registration full response:", JSON.stringify(oauthResponse?.data, null, 2));
+
+        // Log the response format
+        console.log("OAuth registration response:", {
+          success: oauthResponse?.data?.success,
+          message: oauthResponse?.data?.message,
+          hasUser: !!oauthResponse?.data?.user
+        });
+
+        // Store the user's UID as the session ID
+        localStorage.setItem("sessionId", user.uid);
+        
+        // Prioritize checking for "already registered" message first
+        if (oauthResponse?.data?.success === true && oauthResponse?.data?.message?.includes("already registered")) {
+          console.log("OAuth user already registered in backend");
+          
+          // If the response includes a user object, use it
+          if (oauthResponse?.data?.user) {
+            console.log("Using user object from 'already registered' response");
+            return oauthResponse.data.user;
+          }
+          
+          // Otherwise create a basic user object
+          return {
+            id: user.uid,
+            email: user.email || "",
+            name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            role: "user",
+            isAdmin: false,
+            emailVerified: user.emailVerified,
+            photoURL: user.photoURL,
+            provider: user.providerData[0]?.providerId || "oauth"
+          };
+        } 
+        // Then check for user object directly in the response
+        else if (oauthResponse?.data?.user) {
+          console.log("OAuth user registered successfully with backend");
+          return oauthResponse.data.user;
+        }
+        // Check for success flag with no specific format
+        else if (oauthResponse?.data?.success === true) {
+          console.log("OAuth registration successful but no user object found");
+          // Create a user object from the Firebase user
+          return {
+            id: user.uid,
+            email: user.email || "",
+            name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+            role: "user",
+            isAdmin: false,
+            emailVerified: user.emailVerified,
+            photoURL: user.photoURL,
+            provider: user.providerData[0]?.providerId || "oauth"
+          };
+        } 
+        // Finally, try to extract user data from any part of the response
+        else {
+          console.log("Response format unexpected, trying to extract user data");
+          if (oauthResponse?.data?.data?.user) {
+            return oauthResponse.data.data.user;
+          } else if (oauthResponse?.data?.data) {
+            return oauthResponse.data.data;
+          } else {
+            console.warn("Could not extract user data from response, using Firebase user");
+            return {
+              id: user.uid,
+              email: user.email || "",
+              name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+              displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+              role: "user",
+              isAdmin: false,
+              emailVerified: user.emailVerified,
+              photoURL: user.photoURL,
+              provider: user.providerData[0]?.providerId || "oauth"
+            };
+          }
+        }
+      } catch (error: any) {
+        console.warn("OAuth registration error:", error?.message || error);
+        
+        // If the error is about password validation, we're using a token-based auth
+        // so we should skip password validation
+        if (error?.response?.data?.error?.message?.includes("Password")) {
+          console.warn("Password validation error during OAuth registration, retrying with explicit skip validation");
+          
+          try {
+            // Retry with even more explicit settings
+            const retryResponse = await apiService.post("/auth/register", {
+              ...userData,
+              skipPasswordValidation: true,
+              password: null, // Explicitly set password to null for OAuth flow
+              tokenBased: true,
+              isOAuthLogin: true,
+              isOAuth: true
+            }, {
+              headers: {
+                Authorization: `Bearer ${idToken}`,
+                "X-OAuth-Login": "true" // Additional header to indicate OAuth flow
+              },
+              timeout: 15000,
+            });
+            
+            console.log("Retry successful with explicit skip validation");
+            
+            if (retryResponse?.data?.user) {
+              return retryResponse.data.user;
+            } else if (retryResponse?.data?.success) {
+              // Success but no user object, use Firebase user data
+              return {
+                id: user.uid,
+                email: user.email || "",
+                name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+                displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+                role: "user",
+                isAdmin: false,
+                emailVerified: user.emailVerified,
+                photoURL: user.photoURL,
+                provider: user.providerData[0]?.providerId || "oauth"
+              };
+            }
+          } catch (retryError) {
+            console.error("Retry also failed:", retryError);
+            // Continue to fallback
+          }
+        }
+        
+        // Fall back to regular registration as a last resort
+        console.warn("OAuth-specific registration failed, falling back to regular registration");
+        return this.registerWithBackend(user);
+      }
+    } catch (error) {
+      console.error("Error in OAuth registration:", error);
+      // If the OAuth-specific registration fails, we continue with login anyway
+      // This ensures users can still sign in even if backend registration has an issue
+      return {
+        id: user.uid,
+        email: user.email || "",
+        name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+        displayName: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+        role: "user",
+        isAdmin: false, 
+        emailVerified: user.emailVerified,
+        photoURL: user.photoURL,
+        provider: user.providerData[0]?.providerId || "oauth"
+      };
     }
   }
 
@@ -396,6 +691,12 @@ class UserService {
         // Continue with the original token
       }
 
+      // Log the token we're using (safely)
+      console.log("Using token for verification:", {
+        length: idToken?.length,
+        prefix: idToken?.substring(0, 10) + "..." || "undefined"
+      });
+
       // Validate token with backend using Authorization header (production-ready approach)
       // Also include device information for better security
       const deviceInfo = {
@@ -444,17 +745,40 @@ class UserService {
         console.log("Auth route verify-token endpoint succeeded");
       }
 
-      console.log("Backend response:", {
-        status: response?.success,
-        hasUserData: !!response?.data?.data?.user,
-      });
+      // Extract response structure data for logging
+      const responseData = {
+        success: response?.data?.success,
+        message: response?.data?.message,
+        hasUser: !!response?.data?.user,
+        hasDataUser: !!response?.data?.data?.user,
+        hasData: !!response?.data?.data,
+      };
+      console.log("Backend response format:", responseData);
+      
+      // Log the full response structure for debugging
+      console.log("📦 Full response structure:", JSON.stringify(response?.data, null, 2));
 
-      // Extract user data from response
-      if (response?.data?.data?.user) {
+      // First check for direct successful responses with user data from "User already registered" response
+      if (response?.data?.success === true && response?.data?.message?.includes("already registered") && response?.data?.user) {
+        console.log("Found user data in 'already registered' response");
+        localStorage.setItem("sessionId", currentUser.uid);
+        return response.data.user;
+      }
+      
+      // Then check other response formats
+      if (response?.data?.user) {
+        // Direct user object in response
+        const userData = response.data.user;
+        localStorage.setItem("sessionId", currentUser.uid);
+        console.log("User data found directly in response.data.user");
+        
+        if (!userData.id) userData.id = currentUser.uid;
+        
+        return userData;
+      } else if (response?.data?.data?.user) {
         const userData = response.data.data.user;
 
         // Store the user's UID as the session ID for collection-based security
-        // In collection ID-based security, the session ID is always the user's UID
         localStorage.setItem("sessionId", currentUser.uid);
         console.log(
           "Using user UID as session ID for collection-based security:",
@@ -523,12 +847,25 @@ class UserService {
         };
       }
 
-      // If we couldn't extract user data from the response but have a successful response,
-      // create a minimal user object from Firebase user data
-      if (response?.success === true) {
+      if (response?.data?.success === true) {
         console.log(
-          "Creating user from Firebase data due to missing user data in response"
+          "Success response but missing user data, creating user from Firebase data"
         );
+        
+        // If success is true but no user object, check if there's a message about registration
+        if (response?.data?.message?.includes("already registered")) {
+          console.log("Found 'already registered' message");
+          
+          // If the response has a user object, use it
+          if (response?.data?.user) {
+            console.log("Found user object in 'already registered' response");
+            localStorage.setItem("sessionId", currentUser.uid);
+            return response.data.user;
+          }
+        }
+        
+        // Fallback to constructing a user from Firebase data
+        localStorage.setItem("sessionId", currentUser.uid);
         return {
           id: currentUser.uid,
           email: currentUser.email || "",
@@ -713,9 +1050,165 @@ class UserService {
   }
 
   /**
+   * A simplified test method to debug response format issues
+   */
+  async testBackendResponseFormat(user: FirebaseUser): Promise<any> {
+    try {
+      // Get a fresh token
+      const idToken = await user.getIdToken(true);
+      
+      console.log("Testing backend response format with token:", {
+        tokenLength: idToken.length,
+        prefix: idToken.substring(0, 10) + "..."
+      });
+
+      // Prepare user data with explicit OAuth flags
+      const userData = {
+        email: user.email,
+        name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+        idToken,
+        provider: user.providerData[0]?.providerId || "password",
+        emailVerified: user.emailVerified,
+        tokenBased: true,
+        isOAuthLogin: user.providerData[0]?.providerId !== "password",
+        skipPasswordValidation: true,
+        deviceInfo: {
+          screenResolution: `${window.screen.width}x${window.screen.height}`,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          language: navigator.language,
+          userAgent: navigator.userAgent,
+        },
+      };
+      
+      // Try both OAuth and regular registration endpoints
+      // Define a proper type for the responses object
+      interface ResponseData {
+        [key: string]: any;
+      }
+      
+      const responses: ResponseData = {
+        oauth: null,
+        register: null,
+        register_format: null,
+        verify: null
+      };
+      
+      // Try OAuth registration endpoint
+      try {
+        const oauthResponse = await apiService.post('/auth/oauth-register', userData, {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+            "X-OAuth-Login": "true"
+          },
+          timeout: 15000
+        });
+        
+        console.log("OAUTH REGISTER ENDPOINT RESPONSE:", JSON.stringify(oauthResponse.data, null, 2));
+        responses.oauth = oauthResponse.data;
+      } catch (oauthError: any) {
+        console.log("OAUTH REGISTER ENDPOINT ERROR:", {
+          status: oauthError?.response?.status,
+          message: oauthError?.message,
+          data: oauthError?.response?.data
+        });
+        responses.oauth = { error: true, status: oauthError?.response?.status, message: oauthError?.message };
+      }
+      
+      // Try regular register endpoint
+      try {
+        const registerResponse = await apiService.post('/auth/register', userData, {
+          headers: {
+            Authorization: `Bearer ${idToken}`
+          },
+          timeout: 15000
+        });
+        
+        console.log("REGISTER ENDPOINT RESPONSE:", JSON.stringify(registerResponse.data, null, 2));
+        responses.register = registerResponse.data;
+        
+        // Check if the data has the format we expect
+        if (registerResponse.data && registerResponse.data.success === true) {
+          if (registerResponse.data.user) {
+            console.log("✓ User object found directly in response.data.user");
+            responses.register_format = {
+              foundIn: "response.data.user",
+              userData: registerResponse.data.user
+            };
+          } else if (registerResponse.data.message && registerResponse.data.message.includes("already registered")) {
+            console.log("✓ Found 'already registered' message");
+            responses.register_format = {
+              foundIn: "already registered message",
+              userData: registerResponse.data.user || null,
+              hasUserObject: !!registerResponse.data.user
+            };
+          }
+        }
+      } catch (registerError: any) {
+        console.log("REGISTER ENDPOINT ERROR:", {
+          status: registerError?.response?.status,
+          message: registerError?.message,
+          data: registerError?.response?.data
+        });
+        responses.register = { error: true, status: registerError?.response?.status, message: registerError?.message };
+      }
+      
+      // Try verify-token endpoint
+      try {
+        const verifyResponse = await apiService.post('/auth/verify-token', {}, {
+          headers: {
+            Authorization: `Bearer ${idToken}`
+          },
+          timeout: 15000
+        });
+        
+        console.log("VERIFY TOKEN ENDPOINT RESPONSE:", JSON.stringify(verifyResponse.data, null, 2));
+        responses.verify = verifyResponse.data;
+      } catch (verifyError: any) {
+        console.log("VERIFY TOKEN ENDPOINT ERROR:", {
+          status: verifyError?.response?.status,
+          message: verifyError?.message,
+          data: verifyError?.response?.data
+        });
+        responses.verify = { error: true, status: verifyError?.response?.status, message: verifyError?.message };
+      }
+      
+      return {
+        diagnostic: "complete",
+        uid: user.uid,
+        provider: user.providerData[0]?.providerId || "unknown",
+        emailVerified: user.emailVerified,
+        responses
+      };
+    } catch (error: any) {
+      console.error("Test failed:", error);
+      return {
+        error: true,
+        message: error.message,
+        response: error.response?.data || null
+      };
+    }
+  }
+
+  /**
    * Handle API errors
    */
   private handleError(error: any): Error {
+    // Log the full error for debugging
+    console.error("Error details for debugging:", {
+      message: error.message,
+      response: error.response ? {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data
+      } : 'No response object',
+      request: error.request ? 'Request present' : 'No request object',
+      config: error.config ? {
+        url: error.config.url,
+        method: error.config.method,
+        headers: error.config.headers
+      } : 'No config object'
+    });
+
     // Check for specific error types
     if (error.response?.status === 401) {
       return new Error("Authentication failed. Please sign in again.");
