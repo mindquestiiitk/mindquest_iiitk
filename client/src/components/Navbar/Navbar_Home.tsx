@@ -67,21 +67,21 @@ const Navbar_Home = () => {
                 </div>
                 <nav>
                   <ul className="space-y-4">
-                    {navItems.map((item, index) => (
-                      <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
-                        {item.text}
-                      </NavItem>
-                    ))}
-                    <li>
-                      <Link
-                        to={"/"}
-                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-light-green hover:bg-[#457d3e] focus:shadow-outline focus:outline-none"
-                        aria-label="Log In"
-                        title="Log In"
-                      >
-                        Log In
-                      </Link>
-                    </li>
+                  {navItems.map((item, index) => (
+                    <NavItem key={index} href={item.href} ariaLabel={item.ariaLabel} title={item.title}>
+                    {item.text}
+                    </NavItem>
+                  ))}
+                  <li className="hidden lg:block">
+                    <Link
+                    to={"/"}
+                    className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-light-green hover:bg-[#457d3e] focus:shadow-outline focus:outline-none"
+                    aria-label="Log In"
+                    title="Log In"
+                    >
+                    Log In
+                    </Link>
+                  </li>
                   </ul>
                 </nav>
               </div>
