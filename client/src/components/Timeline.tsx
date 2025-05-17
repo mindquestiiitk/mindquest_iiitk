@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
+import { parseDate } from '@/lib/utils';
 
 interface TimelineEvent {
   id: string;
@@ -121,7 +122,7 @@ const Timeline: React.FC = () => {
         <div className="absolute left-0 top-32 bottom-0 w-0.5 bg-gray-300 md:hidden"></div>
         
         <div ref={timelineRef} className="relative pl-6 md:pl-0">
-          {events.map((event, index) => (
+          {events.sort((a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()).map((event, index) => (
             <TimelineItem
               key={event.id}
               event={event}
