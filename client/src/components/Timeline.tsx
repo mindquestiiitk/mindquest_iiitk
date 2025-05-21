@@ -137,5 +137,3 @@ const Timeline: React.FC = () => {
 };
 
 export default Timeline;
-
-

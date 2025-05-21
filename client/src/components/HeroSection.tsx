@@ -1,7 +1,10 @@
-// import Button from "./Button";
 import { hero_avatar } from "../assets";
+import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
+import { Avatar } from "./Avatar";
 
 const HeroSection = () => {
+  const { user } = useFirebaseAuth();
+
   const scrollSlowly = () => {
     window.scrollTo({
       top: 770,
@@ -14,11 +17,24 @@ const HeroSection = () => {
       className="flex flex-col justify-between items-center md:flex-row gap-10 w-full max-container"
     >
       <div className="flex flex-1 justify-center items-center md:order-2">
-        <img
-          src={hero_avatar}
-          alt="hero avatar"
-          className="object-contain rounded-xl w-[200px] md:w-[240px] lg:w-[500px]"
-        />
+        {user ? (
+          <div className="flex flex-col items-center">
+            <Avatar
+              size="xl"
+              showStatus={false}
+              className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] lg:w-[300px] lg:h-[300px]"
+            />
+            <p className="mt-4 text-center text-light-green font-medium">
+              Welcome back, <span className="font-bold">{user.name}</span>!
+            </p>
+          </div>
+        ) : (
+          <img
+            src={hero_avatar}
+            alt="hero avatar"
+            className="object-contain rounded-xl w-[200px] md:w-[240px] lg:w-[500px]"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col xl:mx-12 md:order-1">
         <div className="flex flex-col my-4">
