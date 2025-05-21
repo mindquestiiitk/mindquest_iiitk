@@ -25,27 +25,20 @@ const AppRoutes = () => {
         <Route
           path="/forgot-password"
           element={
-            <ProtectedRoute>
+            <PublicRoute>
               <ForgotPassword />
-            </ProtectedRoute>
+            </PublicRoute>
           }
         />
         <Route
           path="/reset-password"
           element={
-            <ProtectedRoute>
-              <ResetPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
             <PublicRoute>
-              <Layout />
+              <ResetPassword />
             </PublicRoute>
           }
-        >
+        />
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/team" element={<Teams />} />
@@ -53,9 +46,23 @@ const AppRoutes = () => {
           <Route path="/theme" element={<ThemePage />} />
           <Route path="/events" element={<Events />} />
           <Route path="/merch" element={<Merch />} />
-          <Route path="/merch/checkout" element={<MerchCheckout />} />
+          <Route
+            path="/merch/checkout"
+            element={
+              <ProtectedRoute requireAuth={true}>
+                <MerchCheckout />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/events/:eventId" element={<EventDetail />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute requireAuth={true}>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/error-demo" element={<ErrorDemo />} />
         </Route>
         <Route path="/error" element={<ServerError />} />

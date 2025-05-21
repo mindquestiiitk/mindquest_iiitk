@@ -9,16 +9,12 @@ import {
   EmailAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   updateProfile,
   updateEmail,
   User as FirebaseUser,
   UserCredential,
-  getIdToken,
   onAuthStateChanged,
   sendEmailVerification,
-  applyActionCode,
   verifyPasswordResetCode,
   AuthError,
   deleteUser,
@@ -26,12 +22,10 @@ import {
   browserSessionPersistence,
   setPersistence,
   multiFactor,
-  PhoneAuthProvider,
-  PhoneMultiFactorGenerator,
-  RecaptchaVerifier,
+  getIdToken,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
-import { secureStorage } from "../utils/secure-storage";
+import { auth, perf } from "../config/firebase";
+import { secureStorage } from "../utils/secure-storage-simplified";
 
 // Constants
 const TOKEN_REFRESH_INTERVAL = 14 * 60 * 1000; // 14 minutes in milliseconds (for 15 min tokens)
@@ -64,6 +58,10 @@ class FirebaseAuthService {
   private refreshTokenInterval: number | null = null;
   private inactivityTimeout: number | null = null;
   private lastActivityTime: number = Date.now();
+
+  // Token cache for better performance
+  private tokenCache: { token: string; expiry: number } | null = null;
+  private readonly TOKEN_CACHE_BUFFER = 5 * 60 * 1000; // 5 minute buffer before expiry
 
   constructor() {
     // Initialize Google provider
@@ -115,6 +113,9 @@ class FirebaseAuthService {
     options: LoginOptions = {}
   ): Promise<UserCredential> {
     try {
+      // Validate email domain first
+      this.validateEmailDomain(email);
+
       // Set persistence based on remember me option
       const persistenceType = options.rememberMe
         ? browserLocalPersistence
@@ -178,32 +179,27 @@ class FirebaseAuthService {
         options.rememberMe ? "true" : "false"
       );
 
-      return await signInWithPopup(auth, this.googleProvider);
-    } catch (error) {
-      this.handleFirebaseAuthError(error as AuthError);
-      throw error;
-    }
-  }
+      // Configure Google provider to only allow iiitkottayam.ac.in domain
+      const customGoogleProvider = new GoogleAuthProvider();
+      customGoogleProvider.setCustomParameters({
+        hd: "iiitkottayam.ac.in", // Hosted domain parameter restricts to specific domain
+      });
 
-  /**
-   * Sign in with Google using redirect (better for mobile)
-   */
-  async signInWithGoogleRedirect(options: LoginOptions = {}): Promise<void> {
-    try {
-      // Set persistence based on remember me option
-      const persistenceType = options.rememberMe
-        ? browserLocalPersistence
-        : browserSessionPersistence;
+      // Sign in with popup
+      const userCredential = await signInWithPopup(auth, customGoogleProvider);
 
-      await setPersistence(auth, persistenceType);
+      // Double-check the email domain after sign-in
+      // This is a safety measure in case the hd parameter is ignored
+      const email = userCredential.user.email;
+      if (email && !email.toLowerCase().endsWith("@iiitkottayam.ac.in")) {
+        // Sign out the user immediately
+        await signOut(auth);
+        throw new Error(
+          "Only email addresses from iiitkottayam.ac.in domain are allowed"
+        );
+      }
 
-      // Store remember me preference
-      secureStorage.setItem(
-        REMEMBER_ME_KEY,
-        options.rememberMe ? "true" : "false"
-      );
-
-      await signInWithRedirect(auth, this.googleProvider);
+      return userCredential;
     } catch (error) {
       this.handleFirebaseAuthError(error as AuthError);
       throw error;
@@ -291,6 +287,9 @@ class FirebaseAuthService {
    */
   async sendPasswordResetEmail(email: string): Promise<void> {
     try {
+      // Validate email domain first
+      this.validateEmailDomain(email);
+
       await sendPasswordResetEmail(auth, email);
     } catch (error) {
       this.handleFirebaseAuthError(error as AuthError);
@@ -390,6 +389,9 @@ class FirebaseAuthService {
         throw new Error("No authenticated user found");
       }
 
+      // Validate email domain first
+      this.validateEmailDomain(newEmail);
+
       await updateEmail(user, newEmail);
       await sendEmailVerification(user);
     } catch (error) {
@@ -462,13 +464,29 @@ class FirebaseAuthService {
   }
 
   /**
-   * Get ID token for current user with enhanced reliability
+   * Get ID token for current user with enhanced reliability and caching
    */
   async getIdToken(forceRefresh = false): Promise<string | null> {
     try {
+      // Check cache first if not forcing refresh
+      if (!forceRefresh && this.tokenCache) {
+        const now = Date.now();
+        // Use cached token if it's not expired (with buffer time)
+        if (now < this.tokenCache.expiry - this.TOKEN_CACHE_BUFFER) {
+          console.debug("Using cached Firebase ID token");
+          return this.tokenCache.token;
+        }
+      }
+
       const user = auth.currentUser;
       if (!user) {
         console.warn("No current user found when getting ID token");
+
+        // For login page, return null immediately instead of waiting
+        // This prevents hanging on the login page
+        if (window.location.pathname.includes("login")) {
+          return null;
+        }
 
         // Try to reload auth state before giving up
         try {
@@ -493,9 +511,9 @@ class FirebaseAuthService {
       }
 
       // Add enhanced retry logic for token retrieval
-      let retries = 5; // Increase retries
+      let retries = 3; // Reduce retries for faster response
       let lastError = null;
-      let backoffTime = 500; // Start with 500ms, will increase exponentially
+      let backoffTime = 300; // Start with 300ms, will increase exponentially
 
       while (retries > 0) {
         try {
@@ -511,8 +529,13 @@ class FirebaseAuthService {
             }
           }
 
-          // Get the token
+          // Get the token with performance monitoring
+          const startTime = Date.now();
           const token = await getIdToken(currentUser, forceRefresh);
+          const endTime = Date.now();
+          console.debug(
+            `⏱️ Token retrieval completed in ${endTime - startTime}ms`
+          );
 
           if (token) {
             // Store token in secure storage
@@ -528,6 +551,28 @@ class FirebaseAuthService {
                 "Session ID stored for collection ID-based security:",
                 currentUser.uid
               );
+            }
+
+            // Parse token to get expiry time for caching
+            try {
+              const tokenParts = token.split(".");
+              if (tokenParts.length === 3) {
+                const payload = JSON.parse(atob(tokenParts[1]));
+                if (payload.exp) {
+                  // Set token cache with expiry time
+                  this.tokenCache = {
+                    token,
+                    expiry: payload.exp * 1000, // Convert seconds to milliseconds
+                  };
+                  console.debug(
+                    `Token cached until ${new Date(
+                      this.tokenCache.expiry
+                    ).toISOString()}`
+                  );
+                }
+              }
+            } catch (parseError) {
+              console.warn("Error parsing token for caching:", parseError);
             }
 
             return token;
@@ -599,7 +644,17 @@ class FirebaseAuthService {
    * Validate password strength
    */
   private validatePasswordStrength(password: string): void {
-    // Create a comprehensive validation message
+    // Use the same regex pattern as the backend for consistency
+    // This matches: at least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+
+    if (passwordRegex.test(password)) {
+      // Password meets all requirements
+      return;
+    }
+
+    // If regex fails, check individual requirements to provide specific feedback
     const requirements = [];
 
     // Password must be at least 8 characters
@@ -623,8 +678,7 @@ class FirebaseAuthService {
     }
 
     // Password must contain at least one special character
-    // Use a more comprehensive regex that matches Firebase's requirements
-    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+    if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?]/.test(password)) {
       requirements.push(
         "contain at least one special character (!@#$%^&*()_+-=[]{}|;:'\",.<>/?)"
       );
@@ -661,57 +715,195 @@ class FirebaseAuthService {
   }
 
   /**
-   * Store token in secure storage
+   * Check if current user has allowed email domain
+   * If not, sign them out and throw an error
+   */
+  async validateCurrentUserEmailDomain(): Promise<void> {
+    const user = auth.currentUser;
+    if (!user || !user.email) {
+      return; // No user to validate
+    }
+
+    try {
+      // Validate the email domain
+      const email = user.email.toLowerCase();
+      if (!email.endsWith("@iiitkottayam.ac.in")) {
+        console.warn(`User with non-allowed email domain detected: ${email}`);
+
+        // Sign out the user
+        await signOut(auth);
+
+        throw new Error(
+          "Only email addresses from iiitkottayam.ac.in domain are allowed"
+        );
+      }
+    } catch (error) {
+      console.error("Error validating current user email domain:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Store token in secure storage and update cache
    */
   private storeToken(token?: string): void {
     if (!token && auth.currentUser) {
       // Get token if not provided
       auth.currentUser.getIdToken().then((newToken) => {
-        // Set expiry time (1 hour from now)
-        const expiryTime = Date.now() + 60 * 60 * 1000;
+        // Parse token to get actual expiry time
+        try {
+          const tokenParts = newToken.split(".");
+          if (tokenParts.length === 3) {
+            const payload = JSON.parse(atob(tokenParts[1]));
+            if (payload.exp) {
+              const expiryTime = payload.exp * 1000; // Convert seconds to milliseconds
 
-        // Store token and expiry time
+              // Update cache
+              this.tokenCache = {
+                token: newToken,
+                expiry: expiryTime,
+              };
+
+              // Store token and expiry time
+              secureStorage.setItem(TOKEN_KEY, newToken);
+              secureStorage.setItem(TOKEN_EXPIRY_KEY, expiryTime.toString());
+
+              return;
+            }
+          }
+        } catch (parseError) {
+          console.warn("Error parsing token for storage:", parseError);
+        }
+
+        // Fallback if parsing fails
+        const expiryTime = Date.now() + 60 * 60 * 1000;
         secureStorage.setItem(TOKEN_KEY, newToken);
         secureStorage.setItem(TOKEN_EXPIRY_KEY, expiryTime.toString());
       });
     } else if (token) {
-      // Set expiry time (1 hour from now)
-      const expiryTime = Date.now() + 60 * 60 * 1000;
+      // Parse token to get actual expiry time
+      try {
+        const tokenParts = token.split(".");
+        if (tokenParts.length === 3) {
+          const payload = JSON.parse(atob(tokenParts[1]));
+          if (payload.exp) {
+            const expiryTime = payload.exp * 1000; // Convert seconds to milliseconds
 
-      // Store token and expiry time
+            // Update cache
+            this.tokenCache = {
+              token,
+              expiry: expiryTime,
+            };
+
+            // Store token and expiry time
+            secureStorage.setItem(TOKEN_KEY, token);
+            secureStorage.setItem(TOKEN_EXPIRY_KEY, expiryTime.toString());
+
+            return;
+          }
+        }
+      } catch (parseError) {
+        console.warn("Error parsing token for storage:", parseError);
+      }
+
+      // Fallback if parsing fails
+      const expiryTime = Date.now() + 60 * 60 * 1000;
       secureStorage.setItem(TOKEN_KEY, token);
       secureStorage.setItem(TOKEN_EXPIRY_KEY, expiryTime.toString());
     }
   }
 
   /**
-   * Clear stored token
+   * Clear stored token and cache
    */
   private clearToken(): void {
+    // Clear from secure storage
     secureStorage.removeItem(TOKEN_KEY);
     secureStorage.removeItem(TOKEN_EXPIRY_KEY);
+
+    // Clear from memory cache
+    this.tokenCache = null;
+
+    // Clear from cookies
+    document.cookie =
+      "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Strict";
+
+    // Clear session ID
+    localStorage.removeItem("sessionId");
   }
 
   /**
-   * Start token refresh interval
+   * Start token refresh interval with adaptive refresh timing
    */
   private startTokenRefresh(): void {
     // Clear any existing interval
     this.stopTokenRefresh();
 
-    // Set up new interval
-    this.refreshTokenInterval = window.setInterval(async () => {
+    // Set up new interval with adaptive timing
+    const refreshToken = async () => {
       try {
+        // Check if we need to refresh based on token expiry
+        if (this.tokenCache) {
+          const now = Date.now();
+          const timeToExpiry = this.tokenCache.expiry - now;
+
+          // If token is not close to expiring, skip refresh
+          if (timeToExpiry > this.TOKEN_CACHE_BUFFER) {
+            console.debug(
+              `Token still valid for ${Math.floor(
+                timeToExpiry / 1000
+              )}s, skipping refresh`
+            );
+            return;
+          }
+        }
+
         // Refresh token directly from Firebase
         if (auth.currentUser) {
+          const startTime = Date.now();
           const token = await auth.currentUser.getIdToken(true);
+          const endTime = Date.now();
+
           this.storeToken(token);
-          console.log("Token refreshed successfully via Firebase");
+          console.log(
+            `Token refreshed successfully in ${endTime - startTime}ms`
+          );
+
+          // Parse token to update cache
+          try {
+            const tokenParts = token.split(".");
+            if (tokenParts.length === 3) {
+              const payload = JSON.parse(atob(tokenParts[1]));
+              if (payload.exp) {
+                // Update token cache with new expiry time
+                this.tokenCache = {
+                  token,
+                  expiry: payload.exp * 1000, // Convert seconds to milliseconds
+                };
+                console.debug(
+                  `Token cached until ${new Date(
+                    this.tokenCache.expiry
+                  ).toISOString()}`
+                );
+              }
+            }
+          } catch (parseError) {
+            console.warn("Error parsing refreshed token:", parseError);
+          }
         }
       } catch (error) {
         console.error("Error refreshing token:", error);
       }
-    }, TOKEN_REFRESH_INTERVAL);
+    };
+
+    // Initial refresh
+    refreshToken();
+
+    // Set up interval
+    this.refreshTokenInterval = window.setInterval(
+      refreshToken,
+      TOKEN_REFRESH_INTERVAL
+    );
   }
 
   /**

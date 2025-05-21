@@ -1,6 +1,5 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
-import { useEffect } from "react";
 import Loading from "./ui/loading";
 
 interface ProtectedRouteProps {
@@ -8,55 +7,55 @@ interface ProtectedRouteProps {
   requireAuth?: boolean;
 }
 
+/**
+ * ProtectedRoute component handles authentication-based routing:
+ * - When requireAuth=true: Redirects to login if user is not authenticated
+ * - When requireAuth=false: Redirects to home if user is already authenticated (for login/register pages)
+ *
+ * Performance optimization: Only checks authentication when requireAuth is true
+ */
 export default function ProtectedRoute({
   children,
   requireAuth = true,
 }: ProtectedRouteProps) {
-  // Use only Firebase authentication
-  const { user, loading } = useFirebaseAuth();
   const location = useLocation();
 
-  if (loading) {
+  // Only use authentication when required
+  const { user, loading } = requireAuth
+    ? useFirebaseAuth()
+    : { user: null, loading: false };
+
+  // Show loading state only when authentication check is in progress and required
+  if (requireAuth && loading) {
     return <Loading message="Checking authentication..." />;
   }
 
-  // If route requires auth and user is not authenticated
-  if (requireAuth && !user) {
+  // If route requires auth and user is not authenticated, redirect to login
+  if (requireAuth && !user && !loading) {
+    console.log("Authentication required, redirecting to login");
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // If route is auth-only (login/register) and user is authenticated
+  // If route is auth-only (login/register) and user is authenticated, redirect to home or original location
   if (!requireAuth && user) {
-    return <Navigate to="/" replace />;
-  }
-
-  return <>{children}</>;
-}
-
-// Component to prevent logged-in users from accessing login and register pages
-export const PublicRoute = ({ children }: ProtectedRouteProps) => {
-  // Use only Firebase authentication
-  const { user, loading } = useFirebaseAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  // Check if the user is already authenticated
-  useEffect(() => {
-    if (!loading && user) {
-      console.log("User is already authenticated, redirecting from auth page");
-      const from = location.state?.from?.pathname || "/";
-      navigate(from, { replace: true });
-    }
-  }, [user, loading, location.state, navigate]);
-
-  if (loading) {
-    return <Loading message="Checking authentication..." />;
-  }
-
-  if (user) {
     const from = location.state?.from?.pathname || "/";
+    console.log(
+      "User already authenticated, redirecting from auth page to",
+      from
+    );
     return <Navigate to={from} replace />;
   }
 
+  // If authentication requirements are met, render the children
+  return <>{children}</>;
+}
+
+/**
+ * PublicRoute is for routes that don't require authentication checks
+ * This is optimized to not perform any authentication checks at all
+ * for better performance
+ */
+export const PublicRoute = ({ children }: ProtectedRouteProps) => {
+  // Simply render children without any authentication checks
   return <>{children}</>;
 };

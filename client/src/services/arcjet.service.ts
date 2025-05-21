@@ -176,7 +176,9 @@ const arcjetClient = {
         try {
           // First try the backend proxy
           const apiUrl =
-            import.meta.env.VITE_API_URL || "http://localhost:3000";
+            import.meta.env.VITE_BACKEND_URL ||
+            import.meta.env.VITE_API_URL ||
+            "http://localhost:3000";
           const response = await fetch(`${apiUrl}/api/arcjet-protect`, {
             method: "POST",
             headers: {
@@ -192,8 +194,8 @@ const arcjetClient = {
             }),
             credentials: "include",
             mode: "cors",
-            // Add timeout to prevent hanging requests
-            signal: AbortSignal.timeout(10000), // 10 second timeout
+            // Reduce timeout to prevent hanging requests
+            signal: AbortSignal.timeout(5000), // 5 second timeout
           });
 
           if (response.ok) {
@@ -361,10 +363,17 @@ class ArcjetService {
         timestamp: new Date().toISOString(),
       });
 
+      // Validate email domain first
+      if (!email.toLowerCase().endsWith("@iiitkottayam.ac.in")) {
+        throw new Error(
+          "Authentication blocked: Only email addresses from iiitkottayam.ac.in domain are allowed."
+        );
+      }
+
       const result = await arcjetClient.protect({
         email,
         ip,
-        rules: ["rate-limit", "bot-detection"],
+        rules: ["rate-limit", "bot-detection", "email-validation"],
         action: "authentication",
       });
 
@@ -499,10 +508,17 @@ class ArcjetService {
         timestamp: new Date().toISOString(),
       });
 
+      // Validate email domain first
+      if (!email.toLowerCase().endsWith("@iiitkottayam.ac.in")) {
+        throw new Error(
+          "Password reset blocked: Only email addresses from iiitkottayam.ac.in domain are allowed."
+        );
+      }
+
       const result = await arcjetClient.protect({
         email,
         ip,
-        rules: ["rate-limit", "bot-detection"],
+        rules: ["rate-limit", "bot-detection", "email-validation"],
         action: "password-reset",
       });
 
@@ -621,9 +637,13 @@ class ArcjetService {
         timestamp: new Date().toISOString(),
       });
 
+      // Note: For social auth, we can't validate the email domain before the auth flow
+      // The domain will be validated after the user authenticates with the provider
+      // in the FirebaseAuthContext.tsx loginWithGoogle method
+
       const result = await arcjetClient.protect({
         ip,
-        rules: ["rate-limit", "bot-detection"],
+        rules: ["rate-limit", "bot-detection", "email-validation"],
         action: `social-auth-${provider}`,
       });
 

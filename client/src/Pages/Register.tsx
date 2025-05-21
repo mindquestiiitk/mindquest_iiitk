@@ -97,8 +97,14 @@ export default function Register() {
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
 
-    // Validate password using our utility
-    const passwordValidation = validatePassword(password);
+    // Validate email domain
+    if (!email.toLowerCase().endsWith("@iiitkottayam.ac.in")) {
+      setError(
+        "Please use an IIIT Kottayam email address (@iiitkottayam.ac.in)."
+      );
+      setIsSubmitting(false);
+      return;
+    }
 
     // Check if passwords match
     if (password !== confirmPassword) {
@@ -107,9 +113,21 @@ export default function Register() {
       return;
     }
 
+    // Validate password using our utility
+    const passwordValidation = validatePassword(password);
+
     // Check password requirements
     if (!passwordValidation.isValid) {
-      setError(passwordValidation.message);
+      // Show detailed password requirements if available
+      if (passwordValidation.errors && passwordValidation.errors.length > 0) {
+        setError(
+          `Password requirements not met: ${passwordValidation.errors.join(
+            ", "
+          )}`
+        );
+      } else {
+        setError(passwordValidation.message);
+      }
       setIsSubmitting(false);
       return;
     }
@@ -119,6 +137,8 @@ export default function Register() {
       const from = location.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     } catch (error: any) {
+      console.error("Registration error:", error);
+
       // Extract the most useful part of Firebase error messages
       let errorMessage =
         error.message || "Registration failed. Please try again.";
@@ -126,12 +146,19 @@ export default function Register() {
       // Handle specific Firebase password validation errors
       if (errorMessage.includes("Password validation failed")) {
         errorMessage = errorMessage.replace("Password validation failed: ", "");
+        errorMessage = `Password requirements: ${errorMessage}`;
       }
 
       // Handle domain validation errors
       if (errorMessage.includes("iiitkottayam.ac.in")) {
         errorMessage =
           "Please use an IIIT Kottayam email address (@iiitkottayam.ac.in).";
+      }
+
+      // Handle Firebase specific errors
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage =
+          "This email is already registered. Please use a different email or sign in.";
       }
 
       setError(errorMessage);
@@ -322,6 +349,63 @@ export default function Register() {
                       {showPassword ? "👁️" : "👁️‍🗨️"}
                     </button>
                   </div>
+
+                  {/* Password requirements checklist */}
+                  {password && (
+                    <div className="mt-2 text-xs space-y-1">
+                      <p className="font-medium text-gray-700">
+                        Password must have:
+                      </p>
+                      <ul className="pl-2 space-y-1">
+                        <li
+                          className={
+                            validation.length
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }
+                        >
+                          ✓ At least 8 characters
+                        </li>
+                        <li
+                          className={
+                            validation.uppercase
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }
+                        >
+                          ✓ At least one uppercase letter (A-Z)
+                        </li>
+                        <li
+                          className={
+                            validation.lowercase
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }
+                        >
+                          ✓ At least one lowercase letter (a-z)
+                        </li>
+                        <li
+                          className={
+                            validation.number
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }
+                        >
+                          ✓ At least one number (0-9)
+                        </li>
+                        <li
+                          className={
+                            validation.special
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }
+                        >
+                          ✓ At least one special character
+                          (!@#$%^&*()_+-=[]&#123;&#125;|;:'",./)
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -465,6 +549,9 @@ export default function Register() {
                 />
                 Google
               </button>
+              <p className="mt-1 text-xs text-center text-gray-500">
+                Only iiitkottayam.ac.in Google accounts are allowed
+              </p>
 
               <p className="mt-2 text-center text-sm text-gray-600">
                 Already have an account?{" "}

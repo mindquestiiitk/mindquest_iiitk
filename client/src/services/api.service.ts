@@ -21,15 +21,18 @@ import { isNetworkOnline, queueOperation } from "../utils/offline-manager";
 import { handleApiErrorWithRedirect } from "../utils/error-redirect";
 
 // API base URL from environment with fallback
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:3000";
 
 // Log API URL in development to help with debugging
 if (import.meta.env.DEV) {
   console.log(`🔌 API Service initialized with base URL: ${API_URL}`);
 }
 
-// Default request timeout (10 seconds)
-const DEFAULT_TIMEOUT = 10000;
+// Default request timeout (5 seconds)
+const DEFAULT_TIMEOUT = 5000;
 
 class ApiService {
   private api: AxiosInstance;
@@ -44,7 +47,7 @@ class ApiService {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      withCredentials: true, // Enable cookies for CSRF
+      withCredentials: true, // Enable cookies for Firebase Auth
     });
 
     // Initialize cancel tokens map
@@ -65,22 +68,12 @@ class ApiService {
           config.headers.Authorization = `Bearer ${token}`;
         }
 
-        // Add CSRF protection for non-GET requests
-        if (config.method !== "get") {
-          // Modern CSRF protection using SameSite cookies
-          // The backend will set a CSRF cookie with SameSite=Strict
-          // We don't need to manually add a token header anymore
+        // Firebase Authentication already provides protection against CSRF
+        // Just ensure credentials are included for cookies
+        config.withCredentials = true;
 
-          // Ensure credentials are included to send cookies
-          config.withCredentials = true;
-
-          // Add a custom header that the server can verify
-          // This is a simple way to prevent CSRF as the header cannot be set by cross-site requests
-          config.headers["X-Requested-With"] = "XMLHttpRequest";
-
-          // Add a timestamp to prevent replay attacks
-          config.headers["X-Request-Timestamp"] = Date.now().toString();
-        }
+        // Add a timestamp for request tracking
+        config.headers["X-Request-Timestamp"] = Date.now().toString();
 
         // Create cancel token
         const source = axios.CancelToken.source();
@@ -232,15 +225,7 @@ class ApiService {
           }
         }
 
-        // Handle CSRF errors
-        if (
-          error.response?.status === 403 &&
-          error.response?.data?.error?.code === "csrf_token_invalid"
-        ) {
-          // Reload the page to get a fresh CSRF token
-          window.location.reload();
-          return Promise.reject(error);
-        }
+        // CSRF protection is handled by Firebase Authentication
 
         // Handle permission errors (403)
         if (error.response?.status === 403) {
@@ -400,11 +385,6 @@ class ApiService {
       }
     };
   }
-
-  /**
-   * Firebase authentication already provides CSRF protection
-   * No need for a separate CSRF token fetching method
-   */
 }
 
 export const apiService = new ApiService();

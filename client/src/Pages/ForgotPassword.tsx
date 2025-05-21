@@ -33,6 +33,17 @@ export default function ForgotPassword() {
       return;
     }
 
+    // Validate email domain
+    if (!email.toLowerCase().endsWith("@iiitkottayam.ac.in")) {
+      toast({
+        title: "Error",
+        description:
+          "Please use an IIIT Kottayam email address (@iiitkottayam.ac.in)",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       setIsLoading(true);
       await forgotPassword(email);
@@ -116,12 +127,15 @@ export default function ForgotPassword() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email address"
+                  placeholder="Enter your iiitkottayam.ac.in email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoading}
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                  Only iiitkottayam.ac.in email addresses are allowed
+                </p>
               </div>
             </CardContent>
 

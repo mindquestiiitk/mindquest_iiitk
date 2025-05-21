@@ -42,42 +42,54 @@ export interface PasswordValidationResult {
  * @param password - Password to validate
  * @returns Validation result with isValid flag and error messages
  */
-export const validatePassword = (password: string): PasswordValidationResult => {
+export const validatePassword = (
+  password: string
+): PasswordValidationResult => {
   const errors: string[] = [];
 
-  // Password must be at least 8 characters
-  if (!password || password.length < 8) {
-    errors.push("Password must be at least 8 characters long");
-  }
+  // Use the same regex pattern as the backend for consistency
+  // This matches: at least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
 
-  // Password must contain at least one uppercase letter
-  const hasUppercase = /[A-Z]/.test(password);
-  if (!hasUppercase) {
-    errors.push("Password must include at least one uppercase letter");
-  }
+  if (!passwordRegex.test(password)) {
+    // If regex fails, check individual requirements to provide specific feedback
 
-  // Password must contain at least one lowercase letter
-  const hasLowercase = /[a-z]/.test(password);
-  if (!hasLowercase) {
-    errors.push("Password must include at least one lowercase letter");
-  }
+    // Password must be at least 8 characters
+    if (!password || password.length < 8) {
+      errors.push("Password must be at least 8 characters long");
+    }
 
-  // Password must contain at least one number
-  const hasNumber = /[0-9]/.test(password);
-  if (!hasNumber) {
-    errors.push("Password must include at least one number");
-  }
+    // Password must contain at least one uppercase letter
+    const hasUppercase = /[A-Z]/.test(password);
+    if (!hasUppercase) {
+      errors.push("Password must include at least one uppercase letter");
+    }
 
-  // Password must contain at least one special character
-  const hasSpecial = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
-  if (!hasSpecial) {
-    errors.push("Password must include at least one special character");
+    // Password must contain at least one lowercase letter
+    const hasLowercase = /[a-z]/.test(password);
+    if (!hasLowercase) {
+      errors.push("Password must include at least one lowercase letter");
+    }
+
+    // Password must contain at least one number
+    const hasNumber = /[0-9]/.test(password);
+    if (!hasNumber) {
+      errors.push("Password must include at least one number");
+    }
+
+    // Password must contain at least one special character
+    const hasSpecial = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
+    if (!hasSpecial) {
+      errors.push("Password must include at least one special character");
+    }
   }
 
   if (errors.length > 0) {
     return {
       isValid: false,
-      message: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character",
+      message:
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character",
       errors,
     };
   }
@@ -93,7 +105,9 @@ export const validatePassword = (password: string): PasswordValidationResult => 
  * @param name - Name to validate
  * @returns Validation result with isValid flag and error message
  */
-export const validateName = (name: string): { isValid: boolean; message: string } => {
+export const validateName = (
+  name: string
+): { isValid: boolean; message: string } => {
   if (!name || name.trim().length < 2) {
     return {
       isValid: false,
@@ -121,8 +135,8 @@ export const validateName = (name: string): { isValid: boolean; message: string 
  */
 export const formatValidationErrors = (errors: string[]): string => {
   if (errors.length === 0) return "";
-  
+
   if (errors.length === 1) return errors[0];
-  
+
   return `Please fix the following issues:\n- ${errors.join("\n- ")}`;
 };

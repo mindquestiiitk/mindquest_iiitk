@@ -139,13 +139,27 @@ class UserService {
         });
 
         // Verify the response contains user data
-        if (!response?.data?.user) {
-          // If we get a successful response but no user data, try to extract it from the data field
-          if (response?.data?.data) {
-            console.log("User data found in response.data.data");
-            return response.data.data;
-          }
+        let userDataFromResponse = null;
 
+        // Check for user data in the standardized format: response.data.data.user
+        if (response?.data?.data?.user) {
+          console.log(
+            "User data found in response.data.data.user (standard format)"
+          );
+          userDataFromResponse = response.data.data.user;
+        }
+        // Fallback for legacy format: response.data.user
+        else if (response?.data?.user) {
+          console.log("User data found in response.data.user (legacy format)");
+          userDataFromResponse = response.data.user;
+        }
+        // Last fallback for other formats
+        else if (response?.data?.data) {
+          console.log("User data found in response.data.data");
+          userDataFromResponse = response.data.data;
+        }
+
+        if (!userDataFromResponse) {
           console.error(
             "Invalid response format from server during registration:",
             response
@@ -162,16 +176,31 @@ class UserService {
         );
 
         console.log("User registered successfully with backend");
-        return response.data.user;
+        return userDataFromResponse;
       } catch (requestError: any) {
         // Log detailed error information for debugging
-        console.error("❌ Registration request failed:", {
-          status: requestError?.response?.status,
-          statusText: requestError?.response?.statusText,
-          url: registerUrl,
-          errorMessage: requestError?.message,
-          responseData: requestError?.response?.data,
-        });
+        console.error(
+          "❌ Registration request failed:",
+          requestError?.response?.data || requestError
+        );
+
+        // Check for validation errors
+        if (requestError?.response?.status === 400) {
+          const errorData = requestError?.response?.data;
+
+          // Handle password validation errors specifically
+          if (errorData?.error?.details?.password) {
+            const passwordError = errorData.error.details.password;
+            console.error("Registration error: " + passwordError);
+            throw new Error(passwordError);
+          }
+
+          // Handle other validation errors
+          if (errorData?.error?.message) {
+            console.error("Registration error: " + errorData.error.message);
+            throw new Error(errorData.error.message);
+          }
+        }
 
         // If this is a 404 error, try the direct endpoint as a fallback
         if (requestError?.response?.status === 404) {
@@ -201,14 +230,54 @@ class UserService {
               hasData: !!fallbackResponse?.data?.data,
             });
 
-            return fallbackResponse;
+            // Extract user data from fallback response
+            let fallbackUserData = null;
+
+            // Check for user data in the standardized format: response.data.data.user
+            if (fallbackResponse?.data?.data?.user) {
+              console.log(
+                "User data found in fallback response.data.data.user"
+              );
+              fallbackUserData = fallbackResponse.data.data.user;
+            }
+            // Fallback for legacy format: response.data.user
+            else if (fallbackResponse?.data?.user) {
+              console.log("User data found in fallback response.data.user");
+              fallbackUserData = fallbackResponse.data.user;
+            }
+            // Last fallback for other formats
+            else if (fallbackResponse?.data?.data) {
+              console.log("User data found in fallback response.data.data");
+              fallbackUserData = fallbackResponse.data.data;
+            }
+
+            if (!fallbackUserData) {
+              console.error(
+                "Invalid fallback response format:",
+                fallbackResponse
+              );
+              throw new Error("Invalid response format from server");
+            }
+
+            return fallbackUserData;
           } catch (fallbackError: any) {
-            console.error("❌ Fallback registration also failed:", {
-              status: fallbackError?.response?.status,
-              statusText: fallbackError?.response?.statusText,
-              url: registerUrl,
-              errorMessage: fallbackError?.message,
-            });
+            console.error(
+              "❌ Fallback registration also failed:",
+              fallbackError?.response?.data || fallbackError
+            );
+
+            // Handle validation errors in fallback response
+            if (fallbackError?.response?.status === 400) {
+              const errorData = fallbackError?.response?.data;
+
+              if (errorData?.error?.details?.password) {
+                throw new Error(errorData.error.details.password);
+              }
+
+              if (errorData?.error?.message) {
+                throw new Error(errorData.error.message);
+              }
+            }
 
             // If both attempts failed, throw a more helpful error
             throw new Error(
@@ -306,9 +375,28 @@ class UserService {
               }
             );
 
-            if (retryResponse?.data?.user) {
+            // Extract user data from retry response
+            let retryUserData = null;
+
+            // Check for user data in the standardized format: response.data.data.user
+            if (retryResponse?.data?.data?.user) {
+              console.log("User data found in retry response.data.data.user");
+              retryUserData = retryResponse.data.data.user;
+            }
+            // Fallback for legacy format: response.data.user
+            else if (retryResponse?.data?.user) {
+              console.log("User data found in retry response.data.user");
+              retryUserData = retryResponse.data.user;
+            }
+            // Last fallback for other formats
+            else if (retryResponse?.data?.data) {
+              console.log("User data found in retry response.data.data");
+              retryUserData = retryResponse.data.data;
+            }
+
+            if (retryUserData) {
               console.log("Retry successful with explicit token-based flag");
-              return retryResponse.data.user;
+              return retryUserData;
             }
           } catch (retryError) {
             console.error(

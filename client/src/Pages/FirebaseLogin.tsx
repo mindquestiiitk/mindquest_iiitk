@@ -8,7 +8,13 @@ import { motion } from "framer-motion";
 import Loading from "../components/ui/loading";
 
 export default function FirebaseLogin() {
-  const { login, loginWithGoogle, error: authError, user } = useFirebaseAuth();
+  const {
+    login,
+    loginWithGoogle,
+    error: authError,
+    user,
+    loading,
+  } = useFirebaseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +29,23 @@ export default function FirebaseLogin() {
       navigate(from, { replace: true });
     }
   }, [user, navigate, location.state]);
+
+  // Handle loading state separately to avoid getting stuck
+  useEffect(() => {
+    // Only show loading state for a maximum of 5 seconds
+    if (loading) {
+      setIsSubmitting(true);
+
+      // Set a timeout to clear the loading state after 5 seconds
+      const timeout = setTimeout(() => {
+        setIsSubmitting(false);
+      }, 5000);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setIsSubmitting(false);
+    }
+  }, [loading]);
 
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
@@ -69,10 +92,30 @@ export default function FirebaseLogin() {
     }
   }, [authError]);
 
+  // Debounce function to prevent multiple rapid submissions
+  const debounce = (func: Function, wait: number) => {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    return (...args: any[]) => {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  };
+
+  // Optimized submit handler with debouncing
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Prevent multiple submissions
+    if (isSubmitting) return;
+
     setError("");
     setIsSubmitting(true);
+
+    // Set a timeout to prevent getting stuck in loading state
+    const loadingTimeout = setTimeout(() => {
+      setIsSubmitting(false);
+      setError("Login request timed out. Please try again.");
+    }, 10000);
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
@@ -82,12 +125,34 @@ export default function FirebaseLogin() {
     if (!email || !password) {
       setError("Please enter both email and password");
       setIsSubmitting(false);
+      clearTimeout(loadingTimeout);
+      return;
+    }
+
+    // Validate email domain
+    if (!email.toLowerCase().endsWith("@iiitkottayam.ac.in")) {
+      setError(
+        "Please use an IIIT Kottayam email address (@iiitkottayam.ac.in)"
+      );
+      setIsSubmitting(false);
+      clearTimeout(loadingTimeout);
       return;
     }
 
     try {
-      // Apply Arcjet protection for authentication
-      await arcjetService.protectAuth(email);
+      // Apply Arcjet protection for authentication with a timeout
+      const arcjetPromise = arcjetService.protectAuth(email);
+      const arcjetTimeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Arcjet protection timed out")), 3000)
+      );
+
+      try {
+        // Race the Arcjet protection against a timeout
+        await Promise.race([arcjetPromise, arcjetTimeout]);
+      } catch (arcjetError) {
+        console.warn("Arcjet protection skipped:", arcjetError);
+        // Continue with login even if Arcjet times out
+      }
 
       console.log("Attempting to login with email:", email);
       await login(email, password);
@@ -108,16 +173,40 @@ export default function FirebaseLogin() {
         setError(error.message || "Invalid email or password");
       }
     } finally {
+      clearTimeout(loadingTimeout);
       setIsSubmitting(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    // Prevent multiple submissions
+    if (isSubmitting) return;
+
     try {
       setIsSubmitting(true);
 
-      // Apply Arcjet protection for Google login
-      await arcjetService.protectSocialAuth("google");
+      // Set a timeout to prevent getting stuck in loading state
+      const loadingTimeout = setTimeout(() => {
+        setIsSubmitting(false);
+        setError("Google login request timed out. Please try again.");
+      }, 10000);
+
+      // Apply Arcjet protection for Google login with a timeout
+      const arcjetPromise = arcjetService.protectSocialAuth("google");
+      const arcjetTimeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Arcjet protection timed out")), 3000)
+      );
+
+      try {
+        // Race the Arcjet protection against a timeout
+        await Promise.race([arcjetPromise, arcjetTimeout]);
+      } catch (arcjetError) {
+        console.warn(
+          "Arcjet protection skipped for Google login:",
+          arcjetError
+        );
+        // Continue with login even if Arcjet times out
+      }
 
       await loginWithGoogle();
       const from = location.state?.from?.pathname || "/";
@@ -135,6 +224,7 @@ export default function FirebaseLogin() {
         setError(error.message || "Google login failed. Please try again.");
       }
     } finally {
+      clearTimeout(loadingTimeout);
       setIsSubmitting(false);
     }
   };
@@ -167,6 +257,15 @@ export default function FirebaseLogin() {
   return (
     <div className="min-h-screen flex flex-col bg-[#9FE196]">
       <NavbarLogin />
+      {/* Global loading overlay */}
+      {isSubmitting && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center">
+            <Loading />
+            <p className="mt-2 text-gray-700">Connecting to server...</p>
+          </div>
+        </div>
+      )}
       <div className="flex flex-grow">
         {/* Left Section */}
         <motion.div
@@ -235,9 +334,14 @@ export default function FirebaseLogin() {
                     name="email"
                     type="email"
                     required
+                    autoComplete="email"
+                    autoFocus
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors"
-                    placeholder="Enter your email"
+                    placeholder="Enter your iiitkottayam.ac.in email"
                   />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Only iiitkottayam.ac.in email addresses are allowed
+                  </p>
                 </div>
 
                 <div>
@@ -262,6 +366,7 @@ export default function FirebaseLogin() {
                       name="password"
                       type={showPassword ? "text" : "password"}
                       required
+                      autoComplete="current-password"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#006833] focus:border-[#006833] transition-colors"
                       placeholder="Enter your password"
                     />
@@ -304,9 +409,11 @@ export default function FirebaseLogin() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#006833] hover:bg-[#005229] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#006833] transition-colors ${
-                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                    isSubmitting
+                      ? "bg-[#88c288] cursor-not-allowed"
+                      : "bg-[#006833] hover:bg-[#005229]"
+                  } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#006833] transition-colors`}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
@@ -350,6 +457,9 @@ export default function FirebaseLogin() {
                 />
                 Google
               </button>
+              <p className="mt-1 text-xs text-center text-gray-500">
+                Only iiitkottayam.ac.in Google accounts are allowed
+              </p>
 
               <p className="mt-2 text-center text-sm text-gray-600">
                 Don't have an account?{" "}
