@@ -5,7 +5,7 @@ import { login_hero } from "../assets";
 import NavbarLogin from "../components/Navbar/navbar_login";
 import { motion, AnimatePresence } from "framer-motion";
 import { validatePassword } from "../utils/validation";
-import Loading from "../components/ui/loading";
+// import Loading from "../components/ui/loading";
 
 interface PasswordValidation {
   length: boolean;

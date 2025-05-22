@@ -13,7 +13,7 @@
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
-  AxiosResponse,
+  // AxiosResponse,
   CancelTokenSource,
 } from "axios";
 import { firebaseAuthService } from "./firebase-auth.service";

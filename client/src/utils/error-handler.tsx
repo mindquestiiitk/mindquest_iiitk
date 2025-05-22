@@ -1,5 +1,6 @@
 import { toast } from "../components/ui/use-toast";
 import { getErrorMessage } from "../components/ErrorDisplay";
+import { ToastAction } from "../components/ui/toast";
 
 /**
  * API Error interface
@@ -94,8 +95,14 @@ export const extractErrorDetails = (
     typeof error.code === "string" &&
     (error.code.startsWith("auth/") || error.code.startsWith("firestore/"))
   ) {
+    // Safely access message property
+    const errorMessage = 
+      error && typeof error === "object" && "message" in error && typeof error.message === "string" 
+        ? error.message 
+        : "Authentication error";
+    
     return {
-      message: (error.message as string) || "Authentication error",
+      message: errorMessage,
       code: error.code as string,
     };
   }
@@ -157,8 +164,8 @@ export const handleError = (
     ? getErrorMessage(errorDetails.code, errorDetails.message)
     : errorDetails.message || defaultMessage;
 
-  // Log error in development
-  if (logError && import.meta.env.DEV) {
+  // Log error in development - using import.meta directly for Vite environment
+  if (logError && import.meta && (import.meta as any).env?.DEV) {
     console.error("Error handled:", {
       original: error,
       extracted: errorDetails,
@@ -176,37 +183,41 @@ export const handleError = (
       // If we have suggestions, show them in the toast
       action:
         errorDetails.suggestions && errorDetails.suggestions.length > 0
-          ? {
-              label: "View Suggestions",
-              onClick: () => {
-                // Show a more detailed error with suggestions in a modal or another toast
-                toast({
-                  title: "Suggestions",
-                  description: (
-                    <div className="space-y-2">
-                      <p>{userMessage}</p>
-                      <ul className="list-disc pl-5 text-sm space-y-1">
-                        {errorDetails.suggestions?.map((suggestion, index) => (
-                          <li key={index}>{suggestion}</li>
-                        ))}
-                      </ul>
-                      {errorDetails.supportEmail && (
-                        <p className="text-sm mt-2">
-                          Need help? Contact{" "}
-                          <a
-                            href={`mailto:${errorDetails.supportEmail}`}
-                            className="underline font-medium"
-                          >
-                            {errorDetails.supportEmail}
-                          </a>
-                        </p>
-                      )}
-                    </div>
-                  ),
-                  duration: 10000, // Show for longer
-                });
-              },
-            }
+          ? (
+              <ToastAction
+                altText="View Suggestions"
+                onClick={() => {
+                  // Show a more detailed error with suggestions in a modal or another toast
+                  toast({
+                    title: "Suggestions",
+                    description: (
+                      <div className="space-y-2">
+                        <p>{userMessage}</p>
+                        <ul className="list-disc pl-5 text-sm space-y-1">
+                          {errorDetails.suggestions?.map((suggestion, index) => (
+                            <li key={index}>{suggestion}</li>
+                          ))}
+                        </ul>
+                        {errorDetails.supportEmail && (
+                          <p className="text-sm mt-2">
+                            Need help? Contact{" "}
+                            <a
+                              href={`mailto:${errorDetails.supportEmail}`}
+                              className="underline font-medium"
+                            >
+                              {errorDetails.supportEmail}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    ),
+                    duration: 10000, // Show for longer
+                  });
+                }}
+              >
+                View Suggestions
+              </ToastAction>
+            )
           : undefined,
     });
   }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFirebaseAuth } from "../contexts/FirebaseAuthContext";
-import { userService } from "../services/user.service";
+// import { userService } from "../services/user.service";
 import { avatarImages } from "../constants/avatars";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";

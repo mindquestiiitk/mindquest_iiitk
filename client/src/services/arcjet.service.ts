@@ -13,7 +13,7 @@
  * - Caching for performance
  */
 import { logAnalyticsEvent } from "../config/firebase";
-import { firebaseFunctionsService } from "./firebase-functions.service";
+// import { firebaseFunctionsService } from "./firebase-functions.service";
 
 interface ArcjetProtectionOptions {
   email?: string;
@@ -401,7 +401,7 @@ class ArcjetService {
       return result;
     } catch (error) {
       // Only log errors that aren't already handled blocked requests
-      if (!error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && !(error as any).message.includes("blocked")) {
         console.error("Arcjet authentication protection error:", error);
 
         // Log error for monitoring
@@ -413,7 +413,7 @@ class ArcjetService {
 
       // In production, we need to rethrow authentication blocks
       // but allow technical errors to proceed
-      if (error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && (error as any).message.includes("blocked")) {
         throw error;
       }
 
@@ -470,7 +470,7 @@ class ArcjetService {
       return result;
     } catch (error) {
       // Only log errors that aren't already handled blocked requests
-      if (!error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && !(error as any).message.includes("blocked")) {
         console.error("Arcjet registration protection error:", error);
 
         // Log error for monitoring
@@ -482,7 +482,7 @@ class ArcjetService {
 
       // In production, we need to rethrow registration blocks
       // but allow technical errors to proceed
-      if (error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && (error as any).message.includes("blocked")) {
         throw error;
       }
 
@@ -536,7 +536,7 @@ class ArcjetService {
       return result;
     } catch (error) {
       // Only log errors that aren't already handled blocked requests
-      if (!error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && !(error as any).message.includes("blocked")) {
         console.error("Arcjet password reset protection error:", error);
 
         // Log error for monitoring
@@ -548,7 +548,7 @@ class ArcjetService {
 
       // In production, we need to rethrow password reset blocks
       // but allow technical errors to proceed
-      if (error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && (error as any).message.includes("blocked")) {
         throw error;
       }
 
@@ -597,7 +597,7 @@ class ArcjetService {
       return result;
     } catch (error) {
       // Only log errors that aren't already handled blocked requests
-      if (!error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && !(error as any).message.includes("blocked")) {
         console.error("Arcjet form submission protection error:", error);
 
         // Log error for monitoring
@@ -610,7 +610,7 @@ class ArcjetService {
 
       // In production, we need to rethrow form submission blocks
       // but allow technical errors to proceed
-      if (error.message?.includes("blocked")) {
+      if (typeof error === "object" && error !== null && "message" in error && typeof (error as any).message === "string" && (error as any).message.includes("blocked")) {
         throw error;
       }
 
@@ -673,7 +673,13 @@ class ArcjetService {
       return result;
     } catch (error) {
       // Only log errors that aren't already handled blocked requests
-      if (!error.message?.includes("blocked")) {
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as any).message === "string" &&
+        !(error as any).message.includes("blocked")
+      ) {
         console.error("Arcjet social auth protection error:", error);
 
         // Log error for monitoring
@@ -686,7 +692,13 @@ class ArcjetService {
 
       // In production, we need to rethrow social authentication blocks
       // but allow technical errors to proceed
-      if (error.message?.includes("blocked")) {
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as any).message === "string" &&
+        (error as any).message.includes("blocked")
+      ) {
         throw error;
       }
 
