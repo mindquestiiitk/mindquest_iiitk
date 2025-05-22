@@ -4,7 +4,6 @@ import AppRoutes from "./routes";
 import { Toaster } from "./components/ui/toaster";
 import { NetworkStatus } from "./components/NetworkStatus";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { useNavigate } from "react-router-dom";
 import { Button } from "./components/ui/button";
 import { Home, RefreshCcw } from "lucide-react";
 

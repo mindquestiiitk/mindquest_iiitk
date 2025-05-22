@@ -6,7 +6,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import ErrorDisplay from '../components/ErrorDisplay';
 import { useError } from '../contexts/ErrorContext';
 import { redirectToErrorPage } from '../utils/error-redirect';
 

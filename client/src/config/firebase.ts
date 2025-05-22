@@ -85,10 +85,12 @@ perf.start("auth-init");
 export const auth = getAuth(app);
 perf.end("auth-init");
 
+import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
+
 perf.start("firestore-init");
-export const db = getFirestore(app);
 
 // Configure Firestore for better performance
+let db;
 try {
   // Enable offline persistence for better user experience
   // But don't enable it on login/register pages to improve performance
@@ -98,6 +100,12 @@ try {
     !window.location.pathname.includes("register")
   ) {
     perf.start("firestore-persistence");
+    db = initializeFirestore(app, {
+      localCache: persistentLocalCache({
+        tabManager: persistentMultipleTabManager(),
+        cacheSizeBytes: CACHE_SIZE_UNLIMITED,
+      }),
+    });
     enableIndexedDbPersistence(db)
       .then(() => {
         console.log("Firestore persistence enabled");
@@ -106,21 +114,21 @@ try {
       .catch((err) => {
         console.warn("Firestore persistence could not be enabled:", err.code);
       });
-
-    // Set cache size to unlimited for better offline experience
-    db.settings({
-      cacheSizeBytes: CACHE_SIZE_UNLIMITED,
-    });
   } else {
     // For login/register pages, use a smaller cache size for better performance
-    db.settings({
-      cacheSizeBytes: 1048576 * 10, // 10MB cache
+    db = initializeFirestore(app, {
+      localCache: persistentLocalCache({
+        tabManager: persistentMultipleTabManager(),
+        cacheSizeBytes: 1048576 * 10, // 10MB cache
+      }),
     });
     console.log("Using reduced Firestore cache for login/register page");
   }
 } catch (err) {
   console.warn("Error configuring Firestore:", err);
+  db = getFirestore(app);
 }
+export { db };
 perf.end("firestore-init");
 
 perf.start("storage-init");

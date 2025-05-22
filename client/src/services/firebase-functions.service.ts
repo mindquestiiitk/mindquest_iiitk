@@ -10,7 +10,7 @@
  */
 
 import {
-  getFunctions,
+  // getFunctions,
   httpsCallable,
   HttpsCallableResult,
 } from "firebase/functions";

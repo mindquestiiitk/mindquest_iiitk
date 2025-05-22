@@ -93,13 +93,13 @@ export default function FirebaseLogin() {
   }, [authError]);
 
   // Debounce function to prevent multiple rapid submissions
-  const debounce = (func: Function, wait: number) => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
-    return (...args: any[]) => {
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
-    };
-  };
+  // const debounce = (func: Function, wait: number) => {
+  //   let timeout: ReturnType<typeof setTimeout> | null = null;
+  //   return (...args: any[]) => {
+  //     if (timeout) clearTimeout(timeout);
+  //     timeout = setTimeout(() => func(...args), wait);
+  //   };
+  // };
 
   // Optimized submit handler with debouncing
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -181,15 +181,14 @@ export default function FirebaseLogin() {
   const handleGoogleLogin = async () => {
     // Prevent multiple submissions
     if (isSubmitting) return;
+    // Set a timeout to prevent getting stuck in loading state
+    const loadingTimeout = setTimeout(() => {
+      setIsSubmitting(false);
+      setError("Google login request timed out. Please try again.");
+    }, 10000);
 
     try {
       setIsSubmitting(true);
-
-      // Set a timeout to prevent getting stuck in loading state
-      const loadingTimeout = setTimeout(() => {
-        setIsSubmitting(false);
-        setError("Google login request timed out. Please try again.");
-      }, 10000);
 
       // Apply Arcjet protection for Google login with a timeout
       const arcjetPromise = arcjetService.protectSocialAuth("google");

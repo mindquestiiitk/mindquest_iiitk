@@ -16,7 +16,6 @@ import {
   onAuthStateChanged,
   sendEmailVerification,
   verifyPasswordResetCode,
-  AuthError,
   deleteUser,
   browserLocalPersistence,
   browserSessionPersistence,
@@ -24,7 +23,7 @@ import {
   multiFactor,
   getIdToken,
 } from "firebase/auth";
-import { auth, perf } from "../config/firebase";
+import { auth } from "../config/firebase";
 import { secureStorage } from "../utils/secure-storage-simplified";
 
 // Constants
@@ -54,7 +53,7 @@ export interface DeviceInfo {
 
 class FirebaseAuthService {
   private googleProvider: GoogleAuthProvider;
-  private currentUser: FirebaseUser | null = null;
+  // private currentUser: FirebaseUser | null = null;
   private refreshTokenInterval: number | null = null;
   private inactivityTimeout: number | null = null;
   private lastActivityTime: number = Date.now();
@@ -71,7 +70,7 @@ class FirebaseAuthService {
 
     // Set up auth state listener
     onAuthStateChanged(auth, (user) => {
-      this.currentUser = user;
+      // this.currentUser = user;
 
       if (user) {
         // User is signed in
